@@ -1,0 +1,74 @@
+@import './variables.scss';
+@import './reset.scss';
+@import './typography.scss';
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    background-color: $white;
+}
+
+.site-header {
+    min-height: 100px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 0 2.4rem;
+
+    .nav-menu {
+        display: flex;
+        gap: 2.4rem;
+    }
+}
+
+.site-footer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    min-height: 100px;
+    background-color: $dark;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 2.4rem;
+
+    .footer-section {
+        color: $white;
+    }
+}
+
+// Body
+.main {
+
+}
+
+.hero {
+    
+}
+
+.presentation {
+    color: $white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-around;
+    background-color: $primary;
+
+    .presentation-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 2.4rem;
+        text-align: center;
+    }
+
+    .img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img {
+        max-width: 400px;
+    }
+}

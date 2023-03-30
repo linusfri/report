@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    font-family: Raleway;
+    line-height: 1.2;
+    letter-spacing: 0.02rem;
+}
+
+h1 {
+    @media (min-width: $desktop) {
+        font-size: 4rem;
+    }
+}
+h2 {
+    @media (min-width: $desktop) {
+        font-size: 3.2rem;
+    }
+}
+h3 {
+    @media (min-width: $desktop) {
+        font-size: 2rem;
+    }
+}
+h4 {
+    @media (min-width: $desktop) {
+        font-size: 1.6rem;
+    }
+}
+h5 {
+    @media (min-width: $desktop) {
+        font-size: 1.3rem;
+    }
+}
+
+p,
+a,
+label {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2;
+    letter-spacing: 0.05rem;
+}
+
+p,
+a {
+    @media (min-width: $desktop) {
+        font-size: 1.6rem;
+    }
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+         <link rel="icon" href="{{ asset('img/glider.svg') }}">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="site-header" style="background-image: url({{ asset('img/background.jpg') }})">
+            <h1 class="site-title">My Symfony Site</h1>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="{{ path('home') }}">Home</a></li>
+                    <li><a href="{{ path('about') }}">About</a></li>
+                    <li><a href="{{ path('lucky_number') }}">Lucky number</a></li>
+                </ul>
+            </nav>
+        </header>
+        {% block body %}{% endblock %}
+
+        <footer class="site-footer">
+            <section class="footer-section">
+                <h3>En hemsida skriven av Linus</h3>
+            </section>
+        </footer>
+    </body>
+</html>
