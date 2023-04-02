@@ -12,7 +12,7 @@ class ApiController {
         $this->apiClient = HttpClient::create();
     }
     
-    #[Route('/api/quote')]
+    #[Route('/api/quote', 'quote')]
     public function getQuotes(): JsonResponse {
         $response = $this->apiClient->request('GET', 'https://type.fit/api/quotes');
         $quoteArray = $response->toArray();
