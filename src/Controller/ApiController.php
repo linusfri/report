@@ -18,6 +18,7 @@ class ApiController {
         $quoteArray = $response->toArray();
 
         $randomResponse = $quoteArray[array_rand($quoteArray)];
+        $randomResponse['date'] = date("Y-m-d h:i:s");
         return new JsonResponse($randomResponse);
     }
 }
