@@ -39,7 +39,11 @@ class ApiController extends AbstractController
     {
         $data = [
             'routeUrls' => [
-                'api/quote'
+                'api/quote',
+                'api/deck',
+                'api/deck/shuffle',
+                'api/deck/draw',
+                'api/deck/drawNumber/5'
             ]
         ];
         return $this->render('api.html.twig', $data);
