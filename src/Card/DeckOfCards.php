@@ -17,12 +17,12 @@ class DeckOfCards
         $this->sortCards();
     }
 
-    public function showCards()
+    public function getCards()
     {
-
+        return $this->cards;
     }
 
-    private function sortCards()
+    public function sortCards()
     {
         usort($this->cards, function (CardGraphic $a, CardGraphic $b) {
             return [$a->getSuit(), $a->getValue()] <=> [$b->getSuit(), $b->getValue()];
@@ -32,11 +32,6 @@ class DeckOfCards
     public function shuffleCards(): void
     {
         shuffle($this->cards);
-    }
-
-    public function drawCard($number = 1): Card
-    {
-        return end($this->cards);
     }
 
     private function generateCardDeck(): void

@@ -4,12 +4,10 @@ namespace App\Card;
 
 class CardHand
 {
-    public string $here;
     public array $cards;
 
     public function __construct()
     {
-        $this->here = 'im here';
         $this->cards = [];
     }
 
