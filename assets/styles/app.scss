@@ -1,6 +1,7 @@
 @import './variables.scss';
 @import './reset.scss';
 @import './typography.scss';
+@import './global.scss';
 
 html {
     font-size: 62.5%;
@@ -8,13 +9,13 @@ html {
 
 body {
     background-color: $white;
+    margin-bottom: 100px;
 }
 
 .site-header {
     min-height: 100px;
-    background-repeat: no-repeat;
-    background-size: 100%;
     padding: 0 $desktop-p;
+    border-bottom: 1px solid $highlight;
 
     .nav-menu {
         display: flex;
@@ -40,11 +41,8 @@ body {
 
 // Body
 .main {
-    padding: 0 $desktop-p;
-}
-
-.hero {
-    
+    padding: 0;
+    margin: 0;
 }
 
 .presentation {
@@ -88,4 +86,33 @@ body {
 .report-navigation {
     padding-left: $desktop-p;
     padding-right: $desktop-p;
+}
+
+.content {
+    padding: 0 $desktop-p;
+
+    .link-container {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        max-width: 600px;
+        gap: $desktop-p;
+    }
+    
+    a {
+        color: $dark;
+    }
+}
+
+.card-container {
+    display: flex;
+    gap: $desktop-p;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    p {
+        font-size: 130px;
+    }
 }

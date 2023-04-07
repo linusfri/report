@@ -14,7 +14,7 @@
         {% endblock %}
     </head>
     <body>
-        <header class="site-header" style="background-image: url({{ asset('img/background.jpg') }})">
+        <header class="site-header">
             <h1 class="site-title">My Symfony Site</h1>
             <nav>
                 <ul class="nav-menu">
@@ -23,6 +23,7 @@
                     <li><a href="{{ path('lucky_number') }}">Lucky number</a></li>
                     <li><a href="{{ path('report') }}">Report</a></li>
                     <li><a href="{{ path('quote') }}">Quote</a></li>
+                    <li><a href="{{ path('card') }}">Card</a></li>
                 </ul>
             </nav>
         </header>

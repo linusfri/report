@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Card{% endblock %}
+
+{% block body %}
+    <main class="main">
+        <section class="content">
+            <div class="link-container">
+                {% for routeUrl in routeUrls %}
+                    <a href="{{ routeUrl }}">{{ routeUrl }}</a>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock body %}

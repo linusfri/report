@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Deck{% endblock %}
+
+{% block body %}
+    <main class="main">
+        <div class="card-container">
+            {% for card in deck %}
+                <div class="card">
+                    <p class="card">{{ card.getUtf8Rep()|raw }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock body %}
