@@ -120,7 +120,7 @@ class ApiController extends AbstractController
         return new JsonResponse($data);
     }
 
-    #[Route('/api/deck/reset')]
+    #[Route('/api/deck/reset', name: '/api/deck/reset')]
     public function Reset(SessionInterface $session): Response
     {
         $session->remove('cardHand');
