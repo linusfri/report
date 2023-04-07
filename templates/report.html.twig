@@ -37,7 +37,41 @@
         <div id="kmom02" class="report-card">
             <h3>kmom02</h3>
             <p> 
-                
+                Jag börjar med en kortfattad beskrivning av de olika OOP-koncept vi gått igenom i KMOM02:
+                <br><br>
+                <strong>Arv</strong>
+                När en klass ärver från en annan så får den tillgång till alla ickeprivata attribut och metoder som föräldraklassen har.
+                Den ärvande klassen får således samma beteende som föräldern och kan dessutom lägga till mer funktionalitet specifikt för den.
+                <br><br> 
+                <strong>Komposition</strong>
+                Komposition och aggregation är två sätt att beskriva hur "bunda" klasser är till varandra.
+                Om en klass relaterar till en annan med komposition så innebär det att en instans av denna inte kan existera på egen hand.
+                Den kan bara existera i den klassen som den är medlem av.
+                <br><br>
+                <strong>Interface</strong>
+                Ett interface beskriver ett kontrakt som en klass måste uppfylla. Specifikt beskriver den vilket beteende (metoder)
+                en klass skall ha och inte vilka attribut (egenskaper) den skall ha. Om två klasser extendar ett interface så kan
+                man vara säker på att båda klasserna minst uppfyller de beteenden som interfacet definierar.
+                <br><br>
+                <strong>Trait</strong>
+                Trait finns till i PHP eftersom det inte stöder multipelt arv. Genom att använda traits så kan man definiera metoder som flera klasser kan använda sig av,
+                oavsett om de är besläktade med varandra eller inte. Traits möjliggör därför flera klasser att ha samma beteende utan att behöva definiera samma metoder
+                i alla dessa klasser.
+                <br><br>
+                <strong>Implementering</strong>
+                Angående implementeringen av uppgiften så anser jag att den gick utan svårigheter. Jag är nöjd med min insats och programmet fungerar till belåtenhet.
+                För att lösa uppgiften började jag med att skriva ner i vilken ordning jag skulle utföra saker. Dessutom specificerade jag vilka attribut och metoder
+                som min klasser skulle ha för att önskat beteende skulle kunna uppnås. Därefter skapade jag en båda kontrollers och sidmallarna som skulle hysa alla data.
+                När jag var klar med dessa moment började jag implementera attribut och metoder i mina klasser och skapade sedan routes som renderade sidmallar med data på.
+                En förbättring jag ser är att tillåta användaren att blanda Card och CardGraphic i samma kortlek.
+                Dock såg jag detta som lite överflödigt då CardGraphic erbjuder samma funktionalitet som Card.
+                <br><br>
+                Angående flödesdiagram och pseudokod så var det inget som uppgiften bad om. Därför tänkte jag i denna diskussion utgå från mitt UML-diagram.
+                Jag tycker ofta att det är bra att modellera klasser i ett UML-diagram innan dessa implementeras.
+                Genom att göra det kan jag abstrahera bort en hel del och enbart fokusera på hur klasserna skall se ut och bete sig,
+                utan att behöva störas av hur de skall implementeras konkret. Jag tror definitivt att detta är ett stöd och att det förbättrar min problemlösningsförmåga.
+                <br><br>
+                Min TIL för detta kursmoment är en bättre förståelse för Symfony samt hur jag lägger till skräddarsytt beteende för json-serialisering på klassnivå.
             </p>
         </div>
         <div id="kmom03" class="report-card">
