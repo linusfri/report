@@ -4,6 +4,11 @@ namespace App\Card;
 
 class DeckOfCards
 {
+    /**
+     * @cards
+     *  
+     * @var array<CardGraphic>
+     */
     public array $cards;
 
     public function __construct()
@@ -13,12 +18,17 @@ class DeckOfCards
         $this->sortCards();
     }
 
-    public function getCards()
+    /**
+     * getCards
+     *
+     * @return array<CardGraphic>
+     */
+    public function getCards(): array
     {
         return $this->cards;
     }
 
-    public function sortCards()
+    public function sortCards(): void
     {
         usort($this->cards, function (CardGraphic $cardA, CardGraphic $cardB) {
             return [$cardA->getSuit(), $cardA->getValue()] <=> [$cardB->getSuit(), $cardB->getValue()];
@@ -48,7 +58,7 @@ class DeckOfCards
         }
     }
 
-    public function getNumberCards()
+    public function getNumberCards(): int
     {
         return count($this->cards);
     }

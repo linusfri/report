@@ -10,10 +10,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ApiController extends AbstractController
 {
-    private $apiClient;
+    private HttpClientInterface $apiClient;
 
     public function __construct()
     {

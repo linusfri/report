@@ -17,6 +17,11 @@ class CardGraphic extends Card implements \JsonSerializable
         return $this->utf8Representation;
     }
 
+    /**
+     * jsonSerialize
+     *
+     * @return array<string,mixed>
+     */
     public function jsonSerialize(): array
     {
         $utf8 = $this->getUtf8Rep();

@@ -4,6 +4,11 @@ namespace App\Card;
 
 class CardHand
 {
+    /**
+     * Cards
+     *
+     * @var array<CardGraphic>
+     */
     public array $cards;
 
     public function __construct()
