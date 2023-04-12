@@ -2,26 +2,26 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BaseController extends AbstractController
 {
     #[Route('/', 'home')]
-    public function Home(): Response
+    public function home(): Response
     {
         return $this->render('home.html.twig');
     }
 
     #[Route('/about', 'about')]
-    public function About(): Response
+    public function about(): Response
     {
         return $this->render('about.html.twig');
     }
 
     #[Route('/report', 'report')]
-    public function Report(): Response
+    public function report(): Response
     {
         return $this->render('report.html.twig');
     }

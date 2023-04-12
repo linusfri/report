@@ -2,16 +2,12 @@
 
 namespace App\Card;
 
-use App\Card\CardGraphic;
-
 class DeckOfCards
 {
     public array $cards;
-    private bool $includeKnight;
 
-    public function __construct($includeKnight = false)
+    public function __construct()
     {
-        $this->includeKnight = $includeKnight;
         $this->cards = [];
         $this->generateCardDeck();
         $this->sortCards();
@@ -24,8 +20,8 @@ class DeckOfCards
 
     public function sortCards()
     {
-        usort($this->cards, function (CardGraphic $a, CardGraphic $b) {
-            return [$a->getSuit(), $a->getValue()] <=> [$b->getSuit(), $b->getValue()];
+        usort($this->cards, function (CardGraphic $cardA, CardGraphic $cardB) {
+            return [$cardA->getSuit(), $cardA->getValue()] <=> [$cardB->getSuit(), $cardB->getValue()];
         });
     }
 
@@ -36,24 +32,8 @@ class DeckOfCards
 
     private function generateCardDeck(): void
     {
-        if ($this->includeKnight) {
-            for ($i = 1; $i <= 14; $i++) {
-                for ($j = 10; $j <= 13; $j++) {
-                    $cardHexValue = strtoupper(dechex($i));
-                    $suitHexValue = strtoupper(dechex($j));
-                    $suit = CardGraphic::HEX_TO_SUIT[$suitHexValue];
-
-                    $utf8Representation = "&#x1F0{$suitHexValue}{$cardHexValue}";
-
-                    array_push($this->cards, new CardGraphic($i, $suit, $utf8Representation));
-                }
-            }
-
-            return;
-        }
-
-        for ($i = 1; $i <= 13; $i++) {
-            for ($j = 10; $j <= 13; $j++) {
+        for ($i = 1; $i <= 13; ++$i) {
+            for ($j = 10; $j <= 13; ++$j) {
                 $cardHexValue = $i >= 12
                 ? strtoupper(dechex($i + 1))
                 : strtoupper(dechex($i));

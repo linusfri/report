@@ -111,7 +111,14 @@
         ],
         "csfix:dry": [
             "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src --dry-run -v"
-        ]
+        ],
+        "phpmd": "tools/phpmd/vendor/bin/phpmd . text phpmd.xml || true",
+        "phpstan": "tools/phpstan/vendor/bin/phpstan || true",
+        "lint": [
+            "@phpmd",
+            "@phpstan"
+        ],
+        "fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix"
     },
     "conflict": {
         "symfony/symfony": "*"

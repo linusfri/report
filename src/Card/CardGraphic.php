@@ -2,9 +2,7 @@
 
 namespace App\Card;
 
-use JsonSerializable;
-
-class CardGraphic extends Card implements JsonSerializable
+class CardGraphic extends Card implements \JsonSerializable
 {
     private string $utf8Representation;
 
@@ -22,10 +20,11 @@ class CardGraphic extends Card implements JsonSerializable
     public function jsonSerialize(): array
     {
         $utf8 = $this->getUtf8Rep();
+
         return [
             'suit' => $this->getSuit(),
             'value' => $this->getValue(),
-            'utf8' => "$utf8"
+            'utf8' => "$utf8",
         ];
     }
 }

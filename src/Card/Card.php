@@ -8,7 +8,7 @@ class Card
         'A' => 'spades',
         'B' => 'hearts',
         'C' => 'diamonds',
-        'D' => 'clubs'
+        'D' => 'clubs',
     ];
 
     protected int $value;

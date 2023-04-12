@@ -2,17 +2,14 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
-
-use App\Card\Card;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
 {
@@ -20,7 +17,7 @@ class ApiController extends AbstractController
 
     public function __construct()
     {
-        $this->apiClient = HttpClient::create();
+        $this->apiClient = (new HttpClient())->create();
     }
 
     #[Route('api/quote', 'quote')]
@@ -30,12 +27,13 @@ class ApiController extends AbstractController
         $quoteArray = $response->toArray();
 
         $randomResponse = $quoteArray[array_rand($quoteArray)];
-        $randomResponse['date'] = date("Y-m-d h:i:s");
+        $randomResponse['date'] = date('Y-m-d h:i:s');
+
         return new JsonResponse($randomResponse);
     }
 
     #[Route('/api', name: 'api')]
-    public function Api(): Response
+    public function api(): Response
     {
         $data = [
             'routeUrls' => [
@@ -43,24 +41,25 @@ class ApiController extends AbstractController
                 'api/deck',
                 'api/deck/shuffle',
                 'api/deck/draw',
-                'api/deck/drawNumber/5'
-            ]
+                'api/deck/draw/5',
+            ],
         ];
+
         return $this->render('api.html.twig', $data);
     }
 
     #[Route('api/deck', 'api/deck')]
-    public function ShowDeck(): JsonResponse // ;);)
+    public function showDeck(): JsonResponse // ;);)
     {
         $deck = new DeckOfCards();
 
         return new JsonResponse($deck->cards, headers: [
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
         ]);
     }
 
     #[Route('api/deck/shuffle', 'api/deck/shuffle')]
-    public function Shuffle(): JsonResponse
+    public function shuffle(): JsonResponse
     {
         $deck = new DeckOfCards();
         $deck->shuffleCards();
@@ -69,12 +68,12 @@ class ApiController extends AbstractController
     }
 
     #[Route('api/deck/draw', 'api/deck/draw')]
-    public function Draw(SessionInterface $session): Response
+    public function draw(SessionInterface $session): Response
     {
         $cardHand = $session->get('cardHand');
         $deck = $session->get('deck');
 
-        if (! ($cardHand && $deck)) {
+        if (!($cardHand && $deck)) {
             $cardHand = new CardHand();
             $deck = new DeckOfCards();
 
@@ -90,19 +89,19 @@ class ApiController extends AbstractController
 
         $data = [
             'cardHand' => $cardHand->cards,
-            'deck' => $deck->cards
+            'deck' => $deck->cards,
         ];
 
         return new JsonResponse($data);
     }
 
     #[Route('api/deck/draw/{number<\d+>}', 'api/deck/drawNumber', methods: ['GET'])]
-    public function DrawNumber(int $number, SessionInterface $session): JsonResponse
+    public function drawNumber(int $number, SessionInterface $session): JsonResponse
     {
         $cardHand = $session->get('cardHand');
         $deck = $session->get('deck');
 
-        if (! ($cardHand && $deck)) {
+        if (!($cardHand && $deck)) {
             $cardHand = new CardHand();
             $deck = new DeckOfCards();
 
@@ -118,14 +117,14 @@ class ApiController extends AbstractController
 
         $data = [
             'cardHand' => $cardHand->cards,
-            'deck' => $deck->cards
+            'deck' => $deck->cards,
         ];
 
         return new JsonResponse($data);
     }
 
     #[Route('/api/deck/reset', name: '/api/deck/reset')]
-    public function Reset(SessionInterface $session): Response
+    public function reset(SessionInterface $session): Response
     {
         $session->remove('cardHand');
         $session->remove('deck');

@@ -13,7 +13,7 @@ class CardHand
 
     public function drawCards(DeckOfCards $deck, int $number = 1): void
     {
-        if (! count($deck->cards)) {
+        if (!count($deck->cards)) {
             return;
         }
 
@@ -21,7 +21,7 @@ class CardHand
             return;
         }
 
-        for ($i = 0; $i < $number; $i++) {
+        for ($i = 0; $i < $number; ++$i) {
             array_push($this->cards, array_pop($deck->cards));
         }
     }
