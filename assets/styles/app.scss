@@ -80,6 +80,11 @@ body {
     .report-card {
         border: 1px solid $highlight;
         padding: $desktop-p;
+
+        strong {
+            display: block;
+            font-weight: 700;
+        }
     }
 }
 

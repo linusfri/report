@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Card game{% endblock %}
+
+{% block body %} 
+    <main class="main">
+        <section class="content text-center">
+            <h1>Game Over</h1>
+            <h3>Winner</h3>
+            <p>{{ winner.getName() }}</p>
+            <p>Score: <strong>{{ winner.getHandValue() }}</strong></p>
+
+            <div class="button-container">
+                <a href="{{ path('card_game') }}" class="button-green">Play again</a>
+            </div>
+            {{ dump(gameSession) }}
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Card game{% endblock %}
+
+{% block body %} 
+    <main class="main">
+        <section class="content">
+            <h1>Game</h1>
+            <h3>Score: {{ gameSession.getCurrentPlayer().getHandValue() }}</h3>
+            <h3 class="text-center">{{ gameSession.getCurrentPlayer().getName() }} cards</h3>
+            <div class="card-container">
+                {% for card in currentPlayerCards %}
+                    <div class="card">
+                        <p class="card">{{ card.getUtf8Rep()|raw }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="button-container">
+                <a class="button-green" href="{{ path('draw_card_game') }}">Draw card</a>
+                {% if gameSession.getCurrentPlayerRound > 0 %}
+                    <a class="button-red" href="{{ path('stop_player_card_game') }}">Stop</a>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+{% endblock %}

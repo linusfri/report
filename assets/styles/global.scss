@@ -1,3 +1,44 @@
+@mixin base-button {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: $white !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.1s;
+}
+
 a {
     text-decoration: none;
 }
+
+.text-center {
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    gap: 2.4rem;
+    justify-content: center;
+    align-items: center;
+
+    .button {
+        &-red {
+            @include base-button;
+
+            background-color: $warning;
+            &:hover {
+                background-color: darken($warning, 10%);
+            }
+        }
+
+        &-green {
+            @include base-button;
+
+            background-color: $cta;
+            &:hover {
+                background-color: darken($cta, 10%);
+            }
+        }
+    }
+}
+
