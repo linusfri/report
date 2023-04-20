@@ -5,9 +5,19 @@
 {% block body %} 
     <main class="main">
         <section class="content">
-            <h1>Documentation</h1>
-            <p>Some documentation</p>
-            <a href="{{ path('card_game') }}">Start game</a>
+            <h1 class="text-center">Documentation</h1>
+            <article class="text-content-centered">
+                <p>
+                    Welcome to 21, also known as Blackjack! In this game, the goal is to get a hand value of 21 or as close to 21 as possible without going over.
+                    You will be playing against the dealer, who will also be trying to get a hand value of 21 or as close to 21 as possible.
+                    Be careful not to go over 21, as that will result in an automatic loss. Are you ready to take on the dealer and see who comes out on top in this
+                    exciting game of 21?
+                </p>
+            </article>
+            
+            <div class="button-container-padding-top">
+                <a class="button-green" href="{{ path('card_game') }}">Start game</a>
+            </div>
         </section>
     </main>
 {% endblock %}

@@ -7,6 +7,13 @@
     transition: background-color 0.1s;
 }
 
+@mixin button-container {
+    display: flex;
+    gap: 2.4rem;
+    justify-content: center;
+    align-items: center;
+}
+
 a {
     text-decoration: none;
 }
@@ -16,28 +23,30 @@ a {
 }
 
 .button-container {
-    display: flex;
-    gap: 2.4rem;
-    justify-content: center;
-    align-items: center;
+    @include button-container;
 
-    .button {
-        &-red {
-            @include base-button;
+    &-padding-top {
+        @include button-container;
+        padding-top: $desktop-p;
+    }
+}
 
-            background-color: $warning;
-            &:hover {
-                background-color: darken($warning, 10%);
-            }
+.button {
+    &-red {
+        @include base-button;
+
+        background-color: $warning;
+        &:hover {
+            background-color: darken($warning, 10%);
         }
+    }
 
-        &-green {
-            @include base-button;
+    &-green {
+        @include base-button;
 
-            background-color: $cta;
-            &:hover {
-                background-color: darken($cta, 10%);
-            }
+        background-color: $cta;
+        &:hover {
+            background-color: darken($cta, 10%);
         }
     }
 }

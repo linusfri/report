@@ -16,30 +16,20 @@ class GameController extends AbstractController {
     public function game(SessionInterface $session): Response {
         $gameSession = $session->get('game') ?? null;
         if (is_null($gameSession)) {
-            $dealer = new Dealer('Dealer');
-            $player = new Player('Player');
+            $gameSession = new CardGame(new Dealer('Dealer'), new Player('Player'), new DeckOfCards());
+        }
 
-            $gameSession = new CardGame([$player, $dealer], new DeckOfCards());
+        $session->set('game', $gameSession);
+        
+        if ($gameSession->isGameOver()) {
+            return $this->redirectToRoute('game_over');
         }
 
         $data = [
             'gameSession' => $gameSession,
             'currentPlayerCards' => $gameSession->getCurrentPlayer()->getCards()
         ];
-
-        if ($gameSession->getCurrentPlayer() instanceof Dealer) {
-            $gameSession->dealerDrawCards();
-            $gameSession->stopCurrentPlayer();
-            $gameSession->nextPlayer();
-        }
-
-        $gameSession->updateGameState();
-        $session->set('game', $gameSession);
-
-        if ($gameSession->isGameOver()) {
-            return $this->redirectToRoute('game_over');
-        }
-
+        
         return $this->render('game.html.twig', $data);
     }
 
@@ -65,7 +55,13 @@ class GameController extends AbstractController {
             return $this->redirectToRoute('pre_game');
         }
 
+        if ($gameSession->getCurrentPlayer() instanceof Dealer) {
+            $gameSession->dealerDrawCards();
+            return $this->redirectToRoute('card_game', ['gameSession' => $gameSession]);
+        }
+
         $gameSession->currentPlayerDrawCard();
+
         $session->set('game', $gameSession);
 
         return $this->redirectToRoute('card_game', ['gameSession' => $gameSession]);
@@ -83,8 +79,7 @@ class GameController extends AbstractController {
 
         if ($gameSession->getCurrentPlayer() instanceof Dealer) {
             $gameSession->dealerDrawCards();
-            $gameSession->stopCurrentPlayer();
-            $gameSession->nextPlayer();
+            return $this->redirectToRoute('card_game', ['gameSession' => $gameSession]);
         }
 
         $session->set('game', $gameSession);
@@ -101,7 +96,8 @@ class GameController extends AbstractController {
 
         $data = [
             'gameSession' => $gameSession,
-            'winner' => $gameSession->getWinner()
+            'winner' => $gameSession->getWinner(),
+            'loser' => $gameSession->getLoser()
         ];
 
         $session->remove('game');

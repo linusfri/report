@@ -4,16 +4,13 @@ namespace App\CardGame;
 
 use App\Player\PlayerInterface;
 use App\Player\Dealer;
+use App\Player\Player;
 use App\Card\DeckOfCards;
 
 class CardGame {
     private PlayerInterface $currentPlayer;
-
-    /** $players
-     * @var array<PlayerInterface> 
-     * */
-    private array $players;
-    
+    private Player $player;
+    private Dealer $dealer; 
     private int $playerRound;
     private bool $gameOver;
     private DeckOfCards $deck;
@@ -23,26 +20,8 @@ class CardGame {
      *
      * @param array<PlayerInterface> $players
      */
-    public function __construct(array $players, DeckOfCards $deck) {
-        $this->start($players, $deck);
-    }
-
-    private function dealerExists(): bool {
-        foreach ($this->players as $player) {
-            if ($player instanceof Dealer) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function dealerExistsOnce(): bool {
-        $results = array_filter($this->players, function($player) {
-            return $player instanceof Dealer;
-        });
-
-        return count($results) === 1;
+    public function __construct(Dealer $dealer, Player $player, DeckOfCards $deck) {
+        $this->start($dealer, $player, $deck);
     }
 
     /**
@@ -51,32 +30,16 @@ class CardGame {
      * @param array<PlayerInterface> $players
      * @return boolean
      */
-    public function start(array $players, DeckOfCards $deck): bool {
+    public function start(Dealer $dealer, Player $player, DeckOfCards $deck): bool {
         
+        $this->player = $player;
+        $this->dealer = $dealer;
         $this->playerRound = 0;
         $this->gameOver = false;
         $this->deck = $deck;
         $this->deck->shuffleCards();
         
-        $this->players = array_merge([], $players);
-        $this->currentPlayer = $this->setCurrentPlayer(0);
-        
-        if (count($players) > 2) {
-            throw new \Exception('Currently only 2 players are supported.');
-        }
-        
-        if (!$this->dealerExists()) {
-            throw new \Exception('Dealer is required.');
-        }
-        
-        if (!$this->dealerExistsOnce()) {
-            throw new \Exception('There can only be one dealer.');
-        }
-
-        if (!count($players)) {
-            throw new \Exception('No players provided.');
-
-        }
+        $this->currentPlayer = $this->player;
 
         return true;
     }
@@ -84,26 +47,26 @@ class CardGame {
     public function currentPlayerDrawCard(): void {
         $this->currentPlayer->drawCard($this->deck);
         
-        $this->updateCurrentPlayer();
+        $this->updateGameState();
 
         $this->playerRound += 1;
     }
 
     public function dealerDrawCards(): void {
-        if ($this->currentPlayer instanceof Dealer) {
-            for ($i = 0; $i < 4; $i++) {
-                if ($this->randomChance()) {
-                    $this->playerRound += 1;
-                    $this->currentPlayer->drawCard($this->deck);
-                }
+        $this->currentPlayer = $this->dealer;
 
-                if ($this->currentPlayer->getHandValue() >= 21) {
-                    break;
-                }
+        for ($i = 0; $i < 4; $i++) {
+            if ($this->randomChance()) {
+                $this->playerRound += 1;
+                $this->currentPlayer->drawCard($this->deck);
+            }
+
+            if ($this->currentPlayer->getHandValue() >= 21) {
+                break;
             }
         }
 
-        $this->updateCurrentPlayer();
+        $this->updateGameState();
         return;
     }
 
@@ -116,8 +79,8 @@ class CardGame {
         return false;
     }
 
-    public function getCurrentPlayerCards(): void {
-        $this->currentPlayer->getCards;
+    public function getCurrentPlayerCards(): array {
+        return $this->currentPlayer->getCards();
     }
     
     public function updateCurrentPlayer(): void {
@@ -125,12 +88,20 @@ class CardGame {
         
         if ($this->currentPlayer->getHandValue() >= 21) {
             $this->currentPlayer->setIsFinished(true);
-            $this->nextPlayer();
         }
+    }
+
+    public function updateDealer(): void {
+        $this->currentPlayer = $this->dealer;
+        $this->currentPlayer->countHandValue();
+        
+        $this->currentPlayer->setIsFinished(true);
     }
 
     public function stopCurrentPlayer(): void {
         $this->currentPlayer->setIsFinished(true);
+
+        $this->updateGameState();
     }
 
     public function isCurrentPlayerFinished(): bool {
@@ -138,50 +109,26 @@ class CardGame {
     }
 
     public function checkAllPlayersFinished(): bool {
-        foreach ($this->players as $player) {
-            if (!$player->getIsFinished()) {
-                return false;
-            }
-        }
-
-        return true;
+        return $this->dealer->getIsFinished() && $this->player->getIsFinished();
     }
 
     public function nextPlayer(): void {
         if ($this->checkAllPlayersFinished()) return;
 
-        $curIndex = $this->getIndexOfPlayer($this->currentPlayer);
-        $nextIndex = ($curIndex + 1) % count($this->players);
-
-        if ($this->players[$nextIndex]->getIsFinished()) {
-            $this->currentPlayer = $this->players[$nextIndex];
-            $this->nextPlayer();
-
-            return;
-        }
-
-        $this->currentPlayer = $this->players[$nextIndex];
+        $this->currentPlayer = $this->currentPlayer instanceof Player ? $this->dealer : $this->player;
         $this->playerRound = 0;
+
+        $this->updateGameState();
 
         return;
     }
 
-    public function getIndexOfPlayer(PlayerInterface $player): int|false {
-        for ($i = 0; $i < count($this->players); $i++) {
-            if ($this->players[$i]->getId() === $player->getId()) {
-                return $i;
-            }
-        }
-
-        return false;
-    }
-
-    public function setCurrentPlayer(int $index): PlayerInterface {
-        return $this->players[$index];
-    }
-
     public function getCurrentPlayer(): PlayerInterface {
         return $this->currentPlayer;
+    }
+
+    public function setCurrentPlayerScore() {
+        $this->currentPlayer->setHandValue(21);
     }
 
     public function setGameOver(bool $value = true): void {
@@ -193,10 +140,27 @@ class CardGame {
     }
 
     public function updateGameState(): void {
-        $this->updateCurrentPlayer();
+        if ($this->currentPlayer instanceof Dealer) {
+            $this->updateDealer();
+        } else {
+            $this->updateCurrentPlayer();
+        }
 
+        if ($this->currentPlayer->getHandValue() > 21) {
+            $this->setGameOver(true);
+            return;
+        } 
+        
         if ($this->checkAllPlayersFinished()) {
             $this->setGameOver(true);
+            return;
+        } 
+        
+        if (
+            $this->currentPlayer->getHandValue() === 21 && $this->currentPlayer instanceof Player
+        ) {
+            $this->dealerDrawCards();
+            return;
         }
     }
 
@@ -206,50 +170,50 @@ class CardGame {
 
     public function getWinner(): PlayerInterface {
         // TODO: Implement for more than 2 players
-        $dealer = array_values(array_filter($this->players, function($player) {
-            return $player instanceof Dealer;
-        }))[0];
-
-        if ($dealer->getHandValue() === 21) {
-            return $dealer;
+        if (
+            $this->dealer->getHandValue() > 21 && $this->player->getHandValue() > 21
+        ) {
+            throw new \Exception('Both players can not have more than 21 points.');
         }
 
-        $playerWinner = null;
-
-        foreach($this->players as $player) {
-            if ($player instanceof Dealer) continue;
-
-            if ($player->getHandValue() > $dealer->getHandValue() && $player->getHandValue() <= 21) {
-                $playerWinner = $player;
-            } else if ($dealer->getHandValue() > 21 && $player->getHandValue() <= 21) {
-                $playerWinner = $player;
-            }
+        if ($this->dealer->getHandValue() === 21) {
+            return $this->dealer;
         }
 
-        if (is_null($playerWinner)) {
-            return $dealer;
+        if (
+            $this->dealer->getHandValue() > 21 && $this->player->getHandValue() <= 21
+        ) {
+            return $this->player;
         }
 
-        return $playerWinner;
+        if (
+            ($this->player->getHandValue() > 21 && $this->dealer->getHandValue() <= 21)
+            ||
+            $this->player->getHandValue() === $this->dealer->getHandValue()
+        ) {
+            return $this->dealer;
+        }
+
+        if (
+            $this->player->getHandValue() > $this->dealer->getHandValue() && $this->player->getHandValue() <= 21
+        ) {
+            return $this->player;
+        }
+
+        return $this->dealer;
+    }
+
+    public function getLoser(): PlayerInterface {
+        $loser = $this->getWinner()->getId() !== $this->dealer->getId() ? $this->dealer : $this->player;
+
+        return $loser;
     }
 
     public function reset(): void {
         $this->setGameOver(false);
-        $this->resetPlayers($this->players);
+        $this->dealer->reset();
+        $this->player->reset();
 
-        $this->start($this->players, new DeckOfCards());
-    }
-
-    /**
-     * Resets players scores and card hands
-     *
-     * @param array<PlayerInterface> $players
-     * @return void
-     */
-    public function resetPlayers(array $players): void {
-        $numberOfPlayers = count($players);
-        for ($i = 0; $i < $numberOfPlayers; $i++) {
-            $players[$i]->reset();
-        }
+        $this->start($this->player, $this->dealer, new DeckOfCards());
     }
 }

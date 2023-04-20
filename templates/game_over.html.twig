@@ -4,16 +4,21 @@
 
 {% block body %} 
     <main class="main">
-        <section class="content text-center">
-            <h1>Game Over</h1>
-            <h3>Winner</h3>
-            <p>{{ winner.getName() }}</p>
-            <p>Score: <strong>{{ winner.getHandValue() }}</strong></p>
-
-            <div class="button-container">
-                <a href="{{ path('card_game') }}" class="button-green">Play again</a>
+        <h1 class="text-center">Game Over</h1>
+        <section class="content-flex-row ">
+            <div>
+                <h3>Winner</h3>
+                <p>{{ winner.getName() }}</p>
+                <p>Score: <strong>{{ winner.getHandValue() }}</strong></p>
             </div>
-            {{ dump(gameSession) }}
+            <div>
+                <h3>Loser</h3>
+                <p>{{ loser.getName() }}</p>
+                <p>Score: <strong>{{ loser.getHandValue() }}</strong></p>
+            </div>
         </section>
+         <div class="button-container-padding-top">
+            <a href="{{ path('card_game') }}" class="button-green">Play again</a>
+        </div>
     </main>
 {% endblock %}
