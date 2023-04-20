@@ -1,0 +1,34 @@
+While player is not finished:
+    player draw card
+
+    If player stops:
+        break
+
+    If player score > 21:
+        set player is finished
+        set player lost
+        break
+
+    Else If player score = 21:
+        player is finished
+
+If player has not lost:
+    while dealer is not finished:
+        dealer draw card
+
+        If dealer stops:
+            break
+
+        If dealer score > 21:
+            set dealer is finished
+            set dealer lost
+
+        Else If dealer score = 21:
+            set dealer won
+            set dealer is finished
+
+If dealer points >= player points and both <= 21:
+    set dealer won
+
+Else If player points > dealer points and player points <= 21:
+    set player won

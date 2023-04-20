@@ -103,4 +103,9 @@ class GameController extends AbstractController {
         $session->remove('game');
         return $this->render('game_over.html.twig', $data);
     }
+
+    #[Route('/game/doc', 'doc_game')]
+    public function docGame(): Response {
+        return $this->render('doc_game.html.twig');
+    }
 }

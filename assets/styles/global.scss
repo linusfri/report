@@ -51,3 +51,24 @@ a {
     }
 }
 
+.code-block {
+    display: flex;
+    justify-content: center;
+    background-color: $light-code;
+    border-radius: 3px;
+    border: 1px solid $dark;
+    code {
+        font-size: 2rem;
+    }
+}
+
+.img-full-width {
+    max-width: 100%;
+    width: 100%;
+}
+
+hr {
+    margin: $desktop-p 0;
+    color: $dark;
+    border-top: 1px;
+}

@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Card game intro{% endblock %}
+
+{% block body %} 
+    <main class="main">
+        <section class="content">
+            <h1 class="text-center">Documentation</h1>
+            <h3 class="text-center">Main game loop</h3>
+            <pre class="code-block">
+                <code>
+                    While player is not finished:
+                        player draw card
+
+                        If player stops:
+                            break
+
+                        If player score > 21:
+                            set player is finished
+                            set player lost
+                            break
+
+                        Else If player score = 21:
+                            player is finished
+
+                    If player has not lost:
+                        while dealer is not finished:
+                            dealer draw card
+
+                            If dealer stops:
+                                break
+
+                            If dealer score > 21:
+                                set dealer is finished
+                                set dealer lost
+
+                            Else If dealer score = 21:
+                                set dealer won
+                                set dealer is finished
+
+                    If dealer points >= player points and both <= 21:
+                        set dealer won
+
+                    Else If player points > dealer points and player points <= 21:
+                        set player won
+
+                    Else:
+                        set dealer won
+                </code>
+            </pre>
+            <hr>
+            <h3 class="text-center">
+                Flow diagram
+            </h3>
+            <img class="img-full-width" src="{{asset('/img/flow-dia.png')}}" alt="">
+            <hr>
+                <article class="text-content-centered">
+                    <h3>Classes</h3>
+                    <p>
+                        GameController
+                        <br>
+                        En kontroller som hanterar alla routes och anropar metoder i CardGame-klassen
+                        <br><br>
+
+                        Card
+                        <br>
+                        En klass som representerar ett kort, används av CardGraphic-klassen för arv
+                        <br><br>
+
+                        CardGraphic
+                        <br>
+                        Representerar en grafisk representation av ett kort, ärver av card-klassen
+                        <br><br>
+
+                        CardHand
+                        <br>
+                        Används i playerklassen för att ge den en korthand som kan innehålla kort
+                        <br><br>
+
+                        DeckOfCards
+                        <br>
+                        En kortlek, används i CardGame-klassen
+                        <br><br>
+
+                        Player
+                        <br>
+                        En spelare, används i CardGame-klassen
+                        <br><br>
+
+                        Dealer
+                        <br>
+                        Dealer, ärver av Player-klassen
+                        <br><br>
+
+                        CardGame
+                        <br>
+                        En klass som definierar allt beteende för spelet
+                    </p>
+                </article>
+        </section>
+    </main>
+{% endblock %}
