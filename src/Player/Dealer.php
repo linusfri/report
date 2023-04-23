@@ -1,4 +1,7 @@
 <?php
+
 namespace App\Player;
 
-class Dealer extends Player { }
+class Dealer extends Player
+{
+}

@@ -18,7 +18,7 @@ class CardGraphic extends Card implements \JsonSerializable
     }
 
     /**
-     * jsonSerialize
+     * jsonSerialize.
      *
      * @return array<string,mixed>
      */

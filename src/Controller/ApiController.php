@@ -43,6 +43,7 @@ class ApiController extends AbstractController
                 'api/deck/shuffle',
                 'api/deck/draw',
                 'api/deck/draw/5',
+                'api/game',
             ],
         ];
 
@@ -131,5 +132,13 @@ class ApiController extends AbstractController
         $session->remove('deck');
 
         return $this->redirectToRoute('api/deck/drawNumber', ['number' => 1]);
+    }
+
+    #[Route('/api/game', 'api_game')]
+    public function apiGame(SessionInterface $session): JsonResponse
+    {
+        $gameSession = $session->get('game') ?? 'No game started yet!';
+
+        return new JsonResponse($gameSession);
     }
 }

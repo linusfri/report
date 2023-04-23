@@ -6,7 +6,7 @@ class DeckOfCards
 {
     /**
      * @cards
-     *  
+     *
      * @var array<CardGraphic>
      */
     public array $cards;
@@ -19,7 +19,7 @@ class DeckOfCards
     }
 
     /**
-     * getCards
+     * getCards.
      *
      * @return array<CardGraphic>
      */

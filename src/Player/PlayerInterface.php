@@ -1,19 +1,24 @@
 <?php
+
 namespace App\Player;
 
 use App\Card\DeckOfCards;
-use App\Card\CardHand;
+use App\Card\CardGraphic;
 
-interface PlayerInterface {
+interface PlayerInterface
+{
     public function __construct(string $name);
 
     public function drawCard(DeckOfCards $deck): void;
 
+    /**
+     * @return Array<CardGraphic>
+     */
     public function getCards(): array;
 
     public function countHandValue(): void;
 
-    public function setIsFinished(bool $value): void;
+    public function setIsFinished(): void;
 
     public function getHandValue(): int;
 

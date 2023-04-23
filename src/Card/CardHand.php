@@ -5,7 +5,7 @@ namespace App\Card;
 class CardHand
 {
     /**
-     * Cards
+     * Cards.
      *
      * @var array<CardGraphic>
      */
