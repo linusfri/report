@@ -5,6 +5,7 @@ namespace App\Player;
 use App\Card\CardHand;
 use App\Card\CardGraphic;
 use App\Card\DeckOfCards;
+use \Exception;
 
 class Player implements PlayerInterface, \JsonSerializable
 {
@@ -26,6 +27,7 @@ class Player implements PlayerInterface, \JsonSerializable
     public function drawCard(DeckOfCards $deck): void
     {
         $this->cardHand->drawCards($deck, number: 1);
+        $this->countHandValue();
     }
 
     /**
@@ -60,6 +62,9 @@ class Player implements PlayerInterface, \JsonSerializable
 
     public function setHandValue(int $value): void
     {
+        if ($value < 0) {
+            throw new \Exception('Hand value cannot be negative');
+        }
         $this->handValue = $value;
     }
 
@@ -77,7 +82,7 @@ class Player implements PlayerInterface, \JsonSerializable
     {
         $this->cardHand = new CardHand();
         $this->setHandValue(0);
-        $this->setIsFinished();
+        $this->isFinished = false;
     }
 
     public function jsonSerialize(): mixed

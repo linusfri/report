@@ -45,7 +45,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^10",
         "symfony/browser-kit": "6.1.*",
         "symfony/css-selector": "6.1.*",
         "symfony/debug-bundle": "6.1.*",
@@ -118,7 +118,8 @@
             "@phpmd",
             "@phpstan"
         ],
-        "fix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix"
+        "phpdoc": "tools/phpdoc/phpdoc -d src -t docs/api",
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit"
     },
     "conflict": {
         "symfony/symfony": "*"

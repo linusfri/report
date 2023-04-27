@@ -12,8 +12,8 @@ use \Exception;
 class CardGame implements \JsonSerializable
 {
     private PlayerInterface $currentPlayer;
-    private Player $player;
-    private Dealer $dealer;
+    public Player $player;
+    public Dealer $dealer;
     private int $playerRound;
     private bool $gameOver;
     private DeckOfCards $deck;
@@ -226,14 +226,14 @@ class CardGame implements \JsonSerializable
         return $loser;
     }
 
-    // private function reset(): void
-    // {
-    //     $this->gameOver = false;
-    //     $this->dealer->reset();
-    //     $this->player->reset();
+    public function reset(): void
+    {
+        $this->gameOver = false;
+        $this->dealer->reset();
+        $this->player->reset();
 
-    //     $this->start($this->player, $this->dealer, new DeckOfCards());
-    // }
+        $this->start($this->player, $this->dealer, new DeckOfCards());
+    }
 
     public function jsonSerialize(): mixed
     {
