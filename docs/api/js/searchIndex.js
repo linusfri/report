@@ -153,7 +153,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\CardGame\\CardGame\u003A\u003AgetCurrentPlayerCards\u0028\u0029",
             "name": "getCurrentPlayerCards",
-            "summary": "getCurrentPlayerCards",
+            "summary": "getCurrentPlayerCards.",
             "url": "classes/App-CardGame-CardGame.html#method_getCurrentPlayerCards"
         },                {
             "fqsen": "\\App\\CardGame\\CardGame\u003A\u003AupdateCurrentPlayer\u0028\u0029",
@@ -215,6 +215,11 @@ Search.appendIndex(
             "name": "getLoser",
             "summary": "",
             "url": "classes/App-CardGame-CardGame.html#method_getLoser"
+        },                {
+            "fqsen": "\\App\\CardGame\\CardGame\u003A\u003Areset\u0028\u0029",
+            "name": "reset",
+            "summary": "",
+            "url": "classes/App-CardGame-CardGame.html#method_reset"
         },                {
             "fqsen": "\\App\\CardGame\\CardGame\u003A\u003AjsonSerialize\u0028\u0029",
             "name": "jsonSerialize",
@@ -438,57 +443,57 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AdrawCard\u0028\u0029",
             "name": "drawCard",
-            "summary": "",
+            "summary": "Makes\u0020player\u0020draw\u0020a\u0020single\u0020card\u0020from\u0020card\u0020deck",
             "url": "classes/App-Player-Player.html#method_drawCard"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AgetCards\u0028\u0029",
             "name": "getCards",
-            "summary": "",
+            "summary": "Gets\u0020the\u0020cards\u0020in\u0020player\u0027s\u0020hand",
             "url": "classes/App-Player-Player.html#method_getCards"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AsetIsFinished\u0028\u0029",
             "name": "setIsFinished",
-            "summary": "",
+            "summary": "Sets\u0020the\u0020players\u0020status\u0020to\u0020finished",
             "url": "classes/App-Player-Player.html#method_setIsFinished"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AgetIsFinished\u0028\u0029",
             "name": "getIsFinished",
-            "summary": "",
+            "summary": "Returns\u0020true\u0020if\u0020player\u0020is\u0020finished,\u0020false\u0020if\u0020player\u0020is\u0020not\u0020finished",
             "url": "classes/App-Player-Player.html#method_getIsFinished"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AcountHandValue\u0028\u0029",
             "name": "countHandValue",
-            "summary": "",
+            "summary": "Counts\u0020the\u0020value\u0020of\u0020the\u0020cards\u0020in\u0020player\u0027s\u0020hand",
             "url": "classes/App-Player-Player.html#method_countHandValue"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AgetHandValue\u0028\u0029",
             "name": "getHandValue",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020value\u0020of\u0020the\u0020cards\u0020in\u0020player\u0027s\u0020hand",
             "url": "classes/App-Player-Player.html#method_getHandValue"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AsetHandValue\u0028\u0029",
             "name": "setHandValue",
-            "summary": "",
+            "summary": "Sets\u0020the\u0020value\u0020of\u0020the\u0020player\u0027s\u0020hand,\u0020mainly\u0020used\u0020for\u0020testing",
             "url": "classes/App-Player-Player.html#method_setHandValue"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AgetName\u0028\u0029",
             "name": "getName",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020name\u0020of\u0020the\u0020player",
             "url": "classes/App-Player-Player.html#method_getName"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AgetId\u0028\u0029",
             "name": "getId",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020id\u0020of\u0020the\u0020player",
             "url": "classes/App-Player-Player.html#method_getId"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003Areset\u0028\u0029",
             "name": "reset",
-            "summary": "",
+            "summary": "Resets\u0020the\u0020player",
             "url": "classes/App-Player-Player.html#method_reset"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003AjsonSerialize\u0028\u0029",
             "name": "jsonSerialize",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020player\u0020as\u0020an\u0020array\u0020of\u0020keys\u0020and\u0020values.",
             "url": "classes/App-Player-Player.html#method_jsonSerialize"
         },                {
             "fqsen": "\\App\\Player\\Player\u003A\u003A\u0024cardHand",
