@@ -2,12 +2,12 @@
 
 namespace App\CardGame;
 
+use App\Card\CardGraphic;
 use App\Card\DeckOfCards;
 use App\Player\Dealer;
 use App\Player\Player;
 use App\Player\PlayerInterface;
-use App\Card\CardGraphic;
-use \Exception;
+use Exception;
 
 class CardGame implements \JsonSerializable
 {
@@ -39,11 +39,11 @@ class CardGame implements \JsonSerializable
 
     public function currentPlayerDrawCard(): void
     {
+        ++$this->playerRound;
+
         $this->currentPlayer->drawCard($this->deck);
 
         $this->updateGameState();
-
-        ++$this->playerRound;
     }
 
     public function dealerDrawCards(): void
@@ -61,6 +61,7 @@ class CardGame implements \JsonSerializable
             }
         }
 
+        $this->currentPlayer->setIsFinished();
         $this->updateGameState();
 
         return;
@@ -77,7 +78,7 @@ class CardGame implements \JsonSerializable
     }
 
     /**
-     * getCurrentPlayerCards
+     * getCurrentPlayerCards.
      *
      * @return array<CardGraphic>
      */
@@ -99,8 +100,6 @@ class CardGame implements \JsonSerializable
     {
         $this->currentPlayer = $this->dealer;
         $this->currentPlayer->countHandValue();
-
-        $this->currentPlayer->setIsFinished();
     }
 
     public function stopCurrentPlayer(): void
@@ -151,11 +150,7 @@ class CardGame implements \JsonSerializable
 
     private function updateGameState(): void
     {
-        if ($this->currentPlayer instanceof Dealer) {
-            $this->updateDealer();
-        } else {
-            $this->updateCurrentPlayer();
-        }
+        $this->currentPlayer instanceof Dealer ? $this->updateDealer() : $this->updateCurrentPlayer();
 
         if ($this->currentPlayer->getHandValue() > 21) {
             $this->setGameOver();
@@ -185,38 +180,18 @@ class CardGame implements \JsonSerializable
 
     public function getWinner(): PlayerInterface
     {
-        // TODO: Implement for more than 2 players
-        if (
-            $this->dealer->getHandValue() > 21 && $this->player->getHandValue() > 21
-        ) {
+        $dealerValue = $this->dealer->getHandValue();
+        $playerValue = $this->player->getHandValue();
+
+        if ($dealerValue > 21 && $playerValue > 21) {
             throw new Exception('Both players can not have more than 21 points.');
         }
 
-        if (21 === $this->dealer->getHandValue()) {
+        if (21 === $dealerValue || $playerValue > 21 || ($dealerValue <= 21 && $dealerValue > $playerValue)) {
             return $this->dealer;
         }
 
-        if (
-            $this->dealer->getHandValue() > 21 && $this->player->getHandValue() <= 21
-        ) {
-            return $this->player;
-        }
-
-        if (
-            ($this->player->getHandValue() > 21 && $this->dealer->getHandValue() <= 21)
-            ||
-            $this->player->getHandValue() === $this->dealer->getHandValue()
-        ) {
-            return $this->dealer;
-        }
-
-        if (
-            $this->player->getHandValue() > $this->dealer->getHandValue() && $this->player->getHandValue() <= 21
-        ) {
-            return $this->player;
-        }
-
-        return $this->dealer;
+        return $this->player;
     }
 
     public function getLoser(): PlayerInterface
@@ -232,7 +207,7 @@ class CardGame implements \JsonSerializable
         $this->dealer->reset();
         $this->player->reset();
 
-        $this->start($this->player, $this->dealer, new DeckOfCards());
+        $this->start($this->dealer, $this->player, new DeckOfCards());
     }
 
     public function jsonSerialize(): mixed

@@ -2,8 +2,8 @@
 
 namespace App\Player;
 
-use App\Card\DeckOfCards;
 use App\Card\CardGraphic;
+use App\Card\DeckOfCards;
 
 interface PlayerInterface
 {
@@ -12,7 +12,7 @@ interface PlayerInterface
     public function drawCard(DeckOfCards $deck): void;
 
     /**
-     * @return Array<CardGraphic>
+     * @return array<CardGraphic>
      */
     public function getCards(): array;
 

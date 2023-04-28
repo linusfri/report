@@ -10,40 +10,40 @@ class CardGraphicTest extends TestCase
     public function setUp(): void {
         $this->card = new CardGraphic(1, 'spades', '&#x1F0A1');
     }
-    public function testGetInstance()
+    public function testGetInstance(): void
     {
         $this->assertInstanceOf('\App\Card\CardGraphic', $this->card);
     }
 
-    public function testGetValue()
+    public function testGetValue(): void
     {
         $this->assertEquals(1, $this->card->getValue());
     }
 
-    public function testGetSuit()
+    public function testGetSuit(): void
     {
         $this->assertEquals('spades', $this->card->getSuit());
     }
 
-    public function testHasExpectedAttributes()
+    public function testHasExpectedAttributes(): void
     {
         $this->assertObjectHasProperty('value', $this->card);
         $this->assertObjectHasProperty('suit', $this->card);
         $this->assertObjectHasProperty('utf8Representation', $this->card);
     }
 
-    public function testIsHexToSuitArray()
+    public function testIsHexToSuitArray(): void
     {
         $this->assertIsArray($this->card::HEX_TO_SUIT);
         $this->assertIsIterable($this->card::HEX_TO_SUIT);
     }
 
-    public function testUtf8Rep()
+    public function testUtf8Rep(): void
     {
         $this->assertEquals('&#x1F0A1', $this->card->getUtf8Rep());
     }
 
-    public function testSerialize()
+    public function testSerialize(): void
     {
         $this->assertIsArray($this->card->jsonSerialize());
         $this->assertIsIterable($this->card->jsonSerialize());
