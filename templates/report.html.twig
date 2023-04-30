@@ -7,6 +7,7 @@
         <li><a href="#kmom01">Kmom01</a></li>
         <li><a href="#kmom02">kmom02</a></li>
         <li><a href="#kmom03">kmom03</a></li>
+        <li><a href="#kmom03">kmom04</a></li>
     </ul>
     <section class="reports">
         <div id="kmom01" class="report-card">
@@ -84,6 +85,25 @@
                 Hittills i kursen så tycker jag att Symfony som ramverk har varit ett stöd för mig. Det gör mycket bakom kulisserna och en hel del går på "automagi". Fördelen med detta är att jag slipper att tänka på implementeringsspecifika detaljer som annars hade tagit en del tid att utveckla på egen hand. Jag tycker att templatingsystemet fungerar bra men saknar intellisense i twigfilerna. Det hade underlättat att ha typinferens / autocomplete direkt i templates ungefär så som React / Vue med typescript fungerar. Dessa två är ju dock frontend-ramverk / -paket och inte baserade på PHP men man kan ju alltid önska.
                 Jag är nöjd med min insats i kmom03 och anser att jag gjort det mesta med den tid jag hade disponibel. Mitt TIL för detta kursmoment är kodstandard och struktur i PHP samt tankesättet med tunna controllers och feta modeller.
 
+            </p>
+        </div>
+        <div id="kmom04" class="report-card">
+            <h3>Kmom04</h3>
+            <p> 
+                <h3>Kmom04</h3>
+                <br><br>
+                <h4>Enhetstestning</h4>
+                Detta kursmoment har varit ett av de nyttigaste i kursen hittills. Jag har fått insikt om vad testning i PHP med PHPunit innebär samt hur tester struktureras och konfigureras. Sedan innan har jag skrivit enhetstester i Node, Python och C# och det är intressant hur lik testprocessen är. Därför tycker jag att testning med PHPUnit har känts naturligt och lättsamt. Konfigurationen av programvaran har också gått utan problem och jag tycker att mycket varit intuitivt.
+                <br><br>
+                Gällande att skriva kod som testar annan kod så tycker jag att det är olika lätt / svårt beroende på hur koden som skall testas ser ut. Om det exempelvis finns mycket slumpmässigt beteende i funktioner så tycker jag att det är otroligt svårt att få till bra testfall. Om det däremot är fastställt vad en funktion skall returnera så är det ofta trivialt att testa den.
+                <br><br>
+                När jag ser till kodtäckning så lyckades jag få 100% i flera av mina klasser. Den enda som jag inte uppnådde detta i var CardGame, vilket berodde på att den har en del icke deterministiskt beteende som sätter rätt rejäla käppar i hjulen. Jag experimenterade med Mock objects och Stubs för att kunna simulera slumpmässigt beteende men kom snabbt fram till att de testfall där dessa användes inte var så meningsfulla. Därför slopade jag en del tester som jag inte ansåg uppfyllde ett syfte.
+                <br><br>
+                Jag tycker generellt att min kod är testbar och jag stötte inte på några problem bortsett från de som jag beskrev i föregående stycke. Jag skulle kunna åtgärda slumpmässiga beteenden för att göra koden mer testbar, men i detta sammanhang så skulle detta resultera i förlust av funktionalitet som faktiskt behövs för att applikationen skall fungera som tänkt. Med det sagt så valde jag trots allt att skriva om en del annan kod för att det skulle vara lättare att förstå den och därmed lättare att formulera testfall för. Den funktion som jag skrev om mest var CardGame::getWinner(), som i sitt grundutförande var nästintill obegriplig och onödigt komplicerad för vad den gjorde.
+                <br><br>
+                Om jag skall reflektera lite om hurvida testbar kod per automatik innebär "snygg och ren" kod så tänker jag att det beror på. Bara för att en funktion är lätt att testa så behöver det inte betyda att den är snyggt och strukturerat skriven. Exempelvis skulle funktionen kunna manipulera data på alla möjliga komplicerade sätt innan den till slut returnerar ett värde. Returvärdet i sig kanske enbart kan ha två former medans koden som bestämmer vilken form detta skall ha kan vara otroligt komplex. I ett sådant fall blir funktionen lätt att testa men svår att förstå sig på. Samtidigt skulle man kunna argumentera för att det i ett sådant fall vore intressant att göra fler "del-assertions" inne i funktionen för att kontrollera att data manipuleras på rätt sätt. Vilket i sådana fall skulle göra koden mer svårtestad och därmed stärka sambandet mellan testbar och snygg/strukturerad kod.
+                <br><br>
+                Mitt TIL för detta kursmoment är upplägget på testklasser med PHPUnit samt hur programvaran konfigureras.
             </p>
         </div>
     </section>
