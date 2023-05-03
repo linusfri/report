@@ -122,6 +122,12 @@
         "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
         "makeMigrate": "php bin/console make:migration",
         "migrate": "php bin/console doctrine:migrations:migrate",
+        "makeController": "php bin/console make:controller",
+        "makeAndMigrate": [
+            "@makeMigrate",
+            "@migrate"
+        ],
+        "makeEntity": "php bin/console make:entity",
         "sql": "php bin/console dbal:run-sql"
     },
     "conflict": {
