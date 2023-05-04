@@ -81,6 +81,7 @@ class Book implements \JsonSerializable
     public function jsonSerialize(): mixed
     {
         $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+        $baseUrl = strpos('student', $_SERVER['HTTP_HOST'])? '~lifr21/dbwebb-kurser/mvc/me/report/public' : $_SERVER['HTTP_HOST'];
 
         return [
             'id' => $this->getId(),
@@ -88,7 +89,7 @@ class Book implements \JsonSerializable
             'isbn' => $this->getIsbn(),
             'author' => $this->getAuthor(),
             'img' => $this->getImg(),
-            'link' => $protocol.$_SERVER['HTTP_HOST'].'/library/single?id='.$this->getId(),
+            'link' => $protocol.$baseUrl.'/library/single?id='.$this->getId(),
         ];
     }
 }
