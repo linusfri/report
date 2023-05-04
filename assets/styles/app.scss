@@ -2,14 +2,17 @@
 @import './reset.scss';
 @import './typography.scss';
 @import './global.scss';
+@import './base.scss';
 
 html {
-    font-size: 62.5%;
+    font-size: 100%;
 }
 
 body {
     background-color: $white;
-    margin-bottom: 100px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .site-header {
@@ -28,12 +31,8 @@ body {
     grid-template-columns: repeat(3, 1fr);
     min-height: 100px;
     background-color: $dark;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    margin-top: auto;
     padding: 0 $desktop-p;
-
     .footer-section {
         color: $white;
     }
@@ -136,5 +135,25 @@ body {
 
     p {
         font-size: 130px;
+    }
+}
+
+.single-book {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    border: 1px solid $highlight;
+    border-radius: 2px;
+
+    a {
+        margin-top: $mobile-p;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 50%;
+    }
+
+    img {
+        max-width: 150px;
+        min-width: 0%;
     }
 }

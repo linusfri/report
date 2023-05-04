@@ -6,36 +6,35 @@ use App\Card\CardGraphic;
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
 use Exception;
-
 class Player implements PlayerInterface, \JsonSerializable
 {
-    /** 
-     * @var CardHand 
-     * The players card hand
+    /**
+     * @var CardHand
+     *               The players card hand
      * */
     protected CardHand $cardHand;
 
-    /** 
-     * @var int 
-     * The value of the cards in the players hand
+    /**
+     * @var int
+     *          The value of the cards in the players hand
      * */
     protected int $handValue;
 
-    /** 
-     * @var bool 
-     * True if player is finished, false if player is not finished
+    /**
+     * @var bool
+     *           True if player is finished, false if player is not finished
      * */
     protected bool $isFinished;
 
-    /** 
-     * @var string 
-     * The name of the player
+    /**
+     * @var string
+     *             The name of the player
      * */
     protected string $name;
 
-    /** 
-     * @var int 
-     * The id of the player
+    /**
+     * @var int
+     *          The id of the player
      * */
     protected int $id;
 
@@ -56,7 +55,8 @@ class Player implements PlayerInterface, \JsonSerializable
     }
 
     /**
-     * Gets the cards in player's hand
+     * Gets the cards in player's hand.
+     *
      * @return array<CardGraphic>
      */
     public function getCards(): array
@@ -119,9 +119,10 @@ class Player implements PlayerInterface, \JsonSerializable
         $this->isFinished = false;
     }
 
-    /** 
+    /**
      * Returns the player as an array of keys and values.
      * This is for specifying what data to include when serializing the player to JSON.
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array

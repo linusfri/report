@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library{% endblock %}
+
+{% block body %} 
+    <main class="main">
+        <section class="content">
+            <h1>Single book</h1>
+
+            <article class="single-book">
+                <img src="{{ book.img|raw }}" alt="">
+                <h2>{{ book.title }}</h1>
+                <p>Author: {{ book.author }}</p>
+                <p>Isbn: {{ book.isbn }}</p>
+                <a class="button-green" href="{{ path('edit_book', {'id': book.id}) }}">Edit book</a>
+            </article>
+        </section>
+    </main>
+{% endblock %}

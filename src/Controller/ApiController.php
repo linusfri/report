@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Card\CardHand;
 use App\Card\DeckOfCards;
+use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -44,6 +45,7 @@ class ApiController extends AbstractController
                 'api/deck/draw',
                 'api/deck/draw/5',
                 'api/game',
+                'api/library',
             ],
         ];
 
@@ -140,5 +142,21 @@ class ApiController extends AbstractController
         $gameSession = $session->get('game') ?? 'No game started yet!';
 
         return new JsonResponse($gameSession);
+    }
+
+    #[Route('/api/library', name: 'api/library')]
+    public function library(BookRepository $bookRepo): Response
+    {
+        $books = $bookRepo->findAll();
+
+        return new JsonResponse($books);
+    }
+
+    #[Route('/api/library/book/{isbn}', name: 'api/library/book/{isbn}')]
+    public function libraryIsbn(string $isbn, BookRepository $bookRepo): Response
+    {
+        $book = $bookRepo->findOneBy(['isbn' => $isbn]);
+
+        return new JsonResponse($book);
     }
 }

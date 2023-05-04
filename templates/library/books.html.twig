@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library{% endblock %}
+
+{% block body %} 
+    <main class="main">
+        <section class="content">
+            <h1>Books</h1>
+            <h3>Click on the id to view a single book</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>ISBN</th>
+                        <th>Image</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td><a href="{{ path('single_book', {'id': book.id}) }}">{{ book.id }}</a></td>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.isbn }}</td>
+                            <td>{{ book.img }}</td>
+                            <td>
+                                <form action="{{ path('delete_book') }}" method="POST">
+                                    <input type="hidden" name="id" value="{{ book.id }}">
+                                    <input type="submit" class="button-red" value="Delete">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+{% endblock %}

@@ -8,7 +8,6 @@ use App\Player\Dealer;
 use App\Player\Player;
 use App\Player\PlayerInterface;
 use Exception;
-
 class CardGame implements \JsonSerializable
 {
     private PlayerInterface $currentPlayer;

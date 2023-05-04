@@ -1,5 +1,6 @@
 @mixin base-button {
     padding: 1rem;
+    display: block;
     border-radius: 0.5rem;
     color: $white !important;
     font-weight: bold;

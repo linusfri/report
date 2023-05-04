@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Library{% endblock %}
+
+{% block body %} 
+    <main class="main">
+        <section class="content">
+            <h1>Library</h1>
+            <h3 class="text">Options</h3>
+            <div class="card-container">
+                <a href="{{ path('create_book') }}">Create book</a>
+                <a href="{{ path('books') }}">See all books</a>
+            </div>
+        </section>
+    </main>
+{% endblock %}
