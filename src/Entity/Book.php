@@ -81,7 +81,7 @@ class Book implements \JsonSerializable
     public function jsonSerialize(): mixed
     {
         $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
-        $baseUrl = strpos('student', $_SERVER['HTTP_HOST'])? '~lifr21/dbwebb-kurser/mvc/me/report/public' : $_SERVER['HTTP_HOST'];
+        $baseUrl = strpos($_SERVER['HTTP_HOST'], 'student') ? 'www.student.bth.se/~lifr21/dbwebb-kurser/mvc/me/report/public' : $_SERVER['HTTP_HOST'];
 
         return [
             'id' => $this->getId(),
