@@ -14,13 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class LibraryController extends AbstractController
 {
     #[Route('/library', 'library')]
-    public function library(SessionInterface $session): Response
+    public function library(): Response
     {
         return $this->render('library/library.html.twig');
     }
 
     #[Route('/library/create', 'create_book', methods: ['POST', 'GET'])]
-    public function createBook(EntityManagerInterface $entityManager, Request $req): Response
+    public function createBook(BookRepository $bookRepo, Request $req): Response
     {
         if ('GET' == $req->getMethod()) {
             return $this->render('library/create_book.html.twig');
@@ -34,8 +34,7 @@ class LibraryController extends AbstractController
         $book->setAuthor($postData['author']);
         $book->setImg($postData['img']);
 
-        $entityManager->persist($book);
-        $entityManager->flush();
+        $bookRepo->save($book, flush: true);
 
         return $this->redirectToRoute('books');
     }
@@ -63,7 +62,7 @@ class LibraryController extends AbstractController
     }
 
     #[Route('/library/edit', 'edit_book', methods: ['GET', 'POST'])]
-    public function editBook(BookRepository $bookRepo, EntityManagerInterface $entityManager, Request $req): Response
+    public function editBook(BookRepository $bookRepo, Request $req): Response
     {
         if ('GET' == $req->getMethod()) {
             $bookId = $req->query->get('id');
@@ -86,24 +85,22 @@ class LibraryController extends AbstractController
         $book->setAuthor($postData['author']);
         $book->setImg($postData['img']);
 
-        $entityManager->persist($book);
-        $entityManager->flush();
+        $bookRepo->save($book, flush: true);
 
         return $this->redirectToRoute('books');
     }
 
     #[Route('/library/delete', 'delete_book', methods: ['POST'])]
-    public function deleteBook(EntityManagerInterface $entityManager, Request $req): Response
+    public function deleteBook(BookRepository $bookRepo, Request $req): Response
     {
         $bookId = $req->request->get('id');
-        $book = $entityManager->getRepository(Book::class)->find($bookId);
+        $book = $bookRepo->find($bookId);
 
         if (!$book) {
             return $this->redirectToRoute('books');
         }
 
-        $entityManager->remove($book);
-        $entityManager->flush();
+        $bookRepo->remove($book, flush: true);
 
         return $this->redirectToRoute('books');
     }
