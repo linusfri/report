@@ -46,6 +46,7 @@ class ApiController extends AbstractController
                 'api/deck/draw/5',
                 'api/game',
                 'api/library',
+                'api/library/book/9780451524935'
             ],
         ];
 
