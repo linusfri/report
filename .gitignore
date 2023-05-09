@@ -20,7 +20,7 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 tools/
-.env
+# .env
 .env.test
 .phpdoc/
 
