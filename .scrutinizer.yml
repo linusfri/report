@@ -12,8 +12,8 @@ build:
             environment:
                 php:
                     # version: 8.1.13
-                    # version: 8.1.17
-                    version: 8.2.5
+                    version: 8.1.17
+                    # version: 8.2.5
         analysis:
             tests:
                 override:
