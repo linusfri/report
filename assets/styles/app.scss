@@ -120,10 +120,12 @@ body {
 
 .text-content {
     max-width: 600px;
-
     &-centered {
         max-width: 600px;
         margin: auto;
+        strong {
+            font-weight: 700;
+        }
     }
 }
 
@@ -155,5 +157,12 @@ body {
     img {
         max-width: 150px;
         min-width: 0%;
+    }
+}
+
+.metrics {
+    a {
+        color: $cta;
+        text-decoration: underline;
     }
 }

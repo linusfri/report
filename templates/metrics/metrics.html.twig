@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block body %} 
+    <main class="main">
+        <section class="content">
+            <h1 class="text-center">Metrics</h1>
+            <article class="text-content-centered">
+                <h3>Introduktion</h3>
+                <p>
+                    <strong>Code style</strong>
+                    <br>
+                    Kodstil avser hur en utvecklares sätt att skriva kod förhåller sig till ett antal riktlinjer och konventioner.
+                    Exempelvis hur denne väljer att indentera, kommentera, namge variabler och funktioner, samt strukturera upp sin kod.
+                    En "bra" kodstil är en sådan som följer de regler som finns definierade och som vida anses vara "best practice".
+                    <br><br>
+                    <strong>Coverage</strong>
+                    <br>
+                    Kodtäckning är ett mått på hur stor del av en kodbas som täcks av tester. Kodtäckning kan mätas på olika sätt och
+                    när det gäller enhetstester så är det vanligt att kodtäckningen separeras i två delar, en för andel rader som täcks och
+                    en för andel metoder. Kodtäckning utrycks i procent, som ett förhållande mellan antalet rader/metoder med tester delat på totalt antal rader/metoder.
+                    <br><br>
+                    <strong>Complexity</strong>
+                    <br>
+                    Kortfattat kan man säga att komplexitet är ett mått på hur svår kod är att förstå och underhålla. Det finns flera olika faktorer
+                    som påverkar hur komplex en mjukvara är. Exempelvis hur många yttre beroenden den har, hur många rader kod den består av, hur nästlad den är
+                    samt hur många beslutspunkter den innehåller.
+                    <br><br>
+                    <strong>Cohesion</strong>
+                    <br>
+                    Kohesion är ett mått på hur väl en del av en mjukvara hänger ihop, det vill säga hur väl den delen av koden uppfyller ett specifikt syfte.
+                    Ju fler olika syften en del av koden uppfyller desto lägre kohesion har den. Ett bra sätt att öka kohesion är att dela upp problematisk kod
+                    i mindre delar, där varje del idealt har en specifik uppgift. I min kod exemplifierar ApiController hur en klass med låg kohesion kan se ut.
+                    Den har kontrollermetoder som interagerar med flera olika modellklasser och det finns inget samband mellan mycket av den data som returneras av controllern.
+                    Detta skulle till vis del kunna avhjälpas genom att skapa flera olika API-controllers som var och en returnerar data från en specifik del av kodbasen.
+                    Konkret innebär detta att den data som har med kort att göra hamnar i en controller, medan den data som har med böcker att göra hamnar i en annan.
+                    <br></br>
+                    <strong>Coupling</strong>
+                    <br>
+                    Coupling skulle löst kunna översättas till beroende och är ett mått på hur beroende delar av en mjukvara är av andra delar av koden.
+                    Ju större beroende kod har av andra delar desto högre coupling har den. Detta kan i många fall göra mjukvaran svår att förstå och underhålla.
+                    Ett lågt beroende mellan olika delar av koden är därför att föredra. Exempelvis är en klass beroende av 100 andra klasser svårare att underhålla
+                    än en klass som inte är beroende av någon annan. Detta eftersom ändringar i kodbasen påverkar klassen med många beroenden mer än den utan.
+                    <br></br>
+                    <strong>CRAP</strong>
+                    CRAP (Change Risk Anti-Patterns) är ett mått som kombinerar kodtäckning och komplexitet. Ju högre CRAP-poäng desto svårare
+                    är kodbasen att underhålla, vilket i sin tur innebär att ändringar i denna är förenat med större risk.
+                    <br></br>
+                </p>
+                
+                <div class="metrics">
+                    <h3>Phpmetrics</h3> 
+                    <p>Mätvärden A</p>
+                    <a href="{{ asset('img/metrics_1.png') }}"><img class="img-full-width" src="{{ asset('img/metrics_1.png') }}" alt=""></a>
+                    <p>Mätvärden B</p>
+                    <a href="{{ asset('img/metrics_2.png') }}"><img class="img-full-width" src="{{ asset('img/metrics_2.png') }}" alt=""></a>
+
+                    <h4>Övergripande</h4>
+                    <p>
+                        Jag tänkte fokusera på klassen CardGame och ApiController eftersom dessa är de två klasser som får sämst resultat i Phpmetrics.
+                        Med utgångspunkt i CardGame så är det tydligt att klassen har ett stort antal rader kod i förhållande till de andra klasserna i projektet.
+                        Den har LLOC (Logical Lines Of Code) på 149 och en volym på 917. <a href="https://www.verifysoft.com/en_halstead_metrics.html#33">Volym</a>
+                        kan förenklat definieras som informationstätheten i koden, mätt bit. Den har en efferent koppling på 7 vilket innebär att den är beroende av en
+                        rad andra klasser. Dessutom har den en WMC på 37 samt en cyklomatisk komplexitet på 21. <a href="https://phpmd.org/rules/codesize.html">WMC</a>
+                        (Weighted Method Count) är ett genomsnitt på metodernas komplexitet i en klass.
+                        <br><br>
+                        Slutligen har klassen en relativ systemkomplexitet på 325.
+                        Relativ systemkomplexitet kan förenklat definieras som komplexitet i ett system där både intern och extern komplexitet tas i beaktning. I
+                        fallet CardGame är komplexiten tätt kopplad till interna och externa metoder.
+                        <br><br>
+                        <strong>ApiController</strong>
+                        <br>
+                        ApiController får nedslag dess synnerligen låga kohesion, vilket en konsekvens av att den har för många ansvarsområden och använder en rad olika extern klasser.
+                        Den har ett för stort antal publika metoder som i stor utsträckning inte heller har något med varandra att göra. Det finns stor förbättringspotential
+                        i denna klass, vilket är något som kommer tas upp senare.
+                        <br><br>
+                        ApiController
+                        <a href="{{ asset('img/kohesion.png') }}">
+                            <img class="img-full-width" src="{{ asset('img/kohesion.png') }}" alt="">
+                        </a> 
+                    </p>
+
+                    <h3>Scrutinizer</h3>
+                    <p>
+                        Oturligt nog så har alla mina klasser betyget A i Scrutinizer vilket gör analysen något mer utmanande.
+                        Om man dock fokuserar på CardGame så kan man skönja samma mönster i scrutinizer som i phpmetrics. CardGame är fortfarande
+                        den klass som är mest komplex med flest rader. Den har en komplexitet på 40 och en storlek på 210. Tätt efter CardGame följerApiController
+                        som har en komplexitet på 15 med en storlek på 146. Spontant känns phpmetrics mer utömmande i sin analys och det är svårt att dra några
+                        ytterligare slutsatser utifrån Scrutinizers rapport.
+
+                        <br><br>
+                        Scrutinizer
+                        <a href="{{ asset('img/scrutinizer.png') }}">
+                            <img class="img-full-width" src="{{ asset('img/scrutinizer.png') }}" alt="">
+                        </a> 
+                    </p>
+
+                    <h3>Förbättringar</h3>
+                    <p>
+                        <strong>ApiController</strong>
+                        <br>
+                        För att få högre kohesion i ApiController så har jag för avsikta att dela upp koden i flera separata kontrollers som var och en har ett specifikt ansvarsområde.
+                        Dessutom skall jag skriva tester för varje metod i klassen för att få ner CRAP-poängen. Slutligen skall jag kommentera alla metoder i klassen och generera ny dokumentation.
+                        Sammantaget hoppas jag att detta skall leda till förbättrade mätvärden i phpmetrics och scrutinizer. Specifikt tror jag att kohesionen kommer att förbättras mest och
+                        det är också här den största förbättringspotentialen finns.
+                    </p>
+
+                </div>
+            </article>
+        </section>
+    </main>
+{% endblock %}

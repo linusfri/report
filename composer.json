@@ -120,6 +120,7 @@
         ],
         "phpdoc": "tools/phpdoc/phpdoc -d src -t docs/api",
         "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
+        "metrics": "tools/phpmetrics/vendor/bin/phpmetrics --report-html=docs/metrics src",
         "makeMigrate": "php bin/console make:migration",
         "migrate": "php bin/console doctrine:migrations:migrate",
         "makeController": "php bin/console make:controller",

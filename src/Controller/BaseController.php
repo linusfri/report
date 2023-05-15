@@ -25,4 +25,10 @@ class BaseController extends AbstractController
     {
         return $this->render('report.html.twig');
     }
+
+    #[Route('metrics', 'metrics')]
+    public function metrics(): Response
+    {
+        return $this->render('metrics/metrics.html.twig');
+    }
 }

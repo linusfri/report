@@ -261,65 +261,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-ApiController.html"
         },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method___construct"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003AgetQuotes\u0028\u0029",
-            "name": "getQuotes",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_getQuotes"
-        },                {
             "fqsen": "\\App\\Controller\\ApiController\u003A\u003Aapi\u0028\u0029",
             "name": "api",
             "summary": "",
             "url": "classes/App-Controller-ApiController.html#method_api"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003AshowDeck\u0028\u0029",
-            "name": "showDeck",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_showDeck"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003Ashuffle\u0028\u0029",
-            "name": "shuffle",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_shuffle"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003Adraw\u0028\u0029",
-            "name": "draw",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_draw"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003AdrawNumber\u0028\u0029",
-            "name": "drawNumber",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_drawNumber"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003Areset\u0028\u0029",
-            "name": "reset",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_reset"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003AapiGame\u0028\u0029",
-            "name": "apiGame",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_apiGame"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003Alibrary\u0028\u0029",
-            "name": "library",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_library"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003AlibraryIsbn\u0028\u0029",
-            "name": "libraryIsbn",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#method_libraryIsbn"
-        },                {
-            "fqsen": "\\App\\Controller\\ApiController\u003A\u003A\u0024apiClient",
-            "name": "apiClient",
-            "summary": "",
-            "url": "classes/App-Controller-ApiController.html#property_apiClient"
         },                {
             "fqsen": "\\App\\Controller\\BaseController",
             "name": "BaseController",
@@ -340,6 +285,11 @@ Search.appendIndex(
             "name": "report",
             "summary": "",
             "url": "classes/App-Controller-BaseController.html#method_report"
+        },                {
+            "fqsen": "\\App\\Controller\\BaseController\u003A\u003Ametrics\u0028\u0029",
+            "name": "metrics",
+            "summary": "",
+            "url": "classes/App-Controller-BaseController.html#method_metrics"
         },                {
             "fqsen": "\\App\\Controller\\CardController",
             "name": "CardController",
@@ -725,6 +675,81 @@ Search.appendIndex(
             "name": "remove",
             "summary": "",
             "url": "classes/App-Repository-BookRepository.html#method_remove"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiCardController",
+            "name": "ApiCardController",
+            "summary": "",
+            "url": "classes/App-Controller-ApiCardController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003AshowDeck\u0028\u0029",
+            "name": "showDeck",
+            "summary": "",
+            "url": "classes/App-Controller-ApiCardController.html#method_showDeck"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003Ashuffle\u0028\u0029",
+            "name": "shuffle",
+            "summary": "",
+            "url": "classes/App-Controller-ApiCardController.html#method_shuffle"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003Adraw\u0028\u0029",
+            "name": "draw",
+            "summary": "",
+            "url": "classes/App-Controller-ApiCardController.html#method_draw"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003AdrawNumber\u0028\u0029",
+            "name": "drawNumber",
+            "summary": "",
+            "url": "classes/App-Controller-ApiCardController.html#method_drawNumber"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003Areset\u0028\u0029",
+            "name": "reset",
+            "summary": "",
+            "url": "classes/App-Controller-ApiCardController.html#method_reset"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiGameController",
+            "name": "ApiGameController",
+            "summary": "",
+            "url": "classes/App-Controller-ApiGameController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiGameController\u003A\u003AapiGame\u0028\u0029",
+            "name": "apiGame",
+            "summary": "",
+            "url": "classes/App-Controller-ApiGameController.html#method_apiGame"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiLibraryController",
+            "name": "ApiLibraryController",
+            "summary": "",
+            "url": "classes/App-Controller-ApiLibraryController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiLibraryController\u003A\u003Alibrary\u0028\u0029",
+            "name": "library",
+            "summary": "",
+            "url": "classes/App-Controller-ApiLibraryController.html#method_library"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiLibraryController\u003A\u003AlibraryIsbn\u0028\u0029",
+            "name": "libraryIsbn",
+            "summary": "",
+            "url": "classes/App-Controller-ApiLibraryController.html#method_libraryIsbn"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiQuoteController",
+            "name": "ApiQuoteController",
+            "summary": "",
+            "url": "classes/App-Controller-ApiQuoteController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiQuoteController\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Controller-ApiQuoteController.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiQuoteController\u003A\u003AgetQuotes\u0028\u0029",
+            "name": "getQuotes",
+            "summary": "",
+            "url": "classes/App-Controller-ApiQuoteController.html#method_getQuotes"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiQuoteController\u003A\u003A\u0024apiClient",
+            "name": "apiClient",
+            "summary": "",
+            "url": "classes/App-Controller-ApiQuoteController.html#property_apiClient"
         },                {
             "fqsen": "\\",
             "name": "\\",
