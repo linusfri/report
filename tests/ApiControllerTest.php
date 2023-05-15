@@ -1,5 +1,8 @@
 <?php
+
+use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class ApiControllerTest extends WebTestCase
 {
@@ -19,5 +22,10 @@ class ApiControllerTest extends WebTestCase
         $this->assertStringContainsString('api/game', $content);
         $this->assertStringContainsString('api/library', $content);
         $this->assertStringContainsString('api/library/book/9780451524935', $content);
+    }
+
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        return new \App\Kernel('test', true);
     }
 }
