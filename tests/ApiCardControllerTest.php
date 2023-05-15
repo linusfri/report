@@ -16,7 +16,6 @@ class ApiCardControllerTest extends WebTestCase
 
         $content = json_decode($response->getContent(), true);
         $this->assertIsArray($content['cards']);
-        // Additional assertions on the deck content
     }
 
     public function testShuffle(): void
@@ -29,7 +28,6 @@ class ApiCardControllerTest extends WebTestCase
         $this->assertSame('application/json', $response->headers->get('Content-Type'));
 
         $content = json_decode($response->getContent(), true);
-        // Additional assertions on the shuffled deck content
     }
 
     public function testDraw(): void
@@ -45,7 +43,6 @@ class ApiCardControllerTest extends WebTestCase
         $content = json_decode($response->getContent(), true);
         $this->assertIsArray($content['cardHand']);
         $this->assertIsArray($content['deck']);
-        // Additional assertions on the drawn cards and the remaining deck content
     }
 
     public function testDrawNumber(): void
@@ -63,7 +60,6 @@ class ApiCardControllerTest extends WebTestCase
         $this->assertCount(5, $content['cardHand']);
 
         $this->assertIsArray($content['deck']);
-        // Additional assertions on the remaining deck content
     }
 
 }
