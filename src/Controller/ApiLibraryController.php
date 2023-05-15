@@ -11,6 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiLibraryController extends AbstractController
 {
+    /**
+     * library
+     * Show all the books in the library
+     * 
+     * @return JsonResponse
+     */
     #[Route('/api/library', name: 'api/library')]
     public function library(BookRepository $bookRepo): Response
     {
@@ -18,6 +24,12 @@ class ApiLibraryController extends AbstractController
         return new JsonResponse($books);
     }
 
+    /**
+     * libraryIsbn
+     * Show a book by isbn
+     * 
+     * @return JsonResponse
+     */
     #[Route('/api/library/book/{isbn}', name: 'api/library/book/{isbn}')]
     public function libraryIsbn(string $isbn, BookRepository $bookRepo): Response
     {

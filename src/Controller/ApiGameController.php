@@ -8,7 +8,13 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ApiGameController extends AbstractController
-{
+{   
+    /**
+     * apiGame
+     * Shows a json representation of the game
+     * 
+     * @return JsonResponse
+     */
     #[Route('/api/game', 'api_game')]
     public function apiGame(SessionInterface $session): JsonResponse
     {
