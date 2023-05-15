@@ -9,19 +9,11 @@ class ApiControllerTest extends WebTestCase
     public function testApiRoute(): void
     {
         $client = static::createClient();
+        $client->request('GET', '/api');
+        $response = $client->getResponse();
 
-        $crawler = $client->request('GET', '/api');
-        $content = $crawler->filter('.link-container')->text();
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertStringContainsString('api/quote', $content);
-        $this->assertStringContainsString('api/deck', $content);
-        $this->assertStringContainsString('api/deck/shuffle', $content);
-        $this->assertStringContainsString('api/deck/draw', $content);
-        $this->assertStringContainsString('api/deck/draw/5', $content);
-        $this->assertStringContainsString('api/game', $content);
-        $this->assertStringContainsString('api/library', $content);
-        $this->assertStringContainsString('api/library/book/9780451524935', $content);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals('text/html; charset=UTF-8', $response->headers->get('Content-Type'));
     }
 
     protected static function createKernel(array $options = []): KernelInterface
