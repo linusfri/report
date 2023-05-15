@@ -1,8 +1,7 @@
 <?php
-use App\Repository\BookRepository;
+
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Book;
 
 /** 
  * TODO
@@ -18,5 +17,10 @@ class ApiQuoteControllerTest extends WebTestCase
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('application/json', $response->headers->get('Content-Type'));
+    }
+
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        return new \App\Kernel('test', true);
     }
 }

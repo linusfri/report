@@ -1,10 +1,6 @@
 <?php
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use App\CardGame\CardGame;
-use App\Card\DeckOfCards;
-use App\Player\Player;
-use App\Player\Dealer;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class ApiGameControllerTest extends WebTestCase
 {
@@ -37,5 +33,10 @@ class ApiGameControllerTest extends WebTestCase
         $this->assertIsArray($content['game']['player']);
         $this->assertIsArray($content['game']['dealer']);
         $this->assertFalse($content['game']['gameOver']);
+    }
+
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        return new \App\Kernel('test', true);
     }
 }

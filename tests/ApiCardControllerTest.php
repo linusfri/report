@@ -1,6 +1,7 @@
 <?php
 use App\Controller\ApiCardController;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ApiCardControllerTest extends WebTestCase
@@ -62,4 +63,8 @@ class ApiCardControllerTest extends WebTestCase
         $this->assertIsArray($content['deck']);
     }
 
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        return new \App\Kernel('test', true);
+    }
 }

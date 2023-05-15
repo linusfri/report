@@ -1,8 +1,8 @@
 <?php
-use App\Repository\BookRepository;
+
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
-use App\Entity\Book;
+use Symfony\Component\HttpKernel\KernelInterface;
+
 
 /** 
  * TODO
@@ -13,5 +13,10 @@ class ApiLibraryControllerTest extends WebTestCase
     public function testPlaceholder(): void
     {
         $this->assertTrue(true);
+    }
+
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        return new \App\Kernel('test', true);
     }
 }
