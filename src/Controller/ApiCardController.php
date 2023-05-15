@@ -13,9 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiCardController extends AbstractController
 {
     /**
-     * Show the deck of cards
-     *
-     * @return JsonResponse
+     * Show the deck of cards.
      */
     #[Route('api/deck', 'api/deck')]
     public function showDeck(): JsonResponse // ;);)
@@ -28,9 +26,7 @@ class ApiCardController extends AbstractController
     }
 
     /**
-     * Shuffle the deck of cards
-     *
-     * @return JsonResponse
+     * Shuffle the deck of cards.
      */
     #[Route('api/deck/shuffle', 'api/deck/shuffle')]
     public function shuffle(): JsonResponse
@@ -42,7 +38,7 @@ class ApiCardController extends AbstractController
     }
 
     /**
-     * Draw a card from the deck
+     * Draw a card from the deck.
      *
      * @return JsonResponse
      */
@@ -75,9 +71,7 @@ class ApiCardController extends AbstractController
     }
 
     /**
-     * Draw a specified number of cards from the deck
-     *
-     * @return JsonResponse
+     * Draw a specified number of cards from the deck.
      */
     #[Route('api/deck/draw/{number<\d+>}', 'api/deck/drawNumber', methods: ['GET'])]
     public function drawNumber(int $number, SessionInterface $session): JsonResponse
@@ -108,9 +102,7 @@ class ApiCardController extends AbstractController
     }
 
     /**
-     * Resets deck
-     *
-     * @return Response
+     * Resets deck.
      */
     #[Route('/api/deck/reset', name: '/api/deck/reset')]
     public function reset(SessionInterface $session): Response

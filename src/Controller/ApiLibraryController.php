@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\BookRepository;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,21 +12,22 @@ class ApiLibraryController extends AbstractController
 {
     /**
      * library
-     * Show all the books in the library
-     * 
+     * Show all the books in the library.
+     *
      * @return JsonResponse
      */
     #[Route('/api/library', name: 'api/library')]
     public function library(BookRepository $bookRepo): Response
     {
         $books = $bookRepo->findAll();
+
         return new JsonResponse($books);
     }
 
     /**
      * libraryIsbn
-     * Show a book by isbn
-     * 
+     * Show a book by isbn.
+     *
      * @return JsonResponse
      */
     #[Route('/api/library/book/{isbn}', name: 'api/library/book/{isbn}')]

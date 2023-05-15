@@ -19,9 +19,7 @@ class ApiQuoteController extends AbstractController
 
     /**
      * quote
-     * Show a random quote
-     * 
-     * @return JsonResponse
+     * Show a random quote.
      */
     #[Route('api/quote', 'quote')]
     public function getQuotes(): JsonResponse

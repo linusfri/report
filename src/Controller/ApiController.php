@@ -7,12 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
-{   
+{
     /**
      * Api
-     * Show the api routes
-     * 
-     * @return Response
+     * Show the api routes.
      */
     #[Route('/api', name: 'api')]
     public function api(): Response
