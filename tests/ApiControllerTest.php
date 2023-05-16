@@ -2,6 +2,7 @@
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
+use App\Kernel;
 
 class ApiControllerTest extends WebTestCase
 {   
@@ -25,8 +26,14 @@ class ApiControllerTest extends WebTestCase
         $this->assertTrue(true);
     }
 
+    /**
+     * createKernel
+     *
+     * @param array<mixed> $options
+     * @return KernelInterface
+     */
     protected static function createKernel(array $options = []): KernelInterface
     {
-        return new \App\Kernel('test', true);
+        return new Kernel('test', true);
     }
 }

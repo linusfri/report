@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684174760">
-  <project timestamp="1684174760">
+<coverage generated="1684261087">
+  <project timestamp="1684261087">
     <file name="/Users/linusfri/BTH/mvc/me/report/src/Card/Card.php">
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="3" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
@@ -109,8 +109,8 @@
       <line num="66" type="stmt" count="0"/>
       <line num="69" type="method" name="randomChance" visibility="private" complexity="2" crap="2.15" count="1"/>
       <line num="72" type="stmt" count="1"/>
-      <line num="73" type="stmt" count="1"/>
-      <line num="76" type="stmt" count="0"/>
+      <line num="73" type="stmt" count="0"/>
+      <line num="76" type="stmt" count="1"/>
       <line num="84" type="method" name="getCurrentPlayerCards" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="86" type="stmt" count="2"/>
       <line num="89" type="method" name="updateCurrentPlayer" visibility="private" complexity="2" crap="2" count="4"/>

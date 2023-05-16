@@ -1,6 +1,7 @@
 <?php
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
+use App\Kernel;
 
 class ApiGameControllerTest extends WebTestCase
 {
@@ -35,8 +36,14 @@ class ApiGameControllerTest extends WebTestCase
         $this->assertFalse($content['game']['gameOver']);
     }
 
+    /**
+     * createKernel
+     *
+     * @param array<mixed> $options
+     * @return KernelInterface
+     */
     protected static function createKernel(array $options = []): KernelInterface
     {
-        return new \App\Kernel('test', true);
+        return new Kernel('test', true);
     }
 }

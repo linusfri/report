@@ -3,7 +3,7 @@ use App\Controller\ApiCardController;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use App\Kernel;
 class ApiCardControllerTest extends WebTestCase
 {
     public function testShowDeck(): void
@@ -27,8 +27,6 @@ class ApiCardControllerTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame('application/json', $response->headers->get('Content-Type'));
-
-        $content = json_decode($response->getContent(), true);
     }
 
     public function testDraw(): void
@@ -63,8 +61,14 @@ class ApiCardControllerTest extends WebTestCase
         $this->assertIsArray($content['deck']);
     }
 
+    /**
+     * createKernel
+     *
+     * @param array<mixed> $options
+     * @return KernelInterface
+     */
     protected static function createKernel(array $options = []): KernelInterface
     {
-        return new \App\Kernel('test', true);
+        return new Kernel('test', true);
     }
 }

@@ -7,7 +7,7 @@ use App\Card\DeckOfCards;
 use App\Player\Dealer;
 use App\Player\Player;
 use App\Player\PlayerInterface;
-
+use Exception;
 class CardGame implements \JsonSerializable
 {
     private PlayerInterface $currentPlayer;
@@ -183,7 +183,7 @@ class CardGame implements \JsonSerializable
         $playerValue = $this->player->getHandValue();
 
         if ($dealerValue > 21 && $playerValue > 21) {
-            throw new \Exception('Both players can not have more than 21 points.');
+            throw new Exception('Both players can not have more than 21 points.');
         }
 
         if (21 === $dealerValue || $playerValue > 21 || ($dealerValue <= 21 && $dealerValue > $playerValue)) {

@@ -2,7 +2,7 @@
 
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
+use App\Kernel;
 /** 
  * TODO
  * Write tests for database, no time right now
@@ -19,8 +19,14 @@ class ApiQuoteControllerTest extends WebTestCase
         $this->assertSame('application/json', $response->headers->get('Content-Type'));
     }
 
+    /**
+     * createKernel
+     *
+     * @param array<mixed> $options
+     * @return KernelInterface
+     */
     protected static function createKernel(array $options = []): KernelInterface
     {
-        return new \App\Kernel('test', true);
+        return new Kernel('test', true);
     }
 }

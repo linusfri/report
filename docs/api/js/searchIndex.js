@@ -263,7 +263,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ApiController\u003A\u003Aapi\u0028\u0029",
             "name": "api",
-            "summary": "",
+            "summary": "Api\nShow\u0020the\u0020api\u0020routes.",
             "url": "classes/App-Controller-ApiController.html#method_api"
         },                {
             "fqsen": "\\App\\Controller\\BaseController",
@@ -683,27 +683,27 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003AshowDeck\u0028\u0029",
             "name": "showDeck",
-            "summary": "",
+            "summary": "Show\u0020the\u0020deck\u0020of\u0020cards.",
             "url": "classes/App-Controller-ApiCardController.html#method_showDeck"
         },                {
             "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003Ashuffle\u0028\u0029",
             "name": "shuffle",
-            "summary": "",
+            "summary": "Shuffle\u0020the\u0020deck\u0020of\u0020cards.",
             "url": "classes/App-Controller-ApiCardController.html#method_shuffle"
         },                {
             "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003Adraw\u0028\u0029",
             "name": "draw",
-            "summary": "",
+            "summary": "Draw\u0020a\u0020card\u0020from\u0020the\u0020deck.",
             "url": "classes/App-Controller-ApiCardController.html#method_draw"
         },                {
             "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003AdrawNumber\u0028\u0029",
             "name": "drawNumber",
-            "summary": "",
+            "summary": "Draw\u0020a\u0020specified\u0020number\u0020of\u0020cards\u0020from\u0020the\u0020deck.",
             "url": "classes/App-Controller-ApiCardController.html#method_drawNumber"
         },                {
             "fqsen": "\\App\\Controller\\ApiCardController\u003A\u003Areset\u0028\u0029",
             "name": "reset",
-            "summary": "",
+            "summary": "Resets\u0020deck.",
             "url": "classes/App-Controller-ApiCardController.html#method_reset"
         },                {
             "fqsen": "\\App\\Controller\\ApiGameController",
@@ -713,7 +713,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ApiGameController\u003A\u003AapiGame\u0028\u0029",
             "name": "apiGame",
-            "summary": "",
+            "summary": "apiGame\nShows\u0020a\u0020json\u0020representation\u0020of\u0020the\u0020game.",
             "url": "classes/App-Controller-ApiGameController.html#method_apiGame"
         },                {
             "fqsen": "\\App\\Controller\\ApiLibraryController",
@@ -723,12 +723,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ApiLibraryController\u003A\u003Alibrary\u0028\u0029",
             "name": "library",
-            "summary": "",
+            "summary": "library\nShow\u0020all\u0020the\u0020books\u0020in\u0020the\u0020library.",
             "url": "classes/App-Controller-ApiLibraryController.html#method_library"
         },                {
             "fqsen": "\\App\\Controller\\ApiLibraryController\u003A\u003AlibraryIsbn\u0028\u0029",
             "name": "libraryIsbn",
-            "summary": "",
+            "summary": "libraryIsbn\nShow\u0020a\u0020book\u0020by\u0020isbn.",
             "url": "classes/App-Controller-ApiLibraryController.html#method_libraryIsbn"
         },                {
             "fqsen": "\\App\\Controller\\ApiQuoteController",
@@ -743,7 +743,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Controller\\ApiQuoteController\u003A\u003AgetQuotes\u0028\u0029",
             "name": "getQuotes",
-            "summary": "",
+            "summary": "quote\nShow\u0020a\u0020random\u0020quote.",
             "url": "classes/App-Controller-ApiQuoteController.html#method_getQuotes"
         },                {
             "fqsen": "\\App\\Controller\\ApiQuoteController\u003A\u003A\u0024apiClient",

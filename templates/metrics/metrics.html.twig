@@ -55,7 +55,7 @@
                     <a href="{{ asset('img/metrics_1.png') }}"><img class="img-full-width" src="{{ asset('img/metrics_1.png') }}" alt=""></a>
                     <p>Mätvärden B</p>
                     <a href="{{ asset('img/metrics_2.png') }}"><img class="img-full-width" src="{{ asset('img/metrics_2.png') }}" alt=""></a>
-
+                    <br><br>
                     <h4>Övergripande</h4>
                     <p>
                         Jag tänkte fokusera på klassen CardGame och ApiController eftersom dessa är de två klasser som får sämst resultat i Phpmetrics.
@@ -79,6 +79,7 @@
                         <a href="{{ asset('img/kohesion.png') }}">
                             <img class="img-full-width" src="{{ asset('img/kohesion.png') }}" alt="">
                         </a> 
+                        <br><br>
                     </p>
 
                     <h3>Scrutinizer</h3>
@@ -94,6 +95,7 @@
                         <a href="{{ asset('img/scrutinizer.png') }}">
                             <img class="img-full-width" src="{{ asset('img/scrutinizer.png') }}" alt="">
                         </a> 
+                        <br><br>
                     </p>
 
                     <h3>Förbättringar</h3>
@@ -101,11 +103,74 @@
                         <strong>ApiController</strong>
                         <br>
                         För att få högre kohesion i ApiController så har jag för avsikta att dela upp koden i flera separata kontrollers som var och en har ett specifikt ansvarsområde.
-                        Dessutom skall jag skriva tester för varje metod i klassen för att få ner CRAP-poängen. Slutligen skall jag kommentera alla metoder i klassen och generera ny dokumentation.
+                        Dessutom skall jag skriva tester för varje metod i klassen för att öka kodtäckningen. Slutligen skall jag kommentera alla metoder i klassen och generera ny dokumentation.
                         Sammantaget hoppas jag att detta skall leda till förbättrade mätvärden i phpmetrics och scrutinizer. Specifikt tror jag att kohesionen kommer att förbättras mest och
                         det är också här den största förbättringspotentialen finns.
+                        <br><br>
+                    </p>
+                </div>
+                <div class="metrics">
+                    <h2>Resultat efter förbättringar</h2>
+                    <h3>Phpmetrics</h3>
+                    <p>
+                        Som framgår av nedan så har koden förbättrats avsevärt efter att jag delat upp ApiController i flera kontrollers.
+                        ApiController har gått från en relativ systemkomplexitet på 144.83 till en komplexitet på 1.5. Mätvärdet buggar har även
+                        det minskat avsevärt, från 0.34 till 0.02. ApiController lider numera inte heller av låg kohesion, då den har delats upp i flera
+                        olika klasser som ansvara över sin del av API:t.
+                        <br><br>
+                    </p>
+                    <p>Mätvärden A</p>
+                    <a href="{{ asset('img/metrics-1_aft.png') }}"><img class="img-full-width" src="{{ asset('img/metrics_1.png') }}" alt=""></a>
+                    <p>Mätvärden B</p>
+                    <a href="{{ asset('img/metrics-2_aft.png') }}"><img class="img-full-width" src="{{ asset('img/metrics_2.png') }}" alt=""></a>
+                    <br><br>
+
+                    <h4>Kohesion ApiController</h4>
+                    <p>
+                        ApiController är numera inget "blob object" (låg kohesion)
+                        <a href="{{ asset('img/kohesion.png') }}">
+                            <img class="img-full-width" src="{{ asset('img/kohesion_aft.png') }}" alt="">
+                        </a> 
+                        <br><br>
                     </p>
 
+                    <h3>Scrutinizer</h3>
+                    <p>
+                        I scrutinizer kan man inte se någon förbättring i CardGameklassen eftersom jag inte valde att
+                        göra några ändringar i denna klass. ApiController har däremot förbättrats, med en komplexitet på 1 istället för 15
+                        och storlek på 23 istället för 146.
+
+                        <br><br>
+                        Scrutinizer
+                        <a href="{{ asset('img/scrutinizer_aft.png') }}">
+                            <img class="img-full-width" src="{{ asset('img/scrutinizer_aft.png') }}" alt="">
+                        </a>
+                        <br><br>
+                        ApiController scrutinizer
+                        <a href="{{ asset('img/api_controller_aft.png') }}">
+                            <img class="img-full-width" src="{{ asset('img/api_controller_aft.png') }}" alt="">
+                        </a> 
+                        <br><br>
+                    </p>
+                </div>
+                <div class="discussion">
+                    <h2>Diskussion</h2>
+                    <p>
+                        Jag anser att testning och analys av kod kan vara ett bra sätt att arbeta med "clean code". Det är sannolikt nyttigt
+                        att analysera och testa den kod man skriver för att få en bättre förståelse för hur den kan förbättras. Jag anser också
+                        att det är ett bra sätt för en utvecklare att bredda sin kompetens på. Kanske får denne värdefulla insikter om hur bra kodkvalitet
+                        kan uppnås och vilka anpassningar som bör göras i början av ett projekt för att kunna mäta och testa denna.
+                        <br><br>
+                        Den nackdel som jag kan se med detta är tidsåtgången. Det tar trots allt en hel del tid att analysera och testa kod. Något som i vissa
+                        verksamheter kan ses som bortkastad tid. Det är också viktigt att komma ihåg att analys och testning är något som lämpligtvis bör göras
+                        löpande, vilket ställer krav på att rutiner och arbetssätt finns på plats i verksamheten. Det är också viktigt att aktörer inom verksamheten
+                        förstår värdet av testning och analys, vilket är något man inte alltid kan ta för givet. I mindre verksamheter kanske testning och analys i vissa
+                        fall tar oproportionerligt mycket tid i anspråk, vilket kan vara ett hinder för att arbeta med "clean code".
+                        <br><br>
+                        När jag ser till andra möjligheter att arbeta med "clean code" så tror jag att det är viktigt att vara öppen och nyfiken på nya sätt att skriva kod på.
+                        Jag tror också att det är viktigt att kommunicera med sina kollegor och andra i sin närhet för att få en nyanserad bild av vad begreppet faktiskt innebär
+                        för olika människor. Denna insikt i kombination med en rigorös testnings- och analysmetodik är sannolikt ett recept för framgång.
+                    </p>
                 </div>
             </article>
         </section>
