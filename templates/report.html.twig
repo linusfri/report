@@ -9,6 +9,7 @@
         <li><a href="#kmom03">kmom03</a></li>
         <li><a href="#kmom04">kmom04</a></li>
         <li><a href="#kmom05">kmom05</a></li>
+        <li><a href="#kmom06">kmom06</a></li>
     </ul>
     <section class="reports">
         <div id="kmom01" class="report-card">
@@ -120,6 +121,17 @@
                 Sammanfattningsvis så ser jag ORM som ett bra sätt att abstrahera bort mycket av det som är besvärligt med databaser. Samtidigt förstår jag också att viss flexibilitet försvinner. Skulle det vara så att man kräver något som ens entiteter inte klarar av så är man dock fri att använda rå SQL, även om detta till viss det tar bort poängen med ett ORM. Effekten av att arbeta med ett ORM är att antalet kodrader som behövs minskar drastiskt. Som jag tidigare nämt så behöver man inte längre skriva långa SQL-satser utan kan i stället njuta av ett enkelt och lättförstått gränssnitt mot databasen.
                 <br><br>
                 Mitt TIL för detta kmom är hur frustrerande det kan vara med arv i många led samt hur doctrine fungerar och underlättar interaktion mot en databas.
+            </p>
+        </div>
+        <div id="kmom06" class="report-card">
+            <h3>Kmom06</h3>
+            <p> 
+                <strong>KMOM 06</strong>
+                Jag tycker att phpmetrics är en trevlig programvara som jag kan se mig själv använda i framtiden om jag använder PHP. Det ger värdefulla insikter och strukturerar informationen på ett bra sätt, även om jag önskar att det fanns bättre förklaringar av de saker den mäter. Under kursmomentets gång fick jag googla en hel del och ta information från externa sidor för att förstå innebörden av mätvärdena. Trots detta tycker jag programmet fungerar bra i sin helhet. Jag fastnade framförallt för relativ systemkomplexitet eftersom denna tar hänsyn till alla metoder i en klass samt komplexiteten dessa i mellan. Det är ett bra mått på hur en komplex en komponent är i genomsnitt och därmed ett bra mått på hur lätt / svår den är att underhålla. En annan funktion som jag blev förtjust i är Mantainability / complexity på phpmetrics "Overview"-sida. Där kan man se olika stora cirklar i olika färger som symboliserar cyklomatisk komplexitet samt "maintainability index".
+                <br><br>
+                Gällande scrutinizer så gick integrationen mot mitt repo relativt smärtfritt. Jag hade en del problem med att scrutinizer inte kunde köra composer install. Det visade sig bero på en avsaknad av env-fil i repot, något som jag hade konfigurerat tidigt i projektets skede. När denna väl var på plats så fungerade vertyget som väntat. Efter att ha använt vertyget ett tag så skulle jag säga att jag utan tvekan kommer koppla detta mot andra projekt när tillfälle uppenbarar sig. Det är synnerligen värdefullt med automatisk testning och emblemen som kan läggas till i readmefilen är en trevlig bonus de också. Jag uppnådde 36% i kodtecking i min första körning samt 9.97 / 10 i kodkvalitet.
+                <br><br>
+                Gällande kodkvalitet och min syn på den så har jag några saker jag brukar tänka på när begreppet tas upp. Jag tycker att det mest grundläggande är att skriva kod som är lätt att underhålla och som i princip dokumenterar sig själv. Jag anser att det är viktigt att inte fastna i tanken om att man skall skriva så kompakt kod som möjligt, utan att denna istället skall vara lätt att förstå och göra ändringar i. Dessutom tycker jag att man bör kommentera sin kod lagom, så att inte kommentarerna i sig gör koden besvärlig att läsa. Allmänt tycker jag att det är bättre att kommentera varför man gör något och inte vad man gör. Undantag finns, så som docblocks i PHP. Sedan tror jag också att testning är en central del av att faktiskt verifiera att ens kod håller den standard som man själv tror att den gör. Att också få ett bevis på detta i form av badges är ett bra sätt att informera andra om att ens kod håller en viss kvalitet.
             </p>
         </div>
     </section>
