@@ -1,0 +1,44 @@
+.form {
+    padding: $desktop-p;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        padding: $input-p;
+    }
+
+    input:not(:last-child) {
+        margin-bottom: $desktop-p;
+    }
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+  th {
+    background-color: $highlight;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+    text-transform: uppercase;
+  }
+  
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    a {
+       color: #0072c6;
+       font-weight: bold;
+       text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,75 @@
+@mixin base-button {
+    padding: 1rem;
+    display: block;
+    border-radius: 0.5rem;
+    color: $white !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.1s;
+}
+
+@mixin button-container {
+    display: flex;
+    gap: 2.4rem;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.button-container {
+    @include button-container;
+
+    &-padding-top {
+        @include button-container;
+        padding-top: $desktop-p;
+    }
+}
+
+.button {
+    &-red {
+        @include base-button;
+
+        background-color: $warning;
+        &:hover {
+            background-color: darken($warning, 10%);
+        }
+    }
+
+    &-green {
+        @include base-button;
+
+        background-color: $cta;
+        &:hover {
+            background-color: darken($cta, 10%);
+        }
+    }
+}
+
+.code-block {
+    display: flex;
+    justify-content: center;
+    background-color: $light-code;
+    border-radius: 3px;
+    border: 1px solid $dark;
+    code {
+        font-size: 2rem;
+    }
+}
+
+.img-full-width {
+    max-width: 100%;
+    width: 100%;
+}
+
+hr {
+    margin: $desktop-p 0;
+    color: $dark;
+    border-top: 1px;
+}

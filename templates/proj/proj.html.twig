@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+         <link rel="icon" href="{{ asset('img/glider.svg') }}">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('proj') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('proj') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header class="proj-header">
+            <a href="{{ path('proj') }}"><img class="proj-header__logo" src="{{ asset('img/poker_game.png') }}" alt=""></a>
+            <nav>
+                <ul class="proj-header__menu">
+                    <li><a href="{{ path('home') }}">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+        {% block body %}{% endblock %}
+
+        <footer class="proj-footer">
+            <section class="proj-footer__text">
+                <h3>Poker game</h3>
+                <p>A classic five hand poker game for maximum pleasure.</p>
+            </section>
+            <section class="proj-footer__social">
+                <ul class="proj-footer__icons">
+                    <li><a target="_blank" href="https://www.github.com/linusfri"><img src="{{ asset('img/github.svg') }}" alt=""></a></li>
+                    <li><a target="_blank" href="http://www.student.bth.se/~lifr21/dbwebb-kurser/mvc/me/report/public/"><img src="{{ asset('img/globe-solid.svg') }}" alt=""></a></li>
+                </ul>
+            </section>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    font-family: Inter;
+    line-height: 1.2;
+    letter-spacing: 0.02rem;
+}
+
+h1 {
+    @media (min-width: $desktop) {
+        font-size: 2rem;
+    }
+}
+h2 {
+    @media (min-width: $desktop) {
+        font-size: 1.6rem;
+    }
+}
+h3 {
+    @media (min-width: $desktop) {
+        font-size: 1.4rem;
+    }
+}
+h4 {
+    @media (min-width: $desktop) {
+        font-size: 1.2rem;
+    }
+}
+h5 {
+    @media (min-width: $desktop) {
+        font-size: 1rem;
+    }
+}
+
+p,
+a,
+label,
+th {
+    font-family: Lora, Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    letter-spacing: 0.05rem;
+}
+
+p,
+a {
+    @media (min-width: $desktop) {
+        font-size: 1rem;
+    }
+}
+
+.h3title {
+    padding: $desktop-p $desktop-p 0 $desktop-p;
+    margin: 0;
+}
