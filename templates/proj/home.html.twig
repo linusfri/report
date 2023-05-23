@@ -1,0 +1,18 @@
+{% extends "proj/proj.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <section class="content--center">
+        <div class="content__presentation--all-center">
+            <div class="content__text-box">
+                <h1>Poker Game</h1>
+                <p>Welcome to the poker game. Choose one of the options below.</p>
+            </div>
+            <div class="content__button-container">
+                <a href="{{ path('proj/about') }}" class="btn">About</a>
+                <a href="{{ path('proj/game') }}" class="btn">Start game</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

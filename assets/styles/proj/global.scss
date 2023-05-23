@@ -50,6 +50,16 @@ a {
             background-color: darken($cta, 10%);
         }
     }
+
+    &-dark {
+        @include base-button;
+
+        background-color: $grey-600;
+
+        &:hover {
+            background-color: lighten($grey-600, 10%);
+        }
+    }
 }
 
 .code-block {

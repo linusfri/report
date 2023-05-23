@@ -31,4 +31,10 @@ interface PlayerInterface
     public function getId(): int;
 
     public function reset(): void;
+
+    public function bet(int $value): int;
+
+    public function check(int $value): int;
+
+    public function fold(): void;
 }

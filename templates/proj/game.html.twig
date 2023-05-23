@@ -1,0 +1,20 @@
+{% extends "proj/proj.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    {# 
+        If round 1: Button to check, button to fold, button to raise 
+        If round 2: Be able to choose which cards to change (client side JS, endpoint for serving cards dynamically), button to check, button to fold, button to raise
+        If round 3: Be able to bet until out of money, or check to immediately go to showdown, or fold to lose
+    #}
+    <a href="{{ path('proj/reset') }}">Reset</a>
+    <section class="game--center">
+        <div class="game__cards">
+           <div class="game__card">
+                {# Loop out cards in hand #}
+                {{ dump(pokerGame) }}
+           </div>
+        </div>
+    </section>
+{% endblock %}

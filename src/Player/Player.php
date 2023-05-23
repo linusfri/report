@@ -38,9 +38,16 @@ class Player implements PlayerInterface, \JsonSerializable
      * */
     protected int $id;
 
-    public function __construct(string $name, CardHand $cardHand = new CardHand())
+    /**
+     * @var int $money
+     *          The amount of money the player has
+     */
+    protected ?int $money;
+
+    public function __construct(string $name, CardHand $cardHand = new CardHand(), ?int $money = null)
     {
         $this->name = $name;
+        $this->money = $money;
         $this->cardHand = $cardHand;
         $this->handValue = 0;
         $this->isFinished = false;
@@ -117,6 +124,47 @@ class Player implements PlayerInterface, \JsonSerializable
         $this->cardHand = new CardHand();
         $this->setHandValue(0);
         $this->isFinished = false;
+    }
+
+    /** The player bets money */
+    public function bet(int $amount): int
+    {   
+        if (is_null($this->money)) {
+            throw new Exception('The player does not have money. Just plays for fun.');
+        }
+
+        /** If bet bigger than current money, go all in */
+        if ($this->money < $amount) {
+            $bet = $this->money;
+            $this->money -= $bet;
+
+            return $bet;
+        }
+
+        $this->money -= $amount;
+
+        return $amount;
+    }
+
+    /** The player checks previous player bet */
+    public function check(int $previousPlayerBetAmount): int
+    {
+        if ($previousPlayerBetAmount > $this->money) {
+            $allRemainingMoneyBet = $this->money;
+            $this->money = 0;
+
+            return $allRemainingMoneyBet;
+        }
+
+        $this->money -= $previousPlayerBetAmount;
+
+        return $previousPlayerBetAmount;
+    }
+
+    /** Player folds */
+    public function fold(): void
+    {
+        $this->isFinished = true;
     }
 
     /**

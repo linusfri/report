@@ -35,6 +35,6 @@ class BaseController extends AbstractController
     #[Route('/proj', 'proj')]
     public function proj(): Response
     {
-        return $this->render('proj/proj.html.twig');
+        return $this->render('proj/home.html.twig');
     }
 }
