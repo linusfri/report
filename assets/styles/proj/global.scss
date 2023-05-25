@@ -1,7 +1,7 @@
 @mixin base-button {
     padding: 1rem;
     display: block;
-    border-radius: 0.5rem;
+    border-radius: 2px;
     color: $white !important;
     font-weight: bold;
     text-transform: uppercase;

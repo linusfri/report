@@ -126,3 +126,13 @@ body {
         justify-content: center;
     }
 }
+
+.game {
+    &__button-container {
+        @include button-container;
+
+        a {
+            @extend .button-dark;
+        }
+    }
+}

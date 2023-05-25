@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Exception;
 
 class PokerController extends AbstractController
 {
@@ -19,7 +20,11 @@ class PokerController extends AbstractController
     {
         $pokerGame = $session->get('pokerGame') ?? null;
         if (is_null($pokerGame)) {
-            $pokerGame = new PokerGame(new Dealer('Dealer'), new Player('Player'), new DeckOfCards());
+            $pokerGame = new PokerGame(new Dealer('Dealer', money: 100 ), new Player('Player', money: 100), new DeckOfCards());
+        }
+
+        if ($pokerGame->isGameOver()) {
+            return $this->redirectToRoute('proj/game/game_over');
         }
 
         $session->set('pokerGame', $pokerGame);
@@ -30,14 +35,17 @@ class PokerController extends AbstractController
     #[Route('/proj/game/bet', 'proj/game/bet')]
     public function bet(SessionInterface $session, Request $req): Response
     {
-        $amount = $req->query->get('bet') ?? 0;
+        $amount = $req->query->get('bet') ?? null;
+        if (is_null($amount) || $amount <= 0) {
+            throw new Exception('No bet amount');
+        }
+
         $pokerGame = $session->get('pokerGame');
 
         $pokerGame->currentPlayerBet($amount);
-        $pokerGame->setPreviousBet($amount);
         $session->set('pokerGame', $pokerGame);
 
-        return $this->render('proj/game.html.twig', ['pokerGame' => $pokerGame]);
+        return $this->redirectToRoute('proj/game');
     }
     
     #[Route('/proj/game/check', 'proj/game/check')]
@@ -45,19 +53,52 @@ class PokerController extends AbstractController
     {
         $pokerGame = $session->get('pokerGame');
 
-        $pokerGame->currentPlayerBet($pokerGame->getPreviousBet());
+        if ($pokerGame->getCurrentBet() === 0) {
+            throw new Exception('No Current bet');
+        }
+
+        $pokerGame->currentPlayerCheck();
+
         $session->set('pokerGame', $pokerGame);
 
-        return $this->render('proj/game.html.twig', ['pokerGame' => $pokerGame]);
+        return $this->redirectToRoute('proj/game');
     }
     
     #[Route('/proj/game/fold', 'proj/game/fold')]
     public function fold(SessionInterface $session): Response
     {
         $pokerGame = $session->get('pokerGame');
-        $pokerGame->getCurrentPlayer()->fold();
+        $pokerGame->currentPlayerFold();
+
+        $session->set('pokerGame', $pokerGame);
         
-        return $this->render('proj/game.html.twig');
+        return $this->redirectToRoute('proj/game');
+    }
+
+    #[Route('/proj/game/call', 'proj/game/call')]
+    public function call(SessionInterface $session): Response
+    {
+        $pokerGame = $session->get('pokerGame');
+        $pokerGame->currentPlayerCall();
+        
+        $session->set('pokerGame', $pokerGame);
+
+        return $this->redirectToRoute('proj/game');
+    }
+
+    #[Route('/proj/game/game_over', 'proj/game/game_over')]
+    public function gameOver(SessionInterface $session): Response
+    {
+        $pokerGame = $session->get('pokerGame');
+        $session->remove('pokerGame');
+
+        $data = [
+            'gameSession' => $pokerGame,
+            'winner' => $pokerGame->getWinner(),
+            'loser' => $pokerGame->getLoser(),
+        ];
+
+        return $this->render('proj/game_over.html.twig', $data);
     }
 
     #[Route('/proj/reset', 'proj/reset')]

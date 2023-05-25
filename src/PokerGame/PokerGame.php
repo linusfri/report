@@ -11,13 +11,15 @@ use Exception;
 
 class PokerGame implements \JsonSerializable
 {
-    private PlayerInterface $currentPlayer;
+    protected PlayerInterface $currentPlayer;
     public Player $player;
     public Dealer $dealer;
-    private int $round;
-    private bool $gameOver;
-    private DeckOfCards $deck;
-    private int $previousBet;
+    protected int $round;
+    protected bool $gameOver;
+    protected DeckOfCards $deck;
+    protected int $currentBet;
+    protected int $totalPot;
+    protected bool $changeCardRound;
 
     public function __construct(Dealer $dealer, Player $player, DeckOfCards $deck)
     {
@@ -29,16 +31,24 @@ class PokerGame implements \JsonSerializable
         $this->player = $player;
         $this->dealer = $dealer;
         $this->round = 1;
-        $this->previousBet = 0;
+        $this->changeCardRound = false;
+        $this->currentBet = 10; // Simulate ante per player
+        $this->totalPot = 0;
         $this->gameOver = false;
         $this->deck = $deck;
         $this->deck->shuffleCards();
 
         $this->currentPlayer = $this->player;
 
+        $this->initialBet();
         $this->dealCards();
 
         return true;
+    }
+
+    protected function initialBet(): void {
+        $this->totalPot += $this->player->bet(10);
+        $this->totalPot += $this->dealer->bet(10);
     }
 
     public function dealCards(): void
@@ -53,27 +63,83 @@ class PokerGame implements \JsonSerializable
 
     public function currentPlayerFold(): void
     {
-        $this->currentPlayer->setIsFinished();
+        $this->currentPlayer->fold();
 
+        $this->currentPlayer->setHasPlayedRound();
+        $this->nextPlayer();
         $this->updateGameState();
     }
 
-    public function currentPlayerBet(int $amount): void
+    public function currentPlayerBet(int $amount): bool
     {
-        $this->currentPlayer->bet($amount);
+        try {
+            /** 
+             * Do this to ensure that pot only increments with what player actually can bet.
+             * Check implementation of Player::bet() for more info.
+             * */
+            $bet = $this->currentPlayer->bet($amount);
+    
+            $this->totalPot += $bet;
+    
+            if ($bet >= $this->currentBet) {
+                $this->setcurrentBet($bet);
+                $this->nextPlayer();
+            } else if($bet < $this->currentBet) {
+                throw new Exception('Bet must be higher than current bet');
+            }
+        } catch (Exception $e) {
+            return false;
+        }
 
+        $this->currentPlayer->setHasPlayedRound();
         $this->updateGameState();
+
+        return true;
     }
 
-    public function currentPlayerCheck(): void
+    public function currentPlayerCall(): bool
     {
+        try {
+            $bet = $this->currentPlayer->bet($this->currentBet);
+    
+            $this->totalPot += $bet;
+    
+            if ($bet >= $this->currentBet) {
+                $this->setcurrentBet($bet);
+                $this->nextPlayer();
+            } else if($bet < $this->currentBet) {
+                throw new Exception('Call must be equal to current bet');
+            }
+        } catch (Exception $e) {
+            return false;
+        }
 
+        $this->currentPlayer->setHasPlayedRound();
         $this->updateGameState();
+
+        return true;
     }
 
-    public function setPreviousBet(int $amount): void
+    public function currentPlayerCheck(): bool
+    {  
+        $this->currentPlayer->setHasPlayedRound();
+        $this->nextPlayer();
+        $this->updateGameState();
+
+        return true;
+    }
+
+    public function setcurrentBet(int $amount): void
     {
-        $this->previousBet = $amount;
+        if ($amount < $this->currentBet) {
+            throw new Exception('Bet must be higher than current bet');
+        }
+        $this->currentBet = $amount;
+    }
+
+    public function getcurrentBet(): int
+    {
+        return $this->currentBet;
     }
 
     public function dealerDrawCards(int $number): void
@@ -148,10 +214,10 @@ class PokerGame implements \JsonSerializable
     public function nextPlayer(): void
     {
         if ($this->checkAllPlayersFinished()) {
-            return;
+            throw new Exception('All players are finished');
         }
 
-        $this->currentPlayer = $this->currentPlayer instanceof Player ? $this->dealer : $this->player;
+        $this->currentPlayer = $this->getCurrentOpponent();
 
         $this->updateGameState();
 
@@ -161,6 +227,11 @@ class PokerGame implements \JsonSerializable
     public function getCurrentPlayer(): PlayerInterface
     {
         return $this->currentPlayer;
+    }
+
+    public function getCurrentOpponent(): PlayerInterface
+    {
+        return $this->currentPlayer->getId() !== $this->dealer->getId() ? $this->dealer : $this->player;
     }
 
     public function setGameOver(): void
@@ -175,7 +246,17 @@ class PokerGame implements \JsonSerializable
 
     private function updateGameState(): void
     {
-        // TODO for poker
+        /** This only works for two players, need to be changed for arbitrary number of players */
+        if ($this->player->getIsFinished() || $this->dealer->getIsFinished()) {
+            $this->setGameOver();
+        }
+
+        if ($this->player->getHasPlayedRound() && $this->dealer->getHasPlayedRound()) {
+            $this->nextRound();
+            $this->player->resetHasPlayedRound();
+            $this->dealer->resetHasPlayedRound();
+            $this->changeCardRound = true;
+        }
     }
 
     public function getCurrentRound(): int
@@ -186,12 +267,13 @@ class PokerGame implements \JsonSerializable
     public function nextRound(): void
     {
         ++$this->round;
+
+        $this->currentPlayer = $this->player;
     }
 
     public function getWinner(): PlayerInterface
     {
-        // Todo
-        return new Player('todo');
+        return $this->player->getIsFinished() ? $this->dealer : $this->player;
     }
 
     public function getLoser(): PlayerInterface

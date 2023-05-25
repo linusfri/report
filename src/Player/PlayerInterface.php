@@ -34,7 +34,17 @@ interface PlayerInterface
 
     public function bet(int $value): int;
 
-    public function check(int $value): int;
+    public function check(): void;
+
+    public function getIsChecked(): bool;
 
     public function fold(): void;
+
+    public function getMoney(): int;
+
+    public function setHasPlayedRound(): void;
+
+    public function getHasPlayedRound(): bool;
+
+    public function resetHasPlayedRound(): void;
 }

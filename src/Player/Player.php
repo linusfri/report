@@ -44,13 +44,27 @@ class Player implements PlayerInterface, \JsonSerializable
      */
     protected ?int $money;
 
+    /**
+     * @var bool $checked
+     *          True if player has checked, false if player has not checked
+     */
+    protected bool $checked;
+
+    /**
+     * @var bool $hasPlayedRound
+     *          Indicates if the player has played the current round
+     */
+    protected bool $hasPlayedRound;
+
     public function __construct(string $name, CardHand $cardHand = new CardHand(), ?int $money = null)
     {
         $this->name = $name;
         $this->money = $money;
         $this->cardHand = $cardHand;
+        $this->hasPlayedRound = false;
         $this->handValue = 0;
         $this->isFinished = false;
+        $this->checked = false;
         $this->id = rand(0, 1000000);
     }
 
@@ -135,10 +149,7 @@ class Player implements PlayerInterface, \JsonSerializable
 
         /** If bet bigger than current money, go all in */
         if ($this->money < $amount) {
-            $bet = $this->money;
-            $this->money -= $bet;
-
-            return $bet;
+            throw new Exception('The player does not have enough money to bet that amount.');
         }
 
         $this->money -= $amount;
@@ -146,25 +157,44 @@ class Player implements PlayerInterface, \JsonSerializable
         return $amount;
     }
 
-    /** The player checks previous player bet */
-    public function check(int $previousPlayerBetAmount): int
+    public function getMoney(): int
     {
-        if ($previousPlayerBetAmount > $this->money) {
-            $allRemainingMoneyBet = $this->money;
-            $this->money = 0;
+        return $this->money ?? 0;
+    }
 
-            return $allRemainingMoneyBet;
-        }
+    /** The player checks  */
+    public function check(): void
+    {
+        $this->checked = true;
+    }
 
-        $this->money -= $previousPlayerBetAmount;
-
-        return $previousPlayerBetAmount;
+    public function getIsChecked(): bool
+    {
+        return $this->checked;
     }
 
     /** Player folds */
     public function fold(): void
     {
         $this->isFinished = true;
+    }
+
+    /** Sets that player has played current round */
+    public function setHasPlayedRound(): void
+    {
+        $this->hasPlayedRound = true;
+    }
+
+    /** Resets player has played round */
+    public function resetHasPlayedRound(): void
+    {
+        $this->hasPlayedRound = false;
+    }
+
+    /** Gets that player has played current round */
+    public function getHasPlayedRound(): bool
+    {
+        return $this->hasPlayedRound;
     }
 
     /**

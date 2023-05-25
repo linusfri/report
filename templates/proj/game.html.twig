@@ -16,5 +16,14 @@
                 {{ dump(pokerGame) }}
            </div>
         </div>
+        <div class="game__button-container">
+            <a href="{{ path('proj/game/check') }}">Check</a>
+            <a href="{{ path('proj/game/fold') }}">Fold</a>
+            <a href="{{ path('proj/game/call') }}">Call</a>
+        </div>
+        <form action="{{ path('proj/game/bet') }}">
+            <input type="number" name="bet" id="bet" placeholder="Bet amount">
+            <input type="submit" value="Bet">
+        </form>
     </section>
 {% endblock %}

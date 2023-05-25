@@ -1,0 +1,19 @@
+{% extends 'proj/proj.html.twig' %}
+
+{% block title %}Card game{% endblock %}
+
+{% block body %} 
+    <section class="content--center">
+        <div class="content__presentation--all-center">
+            <h1>Results</h1>
+            <div>
+                <h3>Winner</h3>
+                <p>{{ winner.getName() }}</p>
+            </div>
+            <div>
+                <h3>Loser</h3>
+                <p>{{ loser.getName() }}</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}
