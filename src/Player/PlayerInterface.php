@@ -46,5 +46,7 @@ interface PlayerInterface
 
     public function getHasPlayedRound(): bool;
 
+    public function changeCards(array $cardIndices, DeckOfCards $cardDeck): void;
+
     public function resetHasPlayedRound(): void;
 }

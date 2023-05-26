@@ -56,12 +56,19 @@ class Player implements PlayerInterface, \JsonSerializable
      */
     protected bool $hasPlayedRound;
 
+    /**
+     * @var bool $hasChangedCards
+     *          Indicates if the player has changed cards
+     */
+    protected bool $hasChangedCards;
+
     public function __construct(string $name, CardHand $cardHand = new CardHand(), ?int $money = null)
     {
         $this->name = $name;
         $this->money = $money;
         $this->cardHand = $cardHand;
         $this->hasPlayedRound = false;
+        $this->hasChangedCards = false;
         $this->handValue = 0;
         $this->isFinished = false;
         $this->checked = false;
@@ -195,6 +202,25 @@ class Player implements PlayerInterface, \JsonSerializable
     public function getHasPlayedRound(): bool
     {
         return $this->hasPlayedRound;
+    }
+
+    /**
+     * changeCards
+     *
+     * @param array<int> $cardIndices
+     * @return void
+     */
+    public function changeCards(array $cardIndices, DeckOfCards $cardDeck): void {
+        foreach ($cardIndices as $index) {
+            $this->cardHand->changeCardAtIndex($index, $cardDeck);
+        }
+        $this->hasChangedCards = true;
+    }
+
+    /** Get has changed cards */
+    public function getHasChangedCards(): bool
+    {
+        return $this->hasChangedCards;
     }
 
     /**

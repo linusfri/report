@@ -11,6 +11,12 @@ import './styles/proj/proj.scss';
 // start the Stimulus application
 import './bootstrap';
 
+// JS modules
+import CardClient from './pokerGame';
+
 export default function main() {
-    return 'Welcome to encore.';
+    CardClient.attachCardListeners();
+    CardClient.attachCardSubmitListener();
 }
+
+main();

@@ -86,6 +86,16 @@ class PokerController extends AbstractController
         return $this->redirectToRoute('proj/game');
     }
 
+    #[Route('/proj/game/showdown', 'proj/game/showdown')]
+    public function showdown(SessionInterface $session): Response
+    {
+        $pokerGame = $session->get('pokerGame');
+        
+        $session->set('pokerGame', $pokerGame);
+
+        return $this->redirectToRoute('proj/game');
+    }
+
     #[Route('/proj/game/game_over', 'proj/game/game_over')]
     public function gameOver(SessionInterface $session): Response
     {

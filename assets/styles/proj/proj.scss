@@ -135,4 +135,35 @@ body {
             @extend .button-dark;
         }
     }
+
+    &--center {
+        @extend .game;
+
+        display: flex;
+        flex-direction: column;
+        gap: $desktop-p;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__cards {
+        display: flex;
+        flex-direction: row;
+        gap: $desktop-p;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__card {
+        cursor: pointer;
+        font-size: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.selected {
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+    }
 }
