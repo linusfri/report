@@ -89,7 +89,6 @@ class PokerGame extends CardGame implements \JsonSerializable
                 $this->currentPlayer->setPreviousAction('Raised');
                 $this->nextPlayer();
             } else {
-                die;
                 throw new Exception('Bet must be higher than current bet. Or player has not enough money.');
             }
         } catch (Exception $e) {
