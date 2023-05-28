@@ -3,17 +3,25 @@
 {% block title %}Card game{% endblock %}
 
 {% block body %} 
+    {% if winner == null and loser == null %}
     <section class="content--center">
         <div class="content__presentation--all-center">
-            <h1>Results</h1>
-            <div>
-                <h3>Winner</h3>
-                <p>{{ winner.getName() }}</p>
-            </div>
-            <div>
-                <h3>Loser</h3>
-                <p>{{ loser.getName() }}</p>
-            </div>
+            <h1>Its a draw</h1>
         </div>
     </section>
+    {% else %}
+        <section class="content--center">
+            <div class="content__presentation--all-center">
+                <h1>Results</h1>
+                <div>
+                    <h3>Winner</h3>
+                    <p>{{ winner.getName() }}</p>
+                </div>
+                <div>
+                    <h3>Loser</h3>
+                    <p>{{ loser.getName() }}</p>
+                </div>
+            </div>
+        </section>
+    {% endif %}
 {% endblock %}

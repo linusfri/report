@@ -49,4 +49,6 @@ interface PlayerInterface
     public function changeCards(array $cardIndices, DeckOfCards $cardDeck): void;
 
     public function resetHasPlayedRound(): void;
+
+    public function setHasChangedCards(): void;
 }

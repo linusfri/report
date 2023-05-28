@@ -61,12 +61,19 @@ class Player implements PlayerInterface, \JsonSerializable
      *          Indicates if the player has changed cards
      */
     protected bool $hasChangedCards;
+    
+    /**
+     * @var bool $hasFolded
+     *          Indicates if the player has folded
+     */
+    protected bool $hasFolded;
 
     public function __construct(string $name, CardHand $cardHand = new CardHand(), ?int $money = null)
     {
         $this->name = $name;
         $this->money = $money;
         $this->cardHand = $cardHand;
+        $this->hasFolded = false;
         $this->hasPlayedRound = false;
         $this->hasChangedCards = false;
         $this->handValue = 0;
@@ -164,6 +171,7 @@ class Player implements PlayerInterface, \JsonSerializable
         return $amount;
     }
 
+    /** Returns current player money */
     public function getMoney(): int
     {
         return $this->money ?? 0;
@@ -175,6 +183,7 @@ class Player implements PlayerInterface, \JsonSerializable
         $this->checked = true;
     }
 
+    /** Returns if current player has checked */
     public function getIsChecked(): bool
     {
         return $this->checked;
@@ -184,6 +193,7 @@ class Player implements PlayerInterface, \JsonSerializable
     public function fold(): void
     {
         $this->isFinished = true;
+        $this->hasFolded = true;
     }
 
     /** Sets that player has played current round */
@@ -211,6 +221,10 @@ class Player implements PlayerInterface, \JsonSerializable
      * @return void
      */
     public function changeCards(array $cardIndices, DeckOfCards $cardDeck): void {
+        if ($cardDeck->getNumberCards() < count($cardIndices)) {
+            throw new Exception('Not enough cards in deck to change cards');
+        }
+
         foreach ($cardIndices as $index) {
             $this->cardHand->changeCardAtIndex($index, $cardDeck);
         }
@@ -221,6 +235,24 @@ class Player implements PlayerInterface, \JsonSerializable
     public function getHasChangedCards(): bool
     {
         return $this->hasChangedCards;
+    }
+
+    /** Set has changed cards */
+    public function setHasChangedCards(): void
+    {
+        $this->hasChangedCards = true;
+    }
+
+    /** Set has folded */
+    public function setHasFolded(): void
+    {
+        $this->hasFolded = true;
+    }
+
+    /** Get has folded */
+    public function getHasFolded(): bool
+    {
+        return $this->hasFolded;
     }
 
     /**

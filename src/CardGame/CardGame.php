@@ -10,12 +10,12 @@ use App\Player\PlayerInterface;
 use Exception;
 class CardGame implements \JsonSerializable
 {
-    private PlayerInterface $currentPlayer;
+    protected PlayerInterface $currentPlayer;
     public Player $player;
     public Dealer $dealer;
-    private int $playerRound;
-    private bool $gameOver;
-    private DeckOfCards $deck;
+    protected int $playerRound;
+    protected bool $gameOver;
+    protected DeckOfCards $deck;
 
     public function __construct(Dealer $dealer, Player $player, DeckOfCards $deck)
     {
@@ -66,7 +66,7 @@ class CardGame implements \JsonSerializable
         return;
     }
 
-    private function randomChance(): bool
+    protected function randomChance(): bool
     {
         /* 50% chance */
         if (rand(0, 100) > 50) {
@@ -86,7 +86,7 @@ class CardGame implements \JsonSerializable
         return $this->currentPlayer->getCards();
     }
 
-    private function updateCurrentPlayer(): void
+    protected function updateCurrentPlayer(): void
     {
         $this->currentPlayer->countHandValue();
 
@@ -95,7 +95,7 @@ class CardGame implements \JsonSerializable
         }
     }
 
-    private function updateDealer(): void
+    protected function updateDealer(): void
     {
         $this->currentPlayer = $this->dealer;
         $this->currentPlayer->countHandValue();
@@ -107,11 +107,6 @@ class CardGame implements \JsonSerializable
 
         $this->updateGameState();
     }
-
-    // private function isCurrentPlayerFinished(): bool
-    // {
-    //     return $this->currentPlayer->getIsFinished();
-    // }
 
     public function checkAllPlayersFinished(): bool
     {
@@ -147,7 +142,7 @@ class CardGame implements \JsonSerializable
         return $this->gameOver;
     }
 
-    private function updateGameState(): void
+    protected function updateGameState(): void
     {
         $this->currentPlayer instanceof Dealer ? $this->updateDealer() : $this->updateCurrentPlayer();
 

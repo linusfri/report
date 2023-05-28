@@ -15,14 +15,25 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ApiPokerController {
     #[Route('/proj/game/api/changeCards', 'proj/game/api/changeCards', methods: ['POST'])]
-    public function changeCards(SessionInterface $session, Request $req): Response
+    public function changeCards(SessionInterface $session, Request $req): JsonResponse
     {
         $cardIndices = json_decode($req->getContent());
         $pokerGame = $session->get('pokerGame');
 
-        $pokerGame->currentPlayerChangeCards($cardIndices);
-        $session->set('pokerGame', $pokerGame);
+        try {
+            $pokerGame->currentPlayerChangeCards($cardIndices);
+            $session->set('pokerGame', $pokerGame);
+            return new JsonResponse($pokerGame->getCurrentPlayerCards());
+        } catch(Exception $e) {
+            return new JsonResponse($e->getMessage(), 500);
+        }
+    }
 
-        return new JsonResponse($pokerGame->getCurrentPlayerCards());
+    #[Route('/proj/game/api/current-round', 'proj/game/api/current-round', methods: ['GET'])]
+    public function getCurrentRound(SessionInterface $session, Request $req): JsonResponse
+    {
+        $pokerGame = $session->get('pokerGame');
+
+        return new JsonResponse($pokerGame->getCurrentRound());
     }
 }

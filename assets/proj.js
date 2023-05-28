@@ -15,8 +15,9 @@ import './bootstrap';
 import CardClient from './pokerGame';
 
 export default function main() {
-    CardClient.attachCardListeners();
-    CardClient.attachCardSubmitListener();
+    // CardClient.attachCardListeners();
+    // CardClient.attachCardSubmitListener();
+    new CardClient();
 }
 
 main();

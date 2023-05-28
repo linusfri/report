@@ -20,7 +20,7 @@ class PokerController extends AbstractController
     {
         $pokerGame = $session->get('pokerGame') ?? null;
         if (is_null($pokerGame)) {
-            $pokerGame = new PokerGame(new Dealer('Dealer', money: 100 ), new Player('Player', money: 100), new DeckOfCards());
+            $pokerGame = new PokerGame(new Dealer('Dealer', money: 200 ), new Player('Player', money: 100), new DeckOfCards());
         }
 
         if ($pokerGame->isGameOver()) {
@@ -32,7 +32,7 @@ class PokerController extends AbstractController
         return $this->render('proj/game.html.twig', ['pokerGame' => $pokerGame]);
     }
 
-    #[Route('/proj/game/bet', 'proj/game/bet')]
+    #[Route('/proj/game/raise', 'proj/game/raise')]
     public function bet(SessionInterface $session, Request $req): Response
     {
         $amount = $req->query->get('bet') ?? null;
@@ -42,7 +42,7 @@ class PokerController extends AbstractController
 
         $pokerGame = $session->get('pokerGame');
 
-        $pokerGame->currentPlayerBet($amount);
+        $pokerGame->currentPlayerRaise($amount);
         $session->set('pokerGame', $pokerGame);
 
         return $this->redirectToRoute('proj/game');
@@ -86,6 +86,17 @@ class PokerController extends AbstractController
         return $this->redirectToRoute('proj/game');
     }
 
+    #[Route('proj/game/done-change', 'proj/game/done-change')]
+    public function noChange(SessionInterface $session): Response
+    {
+        $pokerGame = $session->get('pokerGame');
+        $pokerGame->currentPlayerDoneChangeCards();
+
+        $session->set('pokerGame', $pokerGame);
+
+        return $this->redirectToRoute('proj/game');
+    } 
+
     #[Route('/proj/game/showdown', 'proj/game/showdown')]
     public function showdown(SessionInterface $session): Response
     {
@@ -93,7 +104,7 @@ class PokerController extends AbstractController
         
         $session->set('pokerGame', $pokerGame);
 
-        return $this->redirectToRoute('proj/game');
+        return $this->redirectToRoute('proj/game/game_over');
     }
 
     #[Route('/proj/game/game_over', 'proj/game/game_over')]
@@ -104,8 +115,8 @@ class PokerController extends AbstractController
 
         $data = [
             'gameSession' => $pokerGame,
-            'winner' => $pokerGame->getWinner(),
-            'loser' => $pokerGame->getLoser(),
+            'winner' => $pokerGame->getPokerWinner(),
+            'loser' => $pokerGame->getPokerLoser(),
         ];
 
         return $this->render('proj/game_over.html.twig', $data);

@@ -19,28 +19,34 @@
                     {{ card.getUtf8Rep()|raw }}
                 </p>
             {% endfor %}
-            <a href="#" id="cards-submit">Submit</a>
         </div>
-        <form action="{{ path('proj/game/bet') }}">
-            <input type="number" name="bet" id="bet" placeholder="Bet amount">
-            <input type="submit" value="Bet">
-        </form>
-        {% if (pokerGame.getIsShowDown()) %}
+        {% if pokerGame.getIsChangeCardRound() %}
             <div class="game__button-container">
-                <a href="{{ path('proj/game/showdown') }}">Showdown</a>
-            </div>
-        {% elseif (pokerGame.getCurrentBet() > pokerGame.getCurrentPlayer().getMoney()) %}
-            <div class="game__button-container">
-                <a href="{{ path('proj/game/fold') }}">Fold</a>
+                <a href="#" id="cards-submit">Change marked cards</a>
+                <a href="{{ path('proj/game/done-change') }}" id="cards-submit">I'm happy with my cards</a>
             </div>
         {% else %}
-            <div class="game__button-container">
-                {% if pokerGame.getCurrentRound() <= 1 and not pokerGame.getBetHasBeenMade() %}
-                    <a href="{{ path('proj/game/check') }}">Check</a>
-                {% endif %}
-                <a href="{{ path('proj/game/fold') }}">Fold</a>
-                <a href="{{ path('proj/game/call') }}">Call</a>
-            </div>
+            {% if (pokerGame.getIsShowDown()) %}
+                <div class="game__button-container">
+                    <a href="{{ path('proj/game/showdown') }}">Showdown</a>
+                </div>
+            {% elseif (pokerGame.getCurrentBet() > pokerGame.getCurrentPlayer().getMoney()) %}
+                <div class="game__button-container">
+                    <a href="{{ path('proj/game/fold') }}">Fold</a>
+                </div>
+            {% else %}
+            <form action="{{ path('proj/game/raise') }}">
+                <input type="number" name="bet" id="bet" placeholder="Bet amount">
+                <input type="submit" value="Bet">
+            </form>
+                <div class="game__button-container">
+                    {% if pokerGame.getCurrentRound() <= 1 and not pokerGame.getBetHasBeenMade() %}
+                        <a href="{{ path('proj/game/check') }}">Check</a>
+                    {% endif %}
+                    <a href="{{ path('proj/game/fold') }}">Fold</a>
+                    <a href="{{ path('proj/game/call') }}">Call</a>
+                </div>
+            {% endif %}
         {% endif %}
     </section>
      {{ dump(pokerGame) }}
