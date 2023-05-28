@@ -2,7 +2,29 @@ imports:
     - php
 
 filter:
-    excluded_paths: [vendor/*, test/*]
+    excluded_paths: [
+        vendor/*,
+        test/*,
+        assets/*,
+        config/*,
+        docs/*,
+        public/*,
+        src/Controller/ApiCardController.php,
+        src/Controller/ApiController.php,
+        src/Controller/ApiGameController.php,
+        src/Controller/ApiLibraryController.php,
+        src/Controller/ApiQuoteController.php,
+        src/Controller/CardController.php,
+        src/Controller/GameController.php,
+        src/Controller/LibraryController.php,
+        src/Controller/LuckyController.php,
+        src/Controller/LuckyController.php,
+        src/Entity/*,
+        src/Repository/BookRepository.php,
+        src/Controller/LuckyController.php,
+        src/kernel.php,
+        src/templates/*
+    ]
 
 build:
     image: default-bionic
