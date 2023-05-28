@@ -16,12 +16,27 @@
                 <div>
                     <h3>Winner</h3>
                     <p>{{ winner.getName() }}</p>
+                    <div id="game-cards" class="game__cards">
+                        {% for card in winner.getCards() %}
+                            <p class="game__card">
+                                {{ card.getUtf8Rep()|raw }}
+                            </p>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div>
                     <h3>Loser</h3>
                     <p>{{ loser.getName() }}</p>
+                    <div id="game-cards" class="game__cards">
+                        {% for card in loser.getCards() %}
+                            <p class="game__card">
+                                {{ card.getUtf8Rep()|raw }}
+                            </p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </section>
     {% endif %}
+    {{ dump(pokerGame) }}
 {% endblock %}

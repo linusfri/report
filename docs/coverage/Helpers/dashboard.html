@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for /Users/linusfri/BTH/mvc/me/report/src/Repository</title>
+  <title>Dashboard for /Users/linusfri/BTH/mvc/me/report/src/Helpers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../_css/bootstrap.min.css?v=10.1.1" rel="stylesheet" type="text/css">
   <link href="../_css/nv.d3.min.css?v=10.1.1" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../index.html">/Users/linusfri/BTH/mvc/me/report/src</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Repository</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Helpers</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -58,7 +58,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="BookRepository.php.html#17">App\Repository\BookRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper.php.html#4">App\Helpers\Helper</a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -75,7 +75,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="BookRepository.php.html#17">App\Repository\BookRepository</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Helper.php.html#4">App\Helpers\Helper</a></td><td class="text-right">6</td></tr>
 
        </tbody>
       </table>
@@ -113,9 +113,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="BookRepository.php.html#19"><abbr title="App\Repository\BookRepository::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="BookRepository.php.html#24"><abbr title="App\Repository\BookRepository::save">save</abbr></a></td><td class="text-right">0%</td></tr>
-       <tr><td><a href="BookRepository.php.html#33"><abbr title="App\Repository\BookRepository::remove">remove</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Helper.php.html#7"><abbr title="App\Helpers\Helper::randomChance">randomChance</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -132,8 +130,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="BookRepository.php.html#24"><abbr title="App\Repository\BookRepository::save">save</abbr></a></td><td class="text-right">6</td></tr>
-       <tr><td><a href="BookRepository.php.html#33"><abbr title="App\Repository\BookRepository::remove">remove</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Helper.php.html#7"><abbr title="App\Helpers\Helper::randomChance">randomChance</abbr></a></td><td class="text-right">6</td></tr>
 
        </tbody>
       </table>
@@ -180,7 +177,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([3,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .datum(getCoverageDistributionData([1,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -230,7 +227,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[0,5,"<a href=\"BookRepository.php.html#17\">App\\Repository\\BookRepository<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[0,2,"<a href=\"Helper.php.html#4\">App\\Helpers\\Helper<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -254,7 +251,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[0,1,"<a href=\"BookRepository.php.html#19\">App\\Repository\\BookRepository::__construct<\/a>"],[0,2,"<a href=\"BookRepository.php.html#24\">App\\Repository\\BookRepository::save<\/a>"],[0,2,"<a href=\"BookRepository.php.html#33\">App\\Repository\\BookRepository::remove<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[0,2,"<a href=\"Helper.php.html#7\">App\\Helpers\\Helper::randomChance<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

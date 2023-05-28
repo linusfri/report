@@ -1,7 +1,6 @@
 <?php
 namespace App\PokerGame;
 
-use App\Player\Player;
 use App\Card\CardGraphic;
 use App\Player\PlayerInterface;
 

@@ -68,8 +68,15 @@ class Player implements PlayerInterface, \JsonSerializable
      */
     protected bool $hasFolded;
 
+    /**
+     * @var string $previousAction
+     *          The previous action of the player
+     */
+    protected string $previousAction;
+
     public function __construct(string $name, CardHand $cardHand = new CardHand(), ?int $money = null)
     {
+        $this->previousAction = '';
         $this->name = $name;
         $this->money = $money;
         $this->cardHand = $cardHand;
@@ -225,6 +232,10 @@ class Player implements PlayerInterface, \JsonSerializable
             throw new Exception('Not enough cards in deck to change cards');
         }
 
+        if (count($cardIndices) > 3) {
+            throw new Exception('Cannot change more than 3 cards');
+        }
+
         foreach ($cardIndices as $index) {
             $this->cardHand->changeCardAtIndex($index, $cardDeck);
         }
@@ -253,6 +264,16 @@ class Player implements PlayerInterface, \JsonSerializable
     public function getHasFolded(): bool
     {
         return $this->hasFolded;
+    }
+
+    /** Gets previous action */
+    public function getPreviousAction(): string {
+        return $this->previousAction;
+    }
+
+    /** Sets previous action */
+    public function setPreviousAction(string $action): void {
+        $this->previousAction = $action;
     }
 
     /**

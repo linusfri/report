@@ -51,4 +51,8 @@ interface PlayerInterface
     public function resetHasPlayedRound(): void;
 
     public function setHasChangedCards(): void;
+
+    public function getPreviousAction(): string;
+
+    public function setPreviousAction(string $action): void;
 }

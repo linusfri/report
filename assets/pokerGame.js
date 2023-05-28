@@ -17,6 +17,7 @@ export default class CardClient {
         this.gameCardContainer = document.getElementById('game-cards');
         this.attachCardListeners();
         this.attachCardSubmitListener();
+        this.getPreviousAction();
     }
 
     async attachCardListeners() {
@@ -42,6 +43,22 @@ export default class CardClient {
                 }
             });
         }
+    }
+
+    async getPreviousAction() {
+        const lastActionElem = document.getElementById('last-action');
+        if (!lastActionElem) {
+            return;
+        }
+
+        const response = await this.sendRequest('proj/game/api/previous-action');
+        if (response.status !== 200) {
+            return;
+        }
+
+        lastActionElem.innerHTML = response.data;
+
+        return response.data;
     }
     
     attachCardSubmitListener() {

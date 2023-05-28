@@ -4,7 +4,7 @@ namespace App\Controller\Proj;
 
 use App\Card\DeckOfCards;
 use App\PokerGame\PokerGame;
-use App\Player\Dealer;
+use App\Player\PokerDealer;
 use App\Player\Player;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,11 +20,20 @@ class PokerController extends AbstractController
     {
         $pokerGame = $session->get('pokerGame') ?? null;
         if (is_null($pokerGame)) {
-            $pokerGame = new PokerGame(new Dealer('Dealer', money: 200 ), new Player('Player', money: 100), new DeckOfCards());
+            $pokerGame = new PokerGame(new PokerDealer('Dealer', money: 200 ), new Player('Player', money: 100), new DeckOfCards());
         }
 
         if ($pokerGame->isGameOver()) {
             return $this->redirectToRoute('proj/game/game_over');
+        }
+
+        /** Do this to simulate dealer turn */
+        if ($pokerGame->getCurrentPlayer()->getId() === $pokerGame->dealer->getId()) {
+            $pokerGame->dealerEmulateTurn();
+
+            if ($pokerGame->isGameOver()) {
+                return $this->redirectToRoute('proj/game/game_over');
+            }
         }
 
         $session->set('pokerGame', $pokerGame);
@@ -52,10 +61,6 @@ class PokerController extends AbstractController
     public function check(SessionInterface $session): Response
     {
         $pokerGame = $session->get('pokerGame');
-
-        if ($pokerGame->getCurrentBet() === 0) {
-            throw new Exception('No Current bet');
-        }
 
         $pokerGame->currentPlayerCheck();
 
@@ -87,7 +92,7 @@ class PokerController extends AbstractController
     }
 
     #[Route('proj/game/done-change', 'proj/game/done-change')]
-    public function noChange(SessionInterface $session): Response
+    public function doneChange(SessionInterface $session): Response
     {
         $pokerGame = $session->get('pokerGame');
         $pokerGame->currentPlayerDoneChangeCards();
@@ -114,7 +119,7 @@ class PokerController extends AbstractController
         $session->remove('pokerGame');
 
         $data = [
-            'gameSession' => $pokerGame,
+            'pokerGame' => $pokerGame,
             'winner' => $pokerGame->getPokerWinner(),
             'loser' => $pokerGame->getPokerLoser(),
         ];

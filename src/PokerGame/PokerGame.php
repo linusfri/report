@@ -2,13 +2,15 @@
 
 namespace App\PokerGame;
 
-use App\Card\CardGraphic;
 use App\Card\DeckOfCards;
 use App\CardGame\CardGame;
+use App\Player\DealerInterface;
 use App\PokerGame\PokerHandEvaluator;
-use App\Player\Dealer;
-use App\Player\Player;
 use App\Player\PlayerInterface;
+use App\Player\PokerDealer;
+use App\Helpers\Helper;
+use App\Player\PokerBrain;
+use App\Player\PokerDealerInterface;
 use Exception;
 
 class PokerGame extends CardGame implements \JsonSerializable
@@ -21,12 +23,12 @@ class PokerGame extends CardGame implements \JsonSerializable
     protected bool $betHasBeenMade;
     protected bool $isShowDown;
 
-    public function __construct(Dealer $dealer, Player $player, DeckOfCards $deck)
+    public function __construct(PokerDealer $dealer, PlayerInterface $player, DeckOfCards $deck)
     {
-        $this->start($dealer, $player, $deck);
+        $this->pokerStart($dealer, $player, $deck);
     }
 
-    public function start(Dealer $dealer, Player $player, DeckOfCards $deck): bool
+    public function pokerStart(PokerDealer $dealer, PlayerInterface $player, DeckOfCards $deck): bool
     {
         $this->player = $player;
         $this->dealer = $dealer;
@@ -68,13 +70,14 @@ class PokerGame extends CardGame implements \JsonSerializable
         $this->currentPlayer->fold();
 
         $this->currentPlayer->setHasPlayedRound();
+        $this->currentPlayer->setPreviousAction('Folded');
+
         $this->nextPlayer();
         $this->updateGameState();
     }
 
     public function currentPlayerRaise(int $amount): bool
     {
-        
         try {
             if ($amount > $this->currentBet && $this->currentPlayer->getMoney() >= $amount) {
                 $this->betHasBeenMade = true;
@@ -83,8 +86,10 @@ class PokerGame extends CardGame implements \JsonSerializable
 
                 $this->setcurrentBet($bet);
                 $this->currentPlayer->setHasPlayedRound();
+                $this->currentPlayer->setPreviousAction('Raised');
                 $this->nextPlayer();
             } else {
+                die;
                 throw new Exception('Bet must be higher than current bet. Or player has not enough money.');
             }
         } catch (Exception $e) {
@@ -112,6 +117,7 @@ class PokerGame extends CardGame implements \JsonSerializable
                 $this->totalPot += $bet;
                 $this->setcurrentBet($bet);
                 $this->currentPlayer->setHasPlayedRound();
+                $this->currentPlayer->setPreviousAction('Called');
                 $this->nextPlayer();
             } else {
                 throw new Exception('Call must be equal to current bet. Or player has not enough money.');
@@ -128,6 +134,7 @@ class PokerGame extends CardGame implements \JsonSerializable
     public function currentPlayerCheck(): bool
     {  
         $this->currentPlayer->setHasPlayedRound();
+        $this->currentPlayer->setPreviousAction('Checked');
         $this->nextPlayer();
         $this->updateGameState();
 
@@ -147,31 +154,45 @@ class PokerGame extends CardGame implements \JsonSerializable
         return $this->currentBet;
     }
 
-    public function pokerDealerDrawCards(int $number): void
+    public function dealerEmulateTurn(): void
     {
-        /** If number bigger than three draw max allowed number of cards */
-        if ($number > 3) {
-            for ($i = 1; $i <= $number; $i++) {
-                if ($this->randomChance()) {
-                    $this->currentPlayer->drawCard($this->deck);
+        if ($this->currentPlayer->getId() !== $this->dealer->getId()) {
+            throw new Exception('Not dealer turn');
+        }
+
+        $idea = (new PokerBrain())->getRandomIdea($this);
+
+        switch ($idea) {
+            case 'fold':
+                $this->currentPlayerFold();
+                break;
+            case 'raise':
+                $this->currentPlayerRaise($this->currentBet + 10);
+                break;
+            case 'call':
+                $this->currentPlayerCall();
+                break;
+            case 'check':
+                $this->currentPlayerCheck();
+                break;
+            case 'change':
+                /** 
+                 * PokerBrain returns 'change' on round 2.
+                 * Make it 50% that the dealer actually changes cards
+                 */
+                if (Helper::randomChance()) {
+                    $this->currentPlayerChangeCards([1,3]);
+                } else {
+                    $this->currentPlayerDoneChangeCards();
                 }
-            }
-
-            $this->updateGameState();
-
-            return;
+                break;
         }
-
-        /** Else draw specified number of cards */
-        for ($i = 1; $i <= $number; ++$i) {
-            if ($this->randomChance()) {
-                $this->dealer->drawCard($this->deck);
-            }
-        }
+        
+        if ($this->getCurrentRound() >= 2) {
+            $this->dealer->setHasChangedCards();
+        };
 
         $this->updateGameState();
-
-        return;
     }
 
     public function getCurrentPlayerCards(): array
@@ -204,9 +225,18 @@ class PokerGame extends CardGame implements \JsonSerializable
     protected function updateGameState(): void
     {
         /** This only works for two players, needs to be changed for arbitrary number of players */
-        if ($this->player->getIsFinished() || $this->dealer->getIsFinished()) {
+        if ($this->player->getHasFolded() || $this->dealer->getHasFolded()) {
             $this->setGameOver();
             return;
+        }
+
+        if (($this->player->getMoney() < $this->getcurrentBet() || $this->dealer->getMoney() < $this->getcurrentBet()) && $this->checkAllPlayersPlayedRound()) {
+            $this->setGameOver();
+            return;
+        }
+
+        if ($this->player->getHasChangedCards() && $this->dealer->getHasChangedCards()) {
+            $this->changeCardRound = false;
         }
 
         if ($this->currentRound >= 3 && $this->checkAllPlayersPlayedRound() || ($this->player->getMoney() <= 0 && $this->dealer->getMoney() <= 0)) {
@@ -255,6 +285,15 @@ class PokerGame extends CardGame implements \JsonSerializable
             return $nonFoldedPlayers[0];
         }
 
+        if ($this->player->getMoney() < $this->getCurrentBet()) {
+            return $this->dealer;
+        }
+
+        if ($this->dealer->getMoney() < $this->getCurrentBet()) {
+            return $this->player;
+        }
+
+
        return PokerHandEvaluator::determineWinner([$this->player, $this->dealer]);
     }
 
@@ -264,16 +303,14 @@ class PokerGame extends CardGame implements \JsonSerializable
     public function currentPlayerChangeCards(array $cardIndices): void
     {
         $this->currentPlayer->changeCards($cardIndices, $this->deck);
-
+        $this->nextPlayer();
         $this->updateGameState();
     }
 
     public function currentPlayerDoneChangeCards(): void
     {
         $this->currentPlayer->setHasChangedCards();
-        $this->currentPlayer->setHasPlayedRound();
         $this->nextPlayer();
-
         $this->updateGameState();
     }
 
@@ -290,6 +327,10 @@ class PokerGame extends CardGame implements \JsonSerializable
         }
 
         return $loser;
+    }
+
+    public function isNotDealer(): bool {
+        return $this->currentPlayer->getId() !== $this->dealer->getId();
     }
 
     public function jsonSerialize(): mixed

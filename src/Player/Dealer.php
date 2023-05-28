@@ -2,6 +2,7 @@
 
 namespace App\Player;
 
-class Dealer extends Player
+use App\PokerGame\PokerGame;
+class Dealer extends Player implements PlayerInterface
 {
 }

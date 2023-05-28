@@ -36,4 +36,13 @@ class ApiPokerController {
 
         return new JsonResponse($pokerGame->getCurrentRound());
     }
+
+    #[Route('proj/game/api/previous-action', 'proj/game/api/previous-action', methods: ['GET'])]
+    public function getPreviousAction(SessionInterface $session, Request $req): JsonResponse
+    {
+        $pokerGame = $session->get('pokerGame');
+        $lastAction = $pokerGame->dealer->getPreviousAction();
+
+        return new JsonResponse($lastAction);
+    }
 }
