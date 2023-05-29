@@ -4,7 +4,6 @@ imports:
 filter:
     excluded_paths: [
         vendor/*,
-        test/*,
         assets/*,
         config/*,
         docs/*,
@@ -24,6 +23,9 @@ filter:
         src/Controller/LuckyController.php,
         src/kernel.php,
         src/templates/*
+        tests/ProjControllerTest.php
+        tests/PokerControllerTest.php
+        tests/LuckyControllerTest.php
     ],
 
     dependency_paths: [
