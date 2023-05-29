@@ -32,15 +32,14 @@ filter:
     ]
         
 
-build:
-    environment:
-        before_commands:
-            - "nvm use --delete-prefix v18.16.0"
+build:  
     image: default-bionic
 
     nodes:
         my-tests:
             environment:
+                before_commands:
+                    - "nvm use --delete-prefix v18.16.0"
                 php:
                     # version: 8.1.13
                     # version: 8.1.17
