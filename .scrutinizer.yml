@@ -23,9 +23,6 @@ filter:
         src/Controller/LuckyController.php,
         src/kernel.php,
         src/templates/*,
-        tests/ProjControllerTest.php,
-        tests/PokerControllerTest.php,
-        tests/LuckyControllerTest.php
     ],
 
     dependency_paths: [
