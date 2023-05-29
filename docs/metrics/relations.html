@@ -49,7 +49,7 @@
 <div class="page">
     <div class="content content-first">
         <div class="report-details">
-            Created at 2023-05-16 18:21:19        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
+            Created at 2023-05-29 20:29:04        , with PHPMetrics v2.8.2 (<a href="https://twitter.com/Halleck45">Jean-François Lépine</a>).
         </div>
 
         
@@ -93,7 +93,7 @@
                             <path d="M0 0h24v24H0z" fill="none">
                             <path d="M20 8h-2.81c-.45-.78-1.07-1.45-1.82-1.96L17 4.41 15.59 3l-2.17 2.17C12.96 5.06 12.49 5 12 5c-.49 0-.96.06-1.41.17L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20V8zm-6 8h-4v-2h4v2zm0-4h-4v-2h4v2z">
                         </svg>
-                        Violations (2)
+                        Violations (13)
                     </a>
                 </li>
                                     <li>
@@ -247,6 +247,80 @@
 
     var relations = [
     {
+        "name": "\\App\\PokerGame\\PokerGame",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\CardGame\\CardGame",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\JsonSerializable",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Player\\PokerDealer",
+        "size": 3000,
+        "relations": [
+            "\\App\\Player\\Dealer",
+            "\\App\\Player\\DealerInterface",
+            "\\App\\Player\\PokerBrain",
+            "\\App\\Card\\CardHand"
+        ]
+    },
+    {
+        "name": "\\App\\Player\\Player",
+        "size": 3000,
+        "relations": [
+            "\\App\\Player\\PlayerInterface",
+            "\\JsonSerializable",
+            "\\App\\Card\\CardHand",
+            "\\App\\Card\\DeckOfCards",
+            "\\Exception"
+        ]
+    },
+    {
+        "name": "\\App\\Card\\DeckOfCards",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\Exception",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Player\\PokerBrain",
+        "size": 3000,
+        "relations": [
+            "\\App\\Helpers\\Helper",
+            "\\App\\PokerGame\\PokerGame"
+        ]
+    },
+    {
+        "name": "\\App\\Helpers\\Helper",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Player\\PlayerInterface",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\PokerGame\\PokerHandEvaluator",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\PokerGame\\HandRank",
+        "size": 3000,
+        "relations": []
+    },
+    {
         "name": "\\App\\Repository\\BookRepository",
         "size": 3000,
         "relations": []
@@ -277,22 +351,7 @@
         "relations": []
     },
     {
-        "name": "\\JsonSerializable",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\Card\\DeckOfCards",
-        "size": 3000,
-        "relations": []
-    },
-    {
         "name": "\\App\\Card\\CardHand",
-        "size": 3000,
-        "relations": []
-    },
-    {
-        "name": "\\App\\CardGame\\CardGame",
         "size": 3000,
         "relations": []
     },
@@ -300,40 +359,44 @@
         "name": "\\App\\Player\\Dealer",
         "size": 3000,
         "relations": [
-            "\\App\\Player\\Player"
+            "\\App\\Player\\Player",
+            "\\App\\Player\\PlayerInterface"
         ]
     },
     {
-        "name": "\\App\\Player\\Player",
+        "name": "\\App\\Controller\\Proj\\ApiPokerController",
         "size": 3000,
         "relations": [
-            "\\App\\Player\\PlayerInterface",
-            "\\JsonSerializable",
-            "\\App\\Card\\CardHand",
+            "\\Symfony\\Component\\HttpFoundation\\JsonResponse",
+            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "\\Symfony\\Component\\HttpFoundation\\Request",
+            "\\App\\Player\\PokerDealer",
+            "\\App\\Player\\Player",
             "\\App\\Card\\DeckOfCards",
-            "\\Exception"
+            "\\App\\PokerGame\\PokerGame"
         ]
     },
     {
-        "name": "\\App\\Player\\PlayerInterface",
+        "name": "\\Symfony\\Component\\HttpFoundation\\JsonResponse",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\Exception",
+        "name": "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
         "size": 3000,
         "relations": []
     },
     {
-        "name": "\\App\\Controller\\CardController",
+        "name": "\\Symfony\\Component\\HttpFoundation\\Request",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Controller\\Proj\\ProjController",
         "size": 3000,
         "relations": [
             "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
-            "\\Symfony\\Component\\HttpFoundation\\Response",
-            "\\App\\Card\\DeckOfCards",
-            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
-            "\\App\\Card\\CardHand",
-            "\\Symfony\\Component\\HttpFoundation\\Request"
+            "\\Symfony\\Component\\HttpFoundation\\Response"
         ]
     },
     {
@@ -347,14 +410,30 @@
         "relations": []
     },
     {
-        "name": "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+        "name": "\\App\\Controller\\Proj\\PokerController",
         "size": 3000,
-        "relations": []
+        "relations": [
+            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "\\App\\Player\\PokerDealer",
+            "\\App\\Player\\Player",
+            "\\App\\Card\\DeckOfCards",
+            "\\App\\PokerGame\\PokerGame",
+            "\\Symfony\\Component\\HttpFoundation\\Request"
+        ]
     },
     {
-        "name": "\\Symfony\\Component\\HttpFoundation\\Request",
+        "name": "\\App\\Controller\\CardController",
         "size": 3000,
-        "relations": []
+        "relations": [
+            "\\Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "\\Symfony\\Component\\HttpFoundation\\Response",
+            "\\App\\Card\\DeckOfCards",
+            "\\Symfony\\Component\\HttpFoundation\\Session\\SessionInterface",
+            "\\App\\Card\\CardHand",
+            "\\Symfony\\Component\\HttpFoundation\\Request"
+        ]
     },
     {
         "name": "\\App\\Controller\\ApiController",
@@ -386,11 +465,6 @@
             "\\App\\Repository\\BookRepository",
             "\\Symfony\\Component\\HttpFoundation\\JsonResponse"
         ]
-    },
-    {
-        "name": "\\Symfony\\Component\\HttpFoundation\\JsonResponse",
-        "size": 3000,
-        "relations": []
     },
     {
         "name": "\\App\\Controller\\ApiGameController",
@@ -463,6 +537,11 @@
     },
     {
         "name": "\\Symfony\\Component\\HttpKernel\\Kernel",
+        "size": 3000,
+        "relations": []
+    },
+    {
+        "name": "\\App\\Player\\DealerInterface",
         "size": 3000,
         "relations": []
     }
