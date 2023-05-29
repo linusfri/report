@@ -26,6 +26,7 @@ class PokerControllerTest extends WebTestCase
 
     public function testCheckEndpoint()
     {
+
         $client = static::createClient();
         $client->followRedirects();
         $client->request('GET', '/proj/game');
