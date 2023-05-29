@@ -17,4 +17,6 @@ class HandRankTest extends TestCase
         $this->assertSame(3, HandRank::TWO_PAIR);
         $this->assertSame(2, HandRank::ONE_PAIR);
     }
+
+    
 }
