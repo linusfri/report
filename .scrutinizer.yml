@@ -4,6 +4,7 @@ imports:
 filter:
     excluded_paths: [
         vendor/*,
+        tests/*,
         assets/*,
         config/*,
         docs/*,
