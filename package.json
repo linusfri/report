@@ -13,9 +13,6 @@
         "webpack-cli": "^4.10.0",
         "webpack-notifier": "^1.15.0"
     },
-    "engines" : { 
-        "node" : ">=18"
-    },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {

@@ -47,9 +47,7 @@ build:
                     - php-scrutinizer-run
     tests:
         override:
-            -   commands: 
-                - "composer phpunit"
-                - "nvm use --delete-prefix v18.16.0"
+            -   command: "composer phpunit"
                 # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:
                     file: "docs/coverage.clover"
