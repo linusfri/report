@@ -22,15 +22,14 @@ filter:
         src/Repository/BookRepository.php,
         src/Controller/LuckyController.php,
         src/kernel.php,
-        src/templates/*
-        tests/ProjControllerTest.php
-        tests/PokerControllerTest.php
+        src/templates/*,
+        tests/ProjControllerTest.php,
+        tests/PokerControllerTest.php,
         tests/LuckyControllerTest.php
     ],
 
     dependency_paths: [
-        'vendor/',
-        'src/'
+        'vendor/'
     ]
         
 
