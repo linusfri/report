@@ -1,7 +1,7 @@
 <?php
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
-
+use App\Kernel;
 class ProjControllerTest extends WebTestCase
 {
     public function testProjRoute(): void
@@ -28,6 +28,6 @@ class ProjControllerTest extends WebTestCase
      */
     protected static function createKernel(array $options = []): KernelInterface
     {
-        return new KernelInterface('test', true);
+        return new Kernel('test', true);
     }
 }

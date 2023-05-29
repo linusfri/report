@@ -1,7 +1,10 @@
 <?php
 use App\Controller\Proj\ApiPokerController;
+use App\Kernel;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
+
 class ApiPokerControllerTest extends WebTestCase
 {
     public function testChangeCards(): void
@@ -47,6 +50,6 @@ class ApiPokerControllerTest extends WebTestCase
      */
     protected static function createKernel(array $options = []): KernelInterface
     {
-        return new KernelInterface('test', true);
+        return new Kernel('test', true);
     }
 }

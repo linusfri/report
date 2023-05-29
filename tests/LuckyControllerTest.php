@@ -1,7 +1,7 @@
 <?php
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
-
+use App\Kernel;
 class LuckyControllerTest extends WebTestCase {
     function testNumber() {
         $client = static::createClient();
@@ -27,6 +27,6 @@ class LuckyControllerTest extends WebTestCase {
      */
     protected static function createKernel(array $options = []): KernelInterface
     {
-        return new KernelInterface('test', true);
+        return new Kernel('test', true);
     }
 }

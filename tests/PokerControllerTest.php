@@ -2,7 +2,7 @@
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
-
+use App\Kernel;
 class PokerControllerTest extends WebTestCase
 {
 
@@ -102,6 +102,6 @@ class PokerControllerTest extends WebTestCase
      */
     protected static function createKernel(array $options = []): KernelInterface
     {
-        return new KernelInterface('test', true);
+        return new Kernel('test', true);
     }
 }
