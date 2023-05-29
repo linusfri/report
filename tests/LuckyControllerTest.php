@@ -17,4 +17,15 @@ class LuckyControllerTest extends WebTestCase {
         $this->assertSame(200, $reponse->getStatusCode());
         $this->assertSelectorTextContains('title', 'About');
     }
+
+    /**
+     * createKernel
+     *
+     * @param array<mixed> $options
+     * @return KernelInterface
+     */
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        return new Kernel('test', true);
+    }
 }

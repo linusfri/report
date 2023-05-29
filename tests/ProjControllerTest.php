@@ -1,5 +1,6 @@
 <?php
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class ProjControllerTest extends WebTestCase
 {
@@ -17,5 +18,16 @@ class ProjControllerTest extends WebTestCase
         $client->request('GET', '/proj/about');
 
         $this->assertResponseIsSuccessful();
+    }
+
+    /**
+     * createKernel
+     *
+     * @param array<mixed> $options
+     * @return KernelInterface
+     */
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        return new KernelInterface('test', true);
     }
 }

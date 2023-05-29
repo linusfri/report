@@ -1,7 +1,7 @@
 <?php
 use App\Controller\Proj\ApiPokerController;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
+use Symfony\Component\HttpKernel\KernelInterface;
 class ApiPokerControllerTest extends WebTestCase
 {
     public function testChangeCards(): void
@@ -37,5 +37,16 @@ class ApiPokerControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertSame(200, $response->getStatusCode());
+    }
+
+    /**
+     * createKernel
+     *
+     * @param array<mixed> $options
+     * @return KernelInterface
+     */
+    protected static function createKernel(array $options = []): KernelInterface
+    {
+        return new KernelInterface('test', true);
     }
 }
