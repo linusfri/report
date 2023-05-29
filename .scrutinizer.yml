@@ -48,7 +48,7 @@ build:
     tests:
         override:
             -   command: "composer phpunit"
-                command: "nvm use --delete-prefix v18.16.12"
+                # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:
                     file: "docs/coverage.clover"
                     format: "php-clover"
