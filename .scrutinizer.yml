@@ -32,10 +32,10 @@ filter:
     ]
         
 
-build:  
+build:
+    commands:
+        - "nvm use --delete-prefix v18.16.12"
     image: default-bionic
-    environment:
-        node: 18.16.12
     nodes:
         my-tests:
             environment:
