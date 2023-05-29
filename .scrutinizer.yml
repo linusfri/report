@@ -34,7 +34,8 @@ filter:
 
 build:
     environment:
-        - "nvm use --delete-prefix v18.16.0"
+        before_commands:
+            - "nvm use --delete-prefix v18.16.0"
     image: default-bionic
 
     nodes:
