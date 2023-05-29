@@ -1,4 +1,5 @@
 <?php
+
 namespace App\PokerGame;
 
 use App\Card\CardGraphic;
@@ -25,12 +26,12 @@ class PokerHandEvaluator
 
     public static function evaluateHandValue(array $cards): int
     {
-        /** Sort the cards by value in ascending order */
+        /* Sort the cards by value in ascending order */
         usort($cards, function (CardGraphic $cardA, CardGraphic $cardB) {
             return $cardA->getValue() <=> $cardB->getValue();
         });
 
-        /** Check for different hand combinations in descending order of rank */
+        /* Check for different hand combinations in descending order of rank */
         if (self::isRoyalFlush($cards)) {
             return HandRank::ROYAL_FLUSH;
         }
@@ -90,7 +91,7 @@ class PokerHandEvaluator
     {
         $suit = $cards[0]->getSuit();
 
-        for ($i = 1; $i < count($cards); $i++) {
+        for ($i = 1; $i < count($cards); ++$i) {
             if ($cards[$i]->getSuit() !== $suit || $cards[$i]->getValue() !== $cards[$i - 1]->getValue() + 1) {
                 return false;
             }
@@ -105,7 +106,7 @@ class PokerHandEvaluator
         $valueCounts = self::getValueCounts($cards);
 
         foreach ($valueCounts as $count) {
-            if ($count === 4) {
+            if (4 === $count) {
                 return true;
             }
         }
@@ -122,9 +123,9 @@ class PokerHandEvaluator
         $hasPair = false;
 
         foreach ($valueCounts as $count) {
-            if ($count === 3) {
+            if (3 === $count) {
                 $hasThreeOfAKind = true;
-            } elseif ($count === 2) {
+            } elseif (2 === $count) {
                 $hasPair = true;
             }
         }
@@ -149,7 +150,7 @@ class PokerHandEvaluator
     /** Check if the cards form a straight (consecutive values) */
     public static function isStraight(array $cards): bool
     {
-        for ($i = 1; $i < count($cards); $i++) {
+        for ($i = 1; $i < count($cards); ++$i) {
             if ($cards[$i]->getValue() !== $cards[$i - 1]->getValue() + 1) {
                 return false;
             }
@@ -164,7 +165,7 @@ class PokerHandEvaluator
         $valueCounts = self::getValueCounts($cards);
 
         foreach ($valueCounts as $count) {
-            if ($count === 3) {
+            if (3 === $count) {
                 return true;
             }
         }
@@ -180,12 +181,12 @@ class PokerHandEvaluator
         $pairCount = 0;
 
         foreach ($valueCounts as $count) {
-            if ($count === 2) {
-                $pairCount++;
+            if (2 === $count) {
+                ++$pairCount;
             }
         }
 
-        return $pairCount === 2;
+        return 2 === $pairCount;
     }
 
     /** Check if the cards contain a pair */
@@ -194,7 +195,7 @@ class PokerHandEvaluator
         $valueCounts = self::getValueCounts($cards);
 
         foreach ($valueCounts as $count) {
-            if ($count === 2) {
+            if (2 === $count) {
                 return true;
             }
         }
@@ -214,7 +215,7 @@ class PokerHandEvaluator
                 $valueCounts[$value] = 0;
             }
 
-            $valueCounts[$value]++;
+            ++$valueCounts[$value];
         }
 
         return $valueCounts;

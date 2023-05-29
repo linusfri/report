@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Helpers;
 
-class Helper {
-
+class Helper
+{
     /** Simulates probability of making a choice */
-    static public function randomChance(): bool
+    public static function randomChance(): bool
     {
         /* 50% chance */
         if (rand(0, 100) > 50) {

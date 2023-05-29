@@ -1,8 +1,6 @@
 <?php
-namespace App\Player;
 
-use App\Player\PlayerInterface;
-use App\PokerGame\PokerGame;
+namespace App\Player;
 
 interface DealerInterface extends PlayerInterface
 {

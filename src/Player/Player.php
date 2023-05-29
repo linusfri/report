@@ -39,38 +39,38 @@ class Player implements PlayerInterface, \JsonSerializable
     protected int $id;
 
     /**
-     * @var int $money
+     * @var int
      *          The amount of money the player has
      */
     protected ?int $money;
 
     /**
-     * @var bool $checked
-     *          True if player has checked, false if player has not checked
+     * @var bool
+     *           True if player has checked, false if player has not checked
      */
     protected bool $checked;
 
     /**
-     * @var bool $hasPlayedRound
-     *          Indicates if the player has played the current round
+     * @var bool
+     *           Indicates if the player has played the current round
      */
     protected bool $hasPlayedRound;
 
     /**
-     * @var bool $hasChangedCards
-     *          Indicates if the player has changed cards
+     * @var bool
+     *           Indicates if the player has changed cards
      */
     protected bool $hasChangedCards;
-    
+
     /**
-     * @var bool $hasFolded
-     *          Indicates if the player has folded
+     * @var bool
+     *           Indicates if the player has folded
      */
     protected bool $hasFolded;
 
     /**
-     * @var string $previousAction
-     *          The previous action of the player
+     * @var string
+     *             The previous action of the player
      */
     protected string $previousAction;
 
@@ -163,12 +163,12 @@ class Player implements PlayerInterface, \JsonSerializable
 
     /** The player bets money */
     public function bet(int $amount): int
-    {   
+    {
         if (is_null($this->money)) {
             throw new Exception('The player does not have money. Just plays for fun.');
         }
 
-        /** If bet bigger than current money, go all in */
+        /* If bet bigger than current money, go all in */
         if ($this->money < $amount) {
             throw new Exception('The player does not have enough money to bet that amount.');
         }
@@ -228,12 +228,12 @@ class Player implements PlayerInterface, \JsonSerializable
     }
 
     /**
-     * changeCards
+     * changeCards.
      *
      * @param array<int> $cardIndices
-     * @return void
      */
-    public function changeCards(array $cardIndices, DeckOfCards $cardDeck): void {
+    public function changeCards(array $cardIndices, DeckOfCards $cardDeck): void
+    {
         if ($cardDeck->getNumberCards() < count($cardIndices)) {
             throw new Exception('Not enough cards in deck to change cards');
         }
@@ -273,12 +273,14 @@ class Player implements PlayerInterface, \JsonSerializable
     }
 
     /** Gets previous action */
-    public function getPreviousAction(): string {
+    public function getPreviousAction(): string
+    {
         return $this->previousAction;
     }
 
     /** Sets previous action */
-    public function setPreviousAction(string $action): void {
+    public function setPreviousAction(string $action): void
+    {
         $this->previousAction = $action;
     }
 

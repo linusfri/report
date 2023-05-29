@@ -31,7 +31,8 @@ class CardHand
         }
     }
 
-    public function changeCardAtIndex(int $index, DeckOfCards $deck) {
+    public function changeCardAtIndex(int $index, DeckOfCards $deck)
+    {
         $this->cards[$index] = array_pop($deck->cards);
     }
 }

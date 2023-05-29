@@ -1,5 +1,7 @@
 <?php
+
 namespace App\PokerGame;
+
 /** Translates Card hands to actual "points" */
 class HandRank
 {

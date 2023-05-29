@@ -1,8 +1,7 @@
 <?php
+
 namespace App\Player;
 
-use App\Player\PokerDealerBrain;
-use App\PokerGame\PokerGame;
 use App\Card\CardHand;
 
 class PokerDealer extends Dealer implements DealerInterface
@@ -14,8 +13,7 @@ class PokerDealer extends Dealer implements DealerInterface
         PokerBrain $brain = new PokerBrain(),
         CardHand $cardHand = new CardHand(),
         ?int $money = null
-    )
-    {
+    ) {
         $this->name = $name;
         $this->brain = $brain;
         $this->cardHand = $cardHand;

@@ -1,6 +1,6 @@
 parameters:
     # List of directories or files to analyze
-    level: 6
+    level: 3
     paths:
         - src
         - tests

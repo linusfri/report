@@ -3,15 +3,14 @@
 namespace App\Controller\Proj;
 
 use App\Card\DeckOfCards;
-use App\PokerGame\PokerGame;
-use App\Player\PokerDealer;
 use App\Player\Player;
+use App\Player\PokerDealer;
+use App\PokerGame\PokerGame;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Exception;
 
 class PokerController extends AbstractController
 {
@@ -20,14 +19,14 @@ class PokerController extends AbstractController
     {
         $pokerGame = $session->get('pokerGame') ?? null;
         if (is_null($pokerGame)) {
-            $pokerGame = new PokerGame(new PokerDealer('Dealer', money: 200 ), new Player('Player', money: 100), new DeckOfCards());
+            $pokerGame = new PokerGame(new PokerDealer('Dealer', money: 200), new Player('Player', money: 100), new DeckOfCards());
         }
 
         if ($pokerGame->isGameOver()) {
             return $this->redirectToRoute('proj/game/game_over');
         }
 
-        /** Do this to simulate dealer turn */
+        /* Do this to simulate dealer turn */
         if ($pokerGame->getCurrentPlayer()->getId() === $pokerGame->dealer->getId()) {
             $pokerGame->dealerEmulateTurn();
 
@@ -53,7 +52,7 @@ class PokerController extends AbstractController
 
         return $this->redirectToRoute('proj/game');
     }
-    
+
     #[Route('/proj/game/check', 'proj/game/check')]
     public function check(SessionInterface $session): Response
     {
@@ -65,7 +64,7 @@ class PokerController extends AbstractController
 
         return $this->redirectToRoute('proj/game');
     }
-    
+
     #[Route('/proj/game/fold', 'proj/game/fold')]
     public function fold(SessionInterface $session): Response
     {
@@ -73,7 +72,7 @@ class PokerController extends AbstractController
         $pokerGame->currentPlayerFold();
 
         $session->set('pokerGame', $pokerGame);
-        
+
         return $this->redirectToRoute('proj/game');
     }
 
@@ -82,7 +81,7 @@ class PokerController extends AbstractController
     {
         $pokerGame = $session->get('pokerGame');
         $pokerGame->currentPlayerCall();
-        
+
         $session->set('pokerGame', $pokerGame);
 
         return $this->redirectToRoute('proj/game');
@@ -97,13 +96,13 @@ class PokerController extends AbstractController
         $session->set('pokerGame', $pokerGame);
 
         return $this->redirectToRoute('proj/game');
-    } 
+    }
 
     #[Route('/proj/game/showdown', 'proj/game/showdown')]
     public function showdown(SessionInterface $session): Response
     {
         $pokerGame = $session->get('pokerGame');
-        
+
         $session->set('pokerGame', $pokerGame);
 
         return $this->redirectToRoute('proj/game/game_over');
@@ -128,7 +127,7 @@ class PokerController extends AbstractController
     public function resetSession(SessionInterface $session): Response
     {
         $session->remove('pokerGame');
-    
+
         return $this->render('proj/home.html.twig');
     }
 }

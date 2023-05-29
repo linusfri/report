@@ -1,15 +1,17 @@
 <?php
+
 namespace App\Player;
 
 use App\Helpers\Helper;
 use App\PokerGame\PokerGame;
 
-class PokerBrain {
+class PokerBrain
+{
     private const POSSIBILITES = [
         'call',
         'fold',
         'raise',
-        'change'
+        'change',
     ];
 
     /**
@@ -22,7 +24,8 @@ class PokerBrain {
         $this->generateNewRoundIdeas();
     }
 
-    public function generateNewRoundIdeas(): array {
+    public function generateNewRoundIdeas(): array
+    {
         $this->ideas = [];
 
         foreach (self::POSSIBILITES as $possibility) {
@@ -34,12 +37,13 @@ class PokerBrain {
         return $this->ideas;
     }
 
-    public function getRandomIdea(PokerGame $pokerGame): string {
+    public function getRandomIdea(PokerGame $pokerGame): string
+    {
         if (empty($this->ideas)) {
             return 'fold';
         }
 
-        /** 
+        /*
          * The point of this is to instruct the dealer brain which legal decisions there are
          * based on the current state of the game. For example, it's not possible to check
          * if a bet has been made or if the first round is over. Also, it's not possible
@@ -54,7 +58,7 @@ class PokerBrain {
                 case 'raise':
                     return true;
                 case 'change':
-                    return $pokerGame->getCurrentRound() === 2;
+                    return 2 === $pokerGame->getCurrentRound();
                 case 'check':
                     return !$pokerGame->getBetHasBeenMade();
             }
@@ -64,7 +68,7 @@ class PokerBrain {
             return Helper::randomChance() ? $this->ideas[] = 'fold' : $this->ideas[] = 'call';
         }
 
-        if ($pokerGame->getCurrentRound() === 2 && !$pokerGame->dealer->getHasChangedCards()) {
+        if (2 === $pokerGame->getCurrentRound() && !$pokerGame->dealer->getHasChangedCards()) {
             return 'change';
         }
 

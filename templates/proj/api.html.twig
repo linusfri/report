@@ -1,0 +1,25 @@
+{% extends "proj/proj.html.twig" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <section class="content--center">
+        <div class="content__presentation--all-center">
+            <div class="content__text-box">
+                <h1>Endpoints</h1>
+                
+
+            </div>
+            <div class="content__button-container column">
+                <a href="{{ path('proj/game/api/current-round') }}">Get current game round</a>
+                <a href="{{ path('proj/game/api/get-player-name') }}">Get Player name</a>
+                <a href="{{ path('proj/game/api/get-dealer-name') }}">Get Dealer name</a>
+                <a href="{{ path('proj/game/api/get-current-player') }}">Get current player</a>
+                <form method="POST" action="{{ path('proj/game/api/set-current-player-money') }}">
+                    <input type="number" name="money" id="money" placeholder="Money">
+                    <input type="submit" value="Set current player money">
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -125,6 +125,14 @@ body {
         align-items: center;
         justify-content: center;
     }
+
+    &__text-box {
+        max-width: 500px;
+    }
+
+    .column {
+        flex-direction: column;
+    }
 }
 
 .game {
