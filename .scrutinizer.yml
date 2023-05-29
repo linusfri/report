@@ -33,8 +33,6 @@ filter:
         
 
 build:
-    commands:
-        - "nvm use --delete-prefix v18.16.12"
     image: default-bionic
     nodes:
         my-tests:
@@ -49,7 +47,9 @@ build:
                     - php-scrutinizer-run
     tests:
         override:
-            -   command: "composer phpunit"
+            -   commands: 
+                - "composer phpunit"
+                - "nvm use --delete-prefix v18.16.0"
                 # command: "XDEBUG_MODE=coverage vendor/bin/phpunit"
                 coverage:
                     file: "docs/coverage.clover"
