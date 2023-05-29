@@ -24,7 +24,13 @@ filter:
         src/Controller/LuckyController.php,
         src/kernel.php,
         src/templates/*
+    ],
+
+    dependency_paths: [
+        'vendor/',
+        'src/'
     ]
+        
 
 build:
     image: default-bionic

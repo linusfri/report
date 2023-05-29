@@ -13,7 +13,7 @@ class PlayerTest extends TestCase
     {
         $cardHand = new CardHand();
         $this->deck = new DeckOfCards();
-        $this->player = new Player('Linus', $cardHand);
+        $this->player = new Player('Linus', $cardHand, money: 100);
     }
 
     protected function tearDown(): void
@@ -79,6 +79,54 @@ class PlayerTest extends TestCase
         $this->player->reset();
         $this->assertEquals(0, $this->player->getHandValue());
         $this->assertFalse($this->player->getIsFinished());
+    }
+
+    public function testBetWithEnoughMoney(): void
+    {
+        $amount = 50;
+        $result = $this->player->bet($amount);
+
+        $this->assertEquals(50, $result);
+        $this->assertEquals(50, $this->player->getMoney());
+    }
+
+    public function testBetWithNotEnoughMoney(): void
+    {
+        $this->expectException(Exception::class);
+
+        $amount = 150;
+        $this->player->bet($amount);
+    }
+
+    public function testCheck(): void
+    {
+        $this->player->check();
+
+        $this->assertTrue($this->player->getIsChecked());
+    }
+
+    public function testFold(): void
+    {
+        $this->player->fold();
+
+        $this->assertTrue($this->player->getHasFolded());
+        $this->assertTrue($this->player->getIsFinished());
+    }
+
+    public function testChangeCards(): void
+    {
+        /** Assume the deck has enough cards for testing */
+
+        $this->player->changeCards([0, 1, 2], $this->deck);
+
+        $this->assertTrue($this->player->getHasChangedCards());
+    }
+
+    public function testSetAndGetPreviousAction(): void
+    {
+        $this->player->setPreviousAction('bet');
+
+        $this->assertEquals('bet', $this->player->getPreviousAction());
     }
 
     public function testSerialize(): void {

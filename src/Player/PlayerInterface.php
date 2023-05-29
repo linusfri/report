@@ -42,6 +42,8 @@ interface PlayerInterface
 
     public function getMoney(): int;
 
+    public function setMoney(int $amount): void;
+
     public function setHasPlayedRound(): void;
 
     public function getHasPlayedRound(): bool;

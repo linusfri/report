@@ -8,11 +8,11 @@ class PokerHandEvaluatorTest extends TestCase
     public function testIsFourOfAKind()
     {
         $cards = [
-            new CardGraphic(2, 'Spades', '2S'),
-            new CardGraphic(2, 'Hearts', '2H'),
-            new CardGraphic(2, 'Diamonds', '2D'),
-            new CardGraphic(2, 'Clubs', '2C'),
-            new CardGraphic(5, 'Spades', '5S'),
+            new CardGraphic(2, 'Spades', ''),
+            new CardGraphic(2, 'Hearts', ''),
+            new CardGraphic(2, 'Diamonds', ''),
+            new CardGraphic(2, 'Clubs', ''),
+            new CardGraphic(5, 'Spades', ''),
         ];
 
         $result = PokerHandEvaluator::isFourOfAKind($cards);
@@ -23,11 +23,11 @@ class PokerHandEvaluatorTest extends TestCase
     public function testIsFullHouse()
     {
         $cards = [
-            new CardGraphic(3, 'Spades', '3S'),
-            new CardGraphic(3, 'Hearts', '3H'),
-            new CardGraphic(3, 'Diamonds', '3D'),
-            new CardGraphic(6, 'Clubs', '6C'),
-            new CardGraphic(6, 'Spades', '6S'),
+            new CardGraphic(3, 'Spades', ''),
+            new CardGraphic(3, 'Hearts', ''),
+            new CardGraphic(3, 'Diamonds', ''),
+            new CardGraphic(6, 'Clubs', ''),
+            new CardGraphic(6, 'Spades', ''),
         ];
 
         $result = PokerHandEvaluator::isFullHouse($cards);
@@ -38,11 +38,11 @@ class PokerHandEvaluatorTest extends TestCase
     public function testIsFlush()
     {
         $cards = [
-            new CardGraphic(4, 'Hearts', '4H'),
-            new CardGraphic(7, 'Hearts', '7H'),
-            new CardGraphic(9, 'Hearts', '9H'),
-            new CardGraphic(11, 'Hearts', '11H'),
-            new CardGraphic(13, 'Hearts', 'KH'),
+            new CardGraphic(4, 'Hearts', ''),
+            new CardGraphic(7, 'Hearts', ''),
+            new CardGraphic(9, 'Hearts', ''),
+            new CardGraphic(11, 'Hearts', ''),
+            new CardGraphic(13, 'Hearts', ''),
         ];
 
         $result = PokerHandEvaluator::isFlush($cards);
@@ -53,11 +53,11 @@ class PokerHandEvaluatorTest extends TestCase
     public function testIsStraight()
     {
         $cards = [
-            new CardGraphic(6, 'Spades', '6S'),
-            new CardGraphic(7, 'Hearts', '7H'),
-            new CardGraphic(8, 'Diamonds', '8D'),
-            new CardGraphic(9, 'Clubs', '9C'),
-            new CardGraphic(10, 'Spades', '10S'),
+            new CardGraphic(6, 'Spades', ''),
+            new CardGraphic(7, 'Hearts', ''),
+            new CardGraphic(8, 'Diamonds', ''),
+            new CardGraphic(9, 'Clubs', ''),
+            new CardGraphic(10, 'Spades', ''),
         ];
 
         $result = PokerHandEvaluator::isStraight($cards);
@@ -68,11 +68,11 @@ class PokerHandEvaluatorTest extends TestCase
     public function testIsThreeOfAKind()
     {
         $cards = [
-            new CardGraphic(5, 'Spades', '5S'),
-            new CardGraphic(5, 'Hearts', '5H'),
-            new CardGraphic(5, 'Diamonds', '5D'),
-            new CardGraphic(8, 'Clubs', '8C'),
-            new CardGraphic(9, 'Spades', '9S'),
+            new CardGraphic(5, 'Spades', ''),
+            new CardGraphic(5, 'Hearts', ''),
+            new CardGraphic(5, 'Diamonds', ''),
+            new CardGraphic(8, 'Clubs', ''),
+            new CardGraphic(9, 'Spades', ''),
         ];
 
         $result = PokerHandEvaluator::isThreeOfAKind($cards);
@@ -83,11 +83,11 @@ class PokerHandEvaluatorTest extends TestCase
     public function testIsTwoPair()
     {
         $cards = [
-            new CardGraphic(7, 'Spades', '7S'),
-            new CardGraphic(7, 'Hearts', '7H'),
-            new CardGraphic(9, 'Diamonds', '9D'),
-            new CardGraphic(9, 'Clubs', '9C'),
-            new CardGraphic(11, 'Spades', 'KS'),
+            new CardGraphic(7, 'Spades', ''),
+            new CardGraphic(7, 'Hearts', ''),
+            new CardGraphic(9, 'Diamonds', ''),
+            new CardGraphic(9, 'Clubs', ''),
+            new CardGraphic(11, 'Spades', ''),
         ];
 
         $result = PokerHandEvaluator::isTwoPair($cards);
@@ -98,31 +98,15 @@ class PokerHandEvaluatorTest extends TestCase
     public function testIsOnePair()
     {
         $cards = [
-            new CardGraphic(10, 'Spades', '10S'),
-            new CardGraphic(10, 'Hearts', '10H'),
-            new CardGraphic(4, 'Diamonds', '4D'),
-            new CardGraphic(7, 'Clubs', '7C'),
-            new CardGraphic(13, 'Spades', 'KS'),
+            new CardGraphic(10, 'Spades', ''),
+            new CardGraphic(10, 'Hearts', ''),
+            new CardGraphic(4, 'Diamonds', ''),
+            new CardGraphic(7, 'Clubs', ''),
+            new CardGraphic(13, 'Spades', ''),
         ];
 
         $result = PokerHandEvaluator::isOnePair($cards);
 
         $this->assertTrue($result);
     }
-
-    // public function testGetHandRank()
-    // {
-    //     $cards = [
-    //         new CardGraphic(4, 'Spades', '4S'),
-    //         new CardGraphic(4, 'Hearts', '4H'),
-    //         new CardGraphic(4, 'Diamonds', '4D'),
-    //         new CardGraphic(4, 'Clubs', '4C'),
-    //         new CardGraphic(5, 'Spades', '5S'),
-    //     ];
-
-    //     $expectedRank = HandRank::FOUR_OF_A_KIND;
-    //     $result = PokerHandEvaluator::getHandRank($cards);
-
-    //     $this->assertEquals($expectedRank, $result);
-    // }
 }

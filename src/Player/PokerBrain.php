@@ -22,7 +22,7 @@ class PokerBrain {
         $this->generateNewRoundIdeas();
     }
 
-    public function generateNewRoundIdeas(): void {
+    public function generateNewRoundIdeas(): array {
         $this->ideas = [];
 
         foreach (self::POSSIBILITES as $possibility) {
@@ -30,6 +30,8 @@ class PokerBrain {
                 $this->ideas[] = $possibility;
             }
         }
+
+        return $this->ideas;
     }
 
     public function getRandomIdea(PokerGame $pokerGame): string {

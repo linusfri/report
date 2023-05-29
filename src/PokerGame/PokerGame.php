@@ -280,8 +280,14 @@ class PokerGame extends CardGame implements \JsonSerializable
             return !$participant->getHasFolded();
         }));
 
+        /** If there only exists one player that has not folded, that player is the winner */
         if(count($nonFoldedPlayers) === 1) {
             return $nonFoldedPlayers[0];
+        }
+
+        /** Should not be able to happen, but adding it for good measure */
+        if ($this->player->getMoney() < $this->getCurrentBet() && $this->dealer->getMoney() < $this->getCurrentBet()) {
+            return null;
         }
 
         if ($this->player->getMoney() < $this->getCurrentBet()) {

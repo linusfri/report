@@ -178,10 +178,16 @@ class Player implements PlayerInterface, \JsonSerializable
         return $amount;
     }
 
-    /** Returns current player money */
+    /** Returns player money */
     public function getMoney(): int
     {
         return $this->money ?? 0;
+    }
+
+    /** Sets player money */
+    public function setMoney(int $money): void
+    {
+        $this->money = $money;
     }
 
     /** The player checks  */
@@ -190,7 +196,7 @@ class Player implements PlayerInterface, \JsonSerializable
         $this->checked = true;
     }
 
-    /** Returns if current player has checked */
+    /** Returns if player has checked */
     public function getIsChecked(): bool
     {
         return $this->checked;

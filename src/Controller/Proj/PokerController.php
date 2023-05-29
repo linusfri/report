@@ -45,9 +45,6 @@ class PokerController extends AbstractController
     public function bet(SessionInterface $session, Request $req): Response
     {
         $amount = $req->query->get('bet') ?? null;
-        if (is_null($amount) || $amount <= 0) {
-            throw new Exception('No bet amount');
-        }
 
         $pokerGame = $session->get('pokerGame');
 
