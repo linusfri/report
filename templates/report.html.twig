@@ -136,5 +136,104 @@
                 Mitt TIL för detta kursmoment är hur jag kopplar ihop ett repo med Scrutinizer samt hur jag tyder de resultat som phpmetrics producerar.
             </p>
         </div>
+        <div id="kmom10" class="report-card">
+            <h3>Kmom10</h3>
+            <p> 
+                <strong>Grunden</strong>
+                Jag valde i mitt slutprojekt att skapa ett pokerspel. Pokerspelet är av typen Femkortspoker som också är den typ jag spelade med min Farmor när jag var liten.
+                I denna text skall jag beskriva och motivera mina tankar inför projektet samt den process jag följde i implementeringen av spelet.
+                <br>
+                När jag inledde projektet var min spontana idé att göra just ett pokerspel. Jag tänkte att en del av funktionaliteten redan existerade sedan tidigare
+                kursmoment och att jag nu skulle kunna utnyttja dessa till ett nytt projekt. Min tanke var att det skulle bli ett bra test för hur flexibla och
+                väl konstruerade mina tidigare klasser var samt hur lätta dessa skulle bli att justera under projektets gång. Innan jag började med implementeringen
+                av själva spelet så skapade jag nya sidmallar som placerades i en helt ny mapp. Sedan skapade jag nya sass- samt js-filer för att kunna separera frontend-funktionalitet
+                samt utseende på sidan. När jag väl var klar med det konstruerade jag en minimalistisk landningssida med tydlighet och användbarhet som ledord. Jag var noga
+                med att designen skulle skilja sig från grundtemat på hemsidan och att den skulle ge ett helt annat intryck än den förstnämnda.
+                <br><br>
+                <strong>Flödet</strong>
+                Därefter började jag planera mina routes och hur grundflödet i pokerspelet skulle se ut, något som utmynnade i `PokerController.php`. Med erfarenhet och kunskap
+                förvärvad genom arbetet med `CardGameController.php`, så visste jag redan från början hur jag ville att `PokerController.php` skulle se ut. Min vision var
+                att en route skulle hantera rendering av sidmall och att de andra skulle vidarebefordra requests till 'huvudrouten' efter att dessa manipulerat själva pokerinstansen. Tanken bakom
+                beslutet var att det skulle bli lättare att visualisera flödet i applikationen, som jag misstänkte skulle kunna bli förhållandevis omfattande
+                med avseende på alla de beslut som en pokerspelare kan ta i olika situationer. Dessutom tänkte jag att det också skulle bli lättare att spåra pokerspelets tillstånd, då det skulle bli
+                lätt att skriva ut instansens innehåll vid en specifik plats i programmet. Med denna specifikation i bakhuvudet började jag implementera pokerspelets routing.
+                <br><br>
+                <strong>Spellogik och tillstånd</strong>
+                Med kontrollern på plats började jag planera själva pokerspelets funktionalitet. Sedan tidigare i kursen visste jag att jag den största utmaningen skulle bli att hantera
+                pokerspelets tillstånd, exempelvis vilken spelare det är och vilken runda det är. Därför började jag med att tänka på de åtgärder från spelaren där uppdatering av spelets
+                tillstånd skulle bli nödvändigt. Förutsägbart nog var dessa åtgärder `lägga sig`, `passa`, `syna` samt `höja / satsa`. Dessa var också de första funktioner jag implementerade
+                eftersom jag ansåg att de skulle bli så centrala att de tvunget behövde finnas redan från början. Därefter började jag fundera på hur själva tillståndet faktiskt skulle uppdateras
+                och kom fram till en lösning som tog inspiration från mitt första kortspel (21). Idén var att jag skulle köra en funktion efter varje speluppdatering med syftet att tillståndet alltid
+                skulle vara uppdaterat. Fördelen med detta var att allt skulle uppdateras på samma ställe och att tillståendet därför inte skulle behöva updateras på flera olika ställen.
+                Sagt och gjort, jag implementerade funktionen PokerGame::updateGameState() där alla uppdateringar skulle ske. I efterhand så kan man dock se att spelets tillstånd uppdateras på flera olika ställen
+                men dessa ändringar är ofta kopplade till åtgärder som sker direkt på spelar- och dealer-objektet. Deras tillstånd kontrolleras i sin tur i PokerGame::updateGameState().
+                <br><br>
+                <strong>Poängsättning av avgörande av vinnare</strong>
+                Efter att PokerGame och PokerController var klara så började jag slipa på den del som jag från början fruktat mest, funktionalitet för att poängsätta de olika pokerhänder en spelare kan få.
+                Jag visste att denna funktionalitet inte skulle rymmas i PokerGame och jag visste dessutom att funktionaliteten inte skulle kräva ett specifikt bibehållet tillstånd, det vill säga att
+                varje gång en pokerhand utvärderas så gör den det utan beroende från ett specifikt tillstånd i spelet. Det enda jag skulle behöva göra beslut på var den faktiskt pokerhanden, som i sig är en instans av CardHand.
+                Med denna insikt konstruerade jag en statisk klass med ett enda syfte, att returnera vinnaren från aktuellt pokerspel. Klassen fick namnet PokerHandEvaluator vars centrala metod tar in en lista med spelare.
+                Varje spelares korthand evalueras sedan i PokerHandEvaluator::evaluateHandValue, varpå en vinnare utses. För att göra poängsättningen enkel så skapade jag också en enkel klass vid namn `HandRank` där varje
+                korthand mappas till ett bestämt siffervärde.
+                <br><br>
+                <strong>Krav 4: JsonAPI</strong>
+                <br>
+                I projektets linda hade jag redan hunnit fundera en del på hur kortbytet egentligen skulle gå till. Först tänkte jag att jag skulle placera korten
+                som element med checkboxes under och sedan skicka in dessa som ett formulär. Dock kände jag lösningen skulle bli lite tråkig och jag tog därför beslutet
+                att låta kortbytet ske dynamiskt med hjälp av javascript på klientsidan. Inte nog med att jag skulle få mer variation i projektet, jag skulle också behöva
+                implementera ett JsonAPI vilket ändå var en del projektets krav. Med det sagt så implementerade jag klassen PokerGame i PokerGame.js där jag bland annat
+                inkluderade funktionalitet för att fästa event listeners på spelplanens kort. Jag lade också till en enkel wrapperfunktion till javascripts inbyggda fetch-funktion med avsikt att underlätta API-frågor från andra funktioner i klassen.
+                Därefter skapade jag funktionen 'submitCards' som skulle titta på spelplanen och skicka med de kort som spelaren valt att byta ut. När klientsidan var klar vände jag mig mot
+                servern där en ny kontroller behövde implementeras. Jag döpte den till APIPokerController och lade till nödvändiga endpoints för att javascript-funktionerna skulle fungera.
+                <br><br>
+                Den mest centrala delen i API:t är metoden APIPokerController::changeCards. Den tar in en lista som innehåller heltal som motsvarar ett korts position i handen.
+                Denna lista skickas sedan vidare till PokerGame::currentPlayerChangeCard där korten byts ut baserat på vilka index som skickats med. Om allt går bra så skickas en JsonResponse med
+                spelarens nya korthand tillbaka, annars skickas ett meddelande om att något gått fel. Spelarens ny korthand används sedan på klientsidan för att populera spelplanen
+                med nya kort.
+
+                <br><br>
+                Gällande de routes jag valde att lägga till i API:t så är dessa som följer:
+                <br><br>
+                <strong>1. Hämta nuvarande spelare</strong>
+                <br>
+                <strong>2. Hämta nuvarande spelares namn</strong>
+                <br>
+                <strong>3. Hämta dealerns namn</strong>
+                <br>
+                <strong>4. Hämta nuvarande runda</strong>
+                <br>
+                <strong>5. Sätt nuvarande spelares pengar till ett värde som anges i inputfältet</strong>
+
+                <br><br>
+                <strong>Avslutningsvis</strong>
+                <br>
+                Jag ångrar ganska mycket att jag valde pokerspelet och jag tror att jag underskattade komplexiteten i det. Jämfört med 21
+                så är pokerspelet flera storleksordningar upp i komplexitet, enligt mig. På åtta kurser så är detta det enda projekt jag haft besvär med och
+                i princip allt har krånglat. Exempelvis så har jag fått anpassa mina test till scrutinizer så att dessa inte skall krascha där. Det verkar som att
+                det inte kan hantera när testerna returnerar HTML. Dessutom har jag också fått instansiera egna Kernels i de tester som använder WebTestCase eftersom
+                scrutinizer kraschar annars. Jag tycker också att det har varit mycket svårt att hitta bra tips på scrutinizer online och jag tycker heller inte dokumentationen
+                är särskilt tillfredsställande. Sedan tycker jag att enhetstesterna i sig har varit ett stressmoment. De klasser jag har fått bygga har till stor del slumpmässigt beteende
+                och det är därför svårt och kanske inte ens meningsfullt att testa visst beteende. Med det sagt så har jag gjort mitt absolut bästa och försökt konstruera meningsfulla test
+                i den mån det har varit möjligt, även om jag inte uppnått över 90%. Jag anser dock att de tester jag har täcker den deterministiska funktionalitet som
+                är kritiskt för att pokerspelet skall fungera som tänkt. Om jag hade haft mer tid så skulle jag fokusera ännu mer på testerna för att uppnå den nivå jag önskar.
+                <br><br>
+                För övrigt tycker jag att projektet har varit stressigt, främst på grund av hur scrutinizer betett sig (har säkert lagt 20% av tiden enbart på att bråka med det),
+                men också för att jag känner att jag valt fel projekt. Trots detta lyckades jag trots allt med ett kortspel som fungerar på ett tillfredsställande sätt, vilket får bli trösten i sammanhanget.
+                I de åtta kurser jag haft hittills så har detta projekt krävt mest engagemang men också bidragit till mest frustration. Som jag nämnt tidigare har scrutinizer
+                varit ett konstant överhängande hot om krångel vilket inte var särskilt angenämt.
+                <br><br>
+                När jag blickar tillbaka tycker jag ändå att jag lärt mig otroligt mycket och anser att kursen har varit till stor nytta. Jag har fått nya insikter om vad
+                testning innebär och hur man på olika sätt kan använda sig av detta verktyg i jakt på bättre kod. Dessutom har jag fått upp ögonen för CD/CI-lösningar och
+                jag tycker att konceptet demystifierats en hel del sedan jag började denna kurs. Så överlag tycker jag kursen har varit bra och som vanligt tycker jag det samma
+                om materialet. Jag tycker att det har varit bra att en stor del av materialet har baserats på Symfonys egna dokumentation. Det har gjort att eget letande
+                bland deras dokumentation känts mer överkomligt. Slutligen vill jag ge kursen ett gott betyg om 7/10 varav det stressiga slutprojektet står för det största
+                poängtappet. Detta är min sista kurs på ett tag och jag vill tacka för ert engagemang. Jag hoppas att vi hörs någon annan gång och att ni har det bra tills dess.
+                <br><br>
+                Obs! Det ligger tre sviter med enhetstest som jag exkluderat i phpunit.xml.dist. Dessa fungerar alldeles utmärkt lokalt men går inte igenom på scrutinizer.
+                Jag har lagt en del tid på dessa och är det så att ni önskar att köra dem så kan detta göras genom att ta bort dessa som exkluderade i phpunits konfigurationsfil.
+                <strong>Linus</strong>
+
+            </p>
+        </div>
     </section>
 {% endblock %}

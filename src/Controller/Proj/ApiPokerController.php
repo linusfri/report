@@ -126,7 +126,7 @@ class ApiPokerController
         }
 
         $pokerGame->getCurrentPlayer()->setMoney((int) $amount);
-
+        $session->set('pokerGame', $pokerGame);
         return new JsonResponse(['current_player_money' => $pokerGame->getCurrentPlayer()->getMoney()]);
     }
 }
