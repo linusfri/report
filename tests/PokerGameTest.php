@@ -22,7 +22,7 @@ class PokerGameTest extends TestCase
 
     public function testPokerStart()
     {
-        // Assert initial game state
+        /** Assert initial game state */
         $this->assertEquals($this->player, $this->game->getCurrentPlayer());
         $this->assertEquals($this->dealer, $this->game->getCurrentOpponent());
         $this->assertEquals(1, $this->game->getCurrentRound());

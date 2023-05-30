@@ -1,7 +1,7 @@
 <?php
-use App\Controller\Proj\ApiPokerController;
 use App\Kernel;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
+use App\Player\Player;
+use App\Player\PokerDealer;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -40,6 +40,75 @@ class ApiPokerControllerTest extends WebTestCase
         $response = $client->getResponse();
 
         $this->assertSame(200, $response->getStatusCode());
+    }
+
+    public function testGetPlayerName(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/proj/game');
+        $client->request('GET', '/proj/game/api/get-player-name');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $responseData = json_decode($client->getResponse()->getContent(), true);
+        $this->assertIsString($responseData);
+    }
+
+    public function testGetDealerName(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/proj/game');
+        $client->request('GET', '/proj/game/api/get-dealer-name');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $responseData = json_decode($client->getResponse()->getContent(), true);
+        $this->assertIsString($responseData);
+    }
+
+    public function testGetCurrentPlayer(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/proj/game');
+        $client->request('GET', '/proj/game/api/get-current-player');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $responseData = json_decode($client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('name', $responseData);
+        $this->assertArrayHasKey('id', $responseData);
+        $this->assertArrayHasKey('handValue', $responseData);
+        $this->assertArrayHasKey('isFinished', $responseData);
+        $this->assertArrayHasKey('cards', $responseData);
+    }
+
+    public function testGetCurrentOpponent(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/proj/game');
+        $client->request('GET', '/proj/game/api/get-current-opponent');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $responseData = json_decode($client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('name', $responseData);
+        $this->assertArrayHasKey('id', $responseData);
+        $this->assertArrayHasKey('handValue', $responseData);
+        $this->assertArrayHasKey('isFinished', $responseData);
+        $this->assertArrayHasKey('cards', $responseData);
+    }
+
+    public function testSetCurrentPlayerMoney(): void
+    {
+        $client = static::createClient();
+        
+        $client->request('GET', '/proj/game');
+        $client->request('POST', '/proj/game/api/set-current-player-money', ['money' => 200]);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $responseData = json_decode($client->getResponse()->getContent(), true);
+        $this->assertEquals(200, $responseData['current_player_money']);
     }
 
     /**
