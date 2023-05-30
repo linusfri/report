@@ -12,9 +12,9 @@
   <testsuites>
     <testsuite name="Project Test Suite">
       <directory>tests</directory>
-      <exclude>tests/ProjControllerTest.php</exclude>
+      <!-- <exclude>tests/ProjControllerTest.php</exclude>
       <exclude>tests/PokerControllerTest.php</exclude>
-      <exclude>tests/LuckyControllerTest.php</exclude>
+      <exclude>tests/LuckyControllerTest.php</exclude> -->
     </testsuite>
   </testsuites>
   <coverage>
