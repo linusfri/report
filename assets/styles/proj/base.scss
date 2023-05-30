@@ -1,16 +1,15 @@
 .form {
-    padding: $desktop-p;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    input {
-        padding: $input-p;
+    input:not(:last-child) {
+        margin-bottom: 0.8rem;
     }
 
-    input:not(:last-child) {
-        margin-bottom: $desktop-p;
+    input {
+      padding: 0.8rem;
     }
 }
 

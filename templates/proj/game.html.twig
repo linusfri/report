@@ -48,7 +48,8 @@
                     <a href="{{ path('proj/game/fold') }}">Fold</a>
                 </div>
             {% else %}
-            <form action="{{ path('proj/game/raise') }}">
+            <form class="form" action="{{ path('proj/game/raise') }}">
+                <label for="bet">You have to bet higher than current bet</label>
                 <input type="number" name="bet" id="bet" placeholder="Raise amount">
                 <input type="submit" value="Raise">
             </form>
