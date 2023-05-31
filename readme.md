@@ -18,3 +18,5 @@ Instructions
 3. Run `composer install` in the root of the project
 4. To watch assets and styles for changes, run `npm run watch` in the root of the project
 5. To build assets, run `npm run build` in the root of the project
+6. Run `composer dev` to start development server
+7. Run `npm run watch` to start encore
